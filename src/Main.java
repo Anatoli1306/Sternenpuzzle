@@ -1,3 +1,5 @@
+import gui.DemoForm;
+
 
 public class Main 
 {
@@ -7,8 +9,20 @@ public class Main
 	 */
 	public static void main(String[] args) 
 	{
-		System.out.println("Hello World");
-
+		startBoardDemo();
+		
+	}
+	
+	
+	/**
+	 * start demo form 
+	 */
+	
+	public static void startBoardDemo()
+	{
+		DemoForm demo = new DemoForm();
+		demo.setSize(800, 600);
+		demo.show();
 	}
 
 }
