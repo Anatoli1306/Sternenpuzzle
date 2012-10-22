@@ -11,9 +11,26 @@ import javax.swing.JPanel;
 
 // Klasse enthällt die Reihe der oberen Buttons
 
-public class PlayMenuButtons extends JPanel{
-	
+/**
+ * 
+ * @author Eren
+ * @version 0.1
+ *
+ */
+
+public class PlayMenuButtons extends JPanel
+{
+	/**
+	 * 
+	 */
 	private PlayFrame playFrame;
+	
+	
+	/**
+	 * 
+	 * @param PlayFrame frame
+	 * 
+	 */
 	
 	public PlayMenuButtons(PlayFrame frame)
 	{

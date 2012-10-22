@@ -8,9 +8,27 @@ import java.awt.event.ActionListener;
 
 // Klasse enthällt die Menüleiste
 
-class PlayMenuBar extends MenuBar{
+/**
+ * 
+ * @author Eren
+ * @version 0.1
+ *
+ */
+
+class PlayMenuBar extends MenuBar
+{
 	
+	/**
+	 * 
+	 */
 	private PlayFrame playFrame;
+	
+	
+	/**
+	 * 
+	 * @param PlayFrame frame
+	 * 
+	 */
 	
 	public PlayMenuBar(PlayFrame frame)
 	{

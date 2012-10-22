@@ -1,4 +1,5 @@
 import gui.DemoForm;
+import gui.PlayFrame;
 
 
 public class Main 
@@ -9,8 +10,8 @@ public class Main
 	 */
 	public static void main(String[] args) 
 	{
-		startBoardDemo();
-		
+//		startBoardDemo();
+		PlayFrame wnd = new PlayFrame();
 	}
 	
 	
