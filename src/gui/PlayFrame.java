@@ -1,12 +1,12 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.MenuBar;
+import java.awt.Component;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
+
 
 // Klasse enthällt das Layout
 
@@ -20,20 +20,60 @@ import javax.swing.JLayeredPane;
 
 public class PlayFrame extends JFrame
 {	
-	
+	private GuiElementBoard _oBoard = null;
 	/**
 	 * 
 	 */
 	public PlayFrame()
 	{
 		super("Sternenhimmel Puzzle");
-		
 		setResizable(false);
-		setLocation(100, 100);
 		setSize(800, 850);
-
+		setLocation(100, 100);
 		setLayout(null);
 		
+		drawGameBoard();
+	}
+	
+	/**
+	 * 
+	 */
+	
+	public void drawGameBoard()
+	{	
+		getContentPane().removeAll();
+		
+		_oBoard = new GuiElementGameBoard(10, 10);
+		_oBoard.setBounds(200, 300, 500, 500);
+		drawDefaualtElements();
+		
+		getContentPane().repaint();
+	}
+	
+	
+	/**
+	 * 
+	 */
+	
+	public void drawEditorBoard()
+	{
+		getContentPane().removeAll();
+		
+		_oBoard = new GuiElementEditorBoard(10, 10);
+		_oBoard.setBounds(200, 300, 500, 500);
+		drawDefaualtElements();
+		
+		getContentPane().repaint();
+		
+	}
+	
+	
+	/**
+	 * 
+	 */
+	
+	public void drawDefaualtElements()
+	{
 		PlayMenuButtonsTop menuButtonsTop = new PlayMenuButtonsTop(this);
 		menuButtonsTop.setBounds(0, 200, 800, 80);
 		menuButtonsTop.setBackground(Color.white);
@@ -43,13 +83,11 @@ public class PlayFrame extends JFrame
 		ImageIcon imgBanner = new ImageIcon("Images/banner.png");
 	    JLabel lblBanner = new JLabel(imgBanner);
 	    lblBanner.setBounds(0, 0, 800, 250);
-		add(lblBanner);		
+	    add(lblBanner);		
 		
-		setMenuBar(new PlayMenuBar(this));	
+		setMenuBar(new PlayMenuBar(this));
 							
-		GuiElementGameBoard oGameBoard = new GuiElementGameBoard(10, 10);
-		oGameBoard.setBounds(200, 300, 500, 500);
-    	add(oGameBoard);
+		add(_oBoard);
     	
 		PlayMenuButtonsBottom menuButtonsBottom = new PlayMenuButtonsBottom(this);
 		menuButtonsBottom.setBounds(0, 710, 800, 80);
@@ -60,9 +98,21 @@ public class PlayFrame extends JFrame
         JLabel backImgPanel = new JLabel(new ImageIcon("Images/background.png"));
         backImgPanel.setLayout(null);
         backImgPanel.setOpaque(false);
-        getContentPane().add(backImgPanel);
+        add(backImgPanel);
         backImgPanel.setBounds(0,0,800,800);
 		    	
 		setVisible(true);
+	}
+	
+	
+	/**
+	 *  shortcut
+	 *  everything has to be added to content panel
+	 *  adding elements directly to frame causes strange sideeffects
+	 */
+	
+	public Component add(Component comp)
+	{
+		return getContentPane().add(comp);
 	}
 }

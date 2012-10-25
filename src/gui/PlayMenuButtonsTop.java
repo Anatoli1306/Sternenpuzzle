@@ -21,11 +21,6 @@ import javax.swing.JPanel;
 
 public class PlayMenuButtonsTop extends JPanel
 {
-	/**
-	 * 
-	 */
-	private PlayFrame playFrame;
-	
 	
 	/**
 	 * 
@@ -33,16 +28,15 @@ public class PlayMenuButtonsTop extends JPanel
 	 * 
 	 */
 	
-	public PlayMenuButtonsTop(PlayFrame frame)
+	public PlayMenuButtonsTop(final PlayFrame frame)
 	{
-
-		playFrame = frame;
-		playFrame.getContentPane().setBackground(Color.white);
+		frame.getContentPane().setBackground(Color.white);
 		
 		JButton btnGameMode;
 		btnGameMode = new JButton(new ImageIcon("images/gameMode.png"));
 		btnGameMode.setAlignmentX(LEFT_ALIGNMENT);
 		btnGameMode.setContentAreaFilled(false);
+		btnGameMode.setToolTipText("Starte den Spielmodus");
 		btnGameMode.setBorder(null);
 		
 		btnGameMode.addActionListener(new ActionListener() {
@@ -50,6 +44,7 @@ public class PlayMenuButtonsTop extends JPanel
             public void actionPerformed(ActionEvent e)
             {
             	 JOptionPane.showMessageDialog(null,"GameMode","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+            	 frame.drawGameBoard();
             }
         });        
 		//setComponentZOrder(btnGameMode, 1);
@@ -60,6 +55,7 @@ public class PlayMenuButtonsTop extends JPanel
 		btnEditMode = new JButton(new ImageIcon("images/editMode.png"));
 		btnEditMode.setAlignmentX(LEFT_ALIGNMENT);
 		btnEditMode.setContentAreaFilled(false);
+		btnEditMode.setToolTipText("Starte den Editormodus");
 		btnEditMode.setBorder(null);
 		
 		btnEditMode.addActionListener(new ActionListener() {
@@ -67,6 +63,7 @@ public class PlayMenuButtonsTop extends JPanel
             public void actionPerformed(ActionEvent e)
             {
             	 JOptionPane.showMessageDialog(null,"EditMode","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+            	 frame.drawEditorBoard();
             }
         });           
 		add(btnEditMode);
@@ -75,6 +72,7 @@ public class PlayMenuButtonsTop extends JPanel
 		btnLoad = new JButton(new ImageIcon("images/load.png"));
 		btnLoad.setAlignmentX(LEFT_ALIGNMENT);
 		btnLoad.setContentAreaFilled(false);
+		btnLoad.setToolTipText("Lade einen vorhandenen Spielstand");
 		btnLoad.setBorder(null);
 		
 		btnLoad.addActionListener(new ActionListener() {
@@ -90,6 +88,7 @@ public class PlayMenuButtonsTop extends JPanel
 		btnSave = new JButton(new ImageIcon("images/save.png"));
 		btnSave.setAlignmentX(LEFT_ALIGNMENT);
 		btnSave.setContentAreaFilled(false);
+		btnSave.setToolTipText("Speichere den aktuellen Spielstand");
 		btnSave.setBorder(null);
 		
 		btnSave.addActionListener(new ActionListener() {
@@ -105,6 +104,7 @@ public class PlayMenuButtonsTop extends JPanel
 		btnInfo = new JButton(new ImageIcon("images/info.png"));
 		btnInfo.setAlignmentX(LEFT_ALIGNMENT);
 		btnInfo.setContentAreaFilled(false);
+		btnInfo.setToolTipText("Zeige Informationen");
 		btnInfo.setBorder(null);
 		
 		btnInfo.addActionListener(new ActionListener() {
@@ -120,13 +120,14 @@ public class PlayMenuButtonsTop extends JPanel
         btnClose = new JButton(new ImageIcon("images/close.png"));
         btnClose.setAlignmentX(LEFT_ALIGNMENT);
         btnClose.setContentAreaFilled(false);
+        btnClose.setToolTipText("Programm beenden");
         btnClose.setBorder(null);
 		
         btnClose.addActionListener(new ActionListener() {
         	 
             public void actionPerformed(ActionEvent e)
             {
-            	 playFrame.dispose();
+            	frame.dispose();
             }
         });           
         add(btnClose);
