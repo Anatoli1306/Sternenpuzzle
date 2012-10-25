@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 import gui.DemoForm;
 import gui.PlayFrame;
 
@@ -12,6 +14,8 @@ public class Main
 	{
 //		startBoardDemo();
 		PlayFrame wnd = new PlayFrame();
+		wnd.getContentPane().setBackground(Color.white);		
+		wnd.setDefaultCloseOperation(wnd.EXIT_ON_CLOSE);
 	}
 	
 	
