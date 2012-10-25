@@ -40,7 +40,7 @@ public class PlayMenuButtonsBottom extends JPanel
 		playFrame.getContentPane().setBackground(Color.white);
 		
 		JButton btnSet;
-		btnSet = new JButton(new ImageIcon("images/set.png"));
+		btnSet = new JButton(new ImageIcon(getClass().getResource("/resources/set.png")));
 		btnSet.setAlignmentX(LEFT_ALIGNMENT);
 		btnSet.setContentAreaFilled(false);
 		btnSet.setBorder(null);
@@ -55,7 +55,7 @@ public class PlayMenuButtonsBottom extends JPanel
 		add(btnSet);
 		
 		JButton btnCheck;
-		btnCheck = new JButton(new ImageIcon("images/check.png"));
+		btnCheck = new JButton(new ImageIcon(getClass().getResource("/resources/check.png")));
 		btnCheck.setAlignmentX(LEFT_ALIGNMENT);
 		btnCheck.setContentAreaFilled(false);
 		btnCheck.setBorder(null);
@@ -70,7 +70,7 @@ public class PlayMenuButtonsBottom extends JPanel
 		add(btnCheck);
 		
 		JButton btnUndo;
-		btnUndo = new JButton(new ImageIcon("images/undo.png"));
+		btnUndo = new JButton(new ImageIcon(getClass().getResource("/resources/undo.png")));
 		btnUndo.setAlignmentX(LEFT_ALIGNMENT);
 		btnUndo.setContentAreaFilled(false);
 		btnUndo.setBorder(null);

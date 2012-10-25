@@ -80,7 +80,7 @@ public class PlayFrame extends JFrame
 		menuButtonsTop.setOpaque(false);
 		add(menuButtonsTop);
 		
-		ImageIcon imgBanner = new ImageIcon("Images/banner.png");
+		ImageIcon imgBanner = new ImageIcon(getClass().getResource("/resources/banner.png"));
 	    JLabel lblBanner = new JLabel(imgBanner);
 	    lblBanner.setBounds(0, 0, 800, 250);
 	    add(lblBanner);		
@@ -95,7 +95,7 @@ public class PlayFrame extends JFrame
 		menuButtonsBottom.setOpaque(false);
 		add(menuButtonsBottom);
 				
-        JLabel backImgPanel = new JLabel(new ImageIcon("Images/background.png"));
+        JLabel backImgPanel = new JLabel(new ImageIcon(getClass().getResource("/resources/background.png")));
         backImgPanel.setLayout(null);
         backImgPanel.setOpaque(false);
         add(backImgPanel);
