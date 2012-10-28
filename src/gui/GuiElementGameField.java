@@ -22,8 +22,11 @@ public class GuiElementGameField  extends GuiElementField
 	{
 		super();
 		
-		eStates tmpAllowedTypes[] = {eStates.BLANK, eStates.STAR, eStates.QUESTION, eStates.CROSS};
-		_allowedTypes = tmpAllowedTypes;
+		eStates tmpAllowedLeftTypes[] = {eStates.BLANK, eStates.QUESTION, eStates.CROSS};
+		_allowedLeftTypes = tmpAllowedLeftTypes;
+		
+		eStates tmpAllowedRightTypes[] = {eStates.BLANK, eStates.STAR};
+		_allowedRightTypes = tmpAllowedRightTypes;
 	}
 
 }

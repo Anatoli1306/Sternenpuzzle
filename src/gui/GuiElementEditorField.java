@@ -22,8 +22,11 @@ public class GuiElementEditorField extends GuiElementField
 	{
 		super();
 		
-		eStates tmpAllowedTypes[] = {eStates.BLANK, eStates.ARROW_N, eStates.ARROW_NE, eStates.ARROW_E, eStates.ARROW_SE, eStates.ARROW_S, eStates.ARROW_SW, eStates.ARROW_W, eStates.ARROW_NW, eStates.STAR,};
-		_allowedTypes = tmpAllowedTypes;
+		eStates tmpAllowedLeftTypes[] = {eStates.BLANK, eStates.ARROW_N, eStates.ARROW_NE, eStates.ARROW_E, eStates.ARROW_SE, eStates.ARROW_S, eStates.ARROW_SW, eStates.ARROW_W, eStates.ARROW_NW};
+		_allowedLeftTypes = tmpAllowedLeftTypes;
+		
+		eStates tmpAllowedRightTypes[] = {eStates.BLANK, eStates.STAR};
+		_allowedRightTypes = tmpAllowedRightTypes;
 	}
 
 }

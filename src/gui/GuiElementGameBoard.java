@@ -3,10 +3,9 @@
  */
 package gui;
 
-import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 import logic.GameBoard;
-import logic.GameField;
 
 /**
  * 
@@ -31,7 +30,7 @@ public class GuiElementGameBoard extends GuiElementBoard
 		_oLogicBoard = new GameBoard(rows, cols);
 		_fields = new GuiElementField[rows][cols];
 		
-		ActionListener oOnClick = new onClick();
+		MouseListener oOnClick = new onClick();
 		
 		for (int iY = 0; iY < rows; iY++)
 		{
@@ -39,7 +38,7 @@ public class GuiElementGameBoard extends GuiElementBoard
 			{
 				GuiElementField oGuiElementField = new GuiElementGameField();
 				oGuiElementField.setSize(40, 40);
-				oGuiElementField.addActionListener(oOnClick);
+				oGuiElementField.addMouseListener(oOnClick);
 				this._fields[iY][iX] = oGuiElementField;
 			}
 		}

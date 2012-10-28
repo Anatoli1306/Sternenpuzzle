@@ -54,7 +54,12 @@ abstract public class GuiElementField extends JButton
 	/**
 	 * 
 	 */
-	protected eStates _allowedTypes[] = null;
+	protected eStates _allowedLeftTypes[] = null;
+	
+	/**
+	 * 
+	 */
+	protected eStates _allowedRightTypes[] = null;
 	
 	/**
 	 * 
@@ -114,26 +119,56 @@ abstract public class GuiElementField extends JButton
 		repaint();
 	}
 	
+	
 	/**
 	 * 
 	 */
-	public void getNextState()
+	
+	public void setNextLeftState()
 	{
-		for (int i = 0; i < _allowedTypes.length; i++) 
+		getNextState(_allowedLeftTypes);
+	}
+	
+	
+	/**
+	 * 
+	 */
+	
+	public void setNextRightState()
+	{
+		getNextState(_allowedRightTypes);
+	}
+	
+	
+	/**
+	 * 
+	 */
+	
+	public void getNextState(eStates allowedStates[])
+	{
+		boolean found = false;
+		for (int i = 0; i < allowedStates.length; i++) 
 		{
-			if (_allowedTypes[i] == _currentState)
+			if (allowedStates[i] == _currentState)
 			{
-				if (i == (_allowedTypes.length - 1))
+				found = true;
+				if (i == (allowedStates.length - 1))
 				{
-					setState(_allowedTypes[0]);
+					setState(allowedStates[0]);
 					break;
 				}
 				else
 				{
-					setState(_allowedTypes[i+1]);
+					setState(allowedStates[i+1]);
 					break;
 				}
 			}
+		}
+		
+		// if _currentState is unknown, set first element to new state
+		if (!found)
+		{
+			setState(allowedStates[1]);
 		}
 	}
 }

@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
 
@@ -94,13 +96,52 @@ public abstract class GuiElementBoard extends JComponent
 	 * @author Andreas
 	 *
 	 */
-	protected class onClick implements ActionListener 
+	protected class onClick implements MouseListener 
 	{
-	    public void actionPerformed(ActionEvent e) 
-	    {
-	    	GuiElementField oGuiElementField = (GuiElementField)e.getSource();
-	    	oGuiElementField.getNextState();
-	    }
+		@Override
+		public void mouseClicked(MouseEvent e) 
+		{
+			
+			if (e.getButton() == MouseEvent.BUTTON1)
+			{
+				GuiElementField oGuiElementField = (GuiElementField)e.getSource();
+		    	oGuiElementField.setNextLeftState();
+			}
+			else if (e.getButton() == MouseEvent.BUTTON3)
+			{
+				GuiElementField oGuiElementField = (GuiElementField)e.getSource();
+		    	oGuiElementField.setNextRightState();
+			}
+			
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) 
+		{
+			// TODO Auto-generated method stub
+			GuiElementField oGuiElementField = (GuiElementField)e.getSource();
+			oGuiElementField.requestFocusInWindow();
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 	 }
 
 }

@@ -34,7 +34,7 @@ public class InfoFenster {
 	        frame.setResizable(false);
 	        frame.setLocationRelativeTo(null);
 	        
-	        backGroundImage = new JLabel(new ImageIcon("Images/infoBackground.png"));
+	        backGroundImage = new JLabel(new ImageIcon(getClass().getResource("/resources/infoBackground.png")));
 	        backGroundImage.setLayout(null);
 	        backGroundImage.setOpaque(false);
 	        frame.getContentPane().add(backGroundImage);
