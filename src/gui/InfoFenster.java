@@ -1,10 +1,18 @@
 package gui;
 
+
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+/**
+ * 
+ * @author Eren, Fabian
+ * @version 0.1
+ *
+ */
 
 public class InfoFenster {
 	

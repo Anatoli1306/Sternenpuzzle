@@ -61,6 +61,7 @@ class PlayMenuBar extends MenuBar
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{	
+				LoadDialog loadDialog = new LoadDialog();
 			}
 			
 		});
@@ -71,7 +72,7 @@ class PlayMenuBar extends MenuBar
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
-			{	
+			{
 			}
 			
 		});

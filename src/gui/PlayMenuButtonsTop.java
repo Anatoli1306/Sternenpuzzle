@@ -79,7 +79,7 @@ public class PlayMenuButtonsTop extends JPanel
         	 
             public void actionPerformed(ActionEvent e)
             {
-            	 JOptionPane.showMessageDialog(null,"Load","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+            	 LoadDialog loadDialog = new LoadDialog();
             }
         });           
         add(btnLoad);
