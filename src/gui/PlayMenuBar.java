@@ -84,6 +84,7 @@ class PlayMenuBar extends MenuBar
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{	
+				SaveDialog saveDialog = new SaveDialog();
 			}
 			
 		});
@@ -196,7 +197,7 @@ class PlayMenuBar extends MenuBar
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				
+				InstructionDialog instructionDialog = new InstructionDialog();
 			}	
 			
 		});
@@ -208,7 +209,7 @@ class PlayMenuBar extends MenuBar
 			@Override
 			public void actionPerformed(ActionEvent a) 
 			{
-				InfoFenster infofenster = new InfoFenster();
+				InfoDialog infofenster = new InfoDialog();
 			}	
 			
 		});

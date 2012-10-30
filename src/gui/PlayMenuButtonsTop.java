@@ -111,7 +111,7 @@ public class PlayMenuButtonsTop extends JPanel
         	 
             public void actionPerformed(ActionEvent e)
             {
-            	InfoFenster infofenster = new InfoFenster();
+            	InfoDialog infofenster = new InfoDialog();
             }
         });           
         add(btnInfo);
