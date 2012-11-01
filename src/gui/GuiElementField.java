@@ -83,8 +83,6 @@ abstract public class GuiElementField extends JButton
 		_eStateToResource.put(eStates.ARROW_SW, "/resources/fieldArrowSW.png");
 		_eStateToResource.put(eStates.ARROW_W, "/resources/fieldArrowW.png");
 		_eStateToResource.put(eStates.ARROW_NW, "/resources/fieldArrowNW.png");
-		
-		setState(eStates.BLANK);
 	}
 	
 	/**
@@ -109,7 +107,7 @@ abstract public class GuiElementField extends JButton
 			Toolkit toolkit = Toolkit.getDefaultToolkit();
 			
 			Image oImage = toolkit.getImage(getClass().getResource(path));
-			Image scaledImage = oImage.getScaledInstance(40, 40, Image.SCALE_DEFAULT);   
+			Image scaledImage = oImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);   
 			ImageIcon oScaledIcon = new ImageIcon(scaledImage);
 			
 			_instancesOfImages.put(path, oScaledIcon);
@@ -170,5 +168,16 @@ abstract public class GuiElementField extends JButton
 		{
 			setState(allowedStates[1]);
 		}
+	}
+	
+	
+	/**
+	 * clear image cache
+	 * call when board size is changed so that all images are newly rezized
+	 */
+	
+	public static void clearImageCache()
+	{
+		_instancesOfImages = new HashMap<String, ImageIcon>();
 	}
 }

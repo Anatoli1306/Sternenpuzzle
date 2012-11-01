@@ -42,9 +42,12 @@ public class PlayFrame extends JFrame
 	public void drawGameBoard()
 	{	
 		getContentPane().removeAll();
+		GuiElementField.clearImageCache();
+		int cols = 20;
+		int rows = 20;
 		
-		_oBoard = new GuiElementGameBoard(10, 10);
-		_oBoard.setBounds(200, 300, 500, 500);
+		_oBoard = new GuiElementGameBoard(rows, cols);
+		_oBoard.setBounds(getLeftPosition(cols), 300, 500, 500);
 		drawDefaualtElements();
 		
 		getContentPane().repaint();
@@ -58,13 +61,38 @@ public class PlayFrame extends JFrame
 	public void drawEditorBoard()
 	{
 		getContentPane().removeAll();
+		GuiElementField.clearImageCache();
+		int cols = 10;
+		int rows = 10;
 		
-		_oBoard = new GuiElementEditorBoard(10, 10);
-		_oBoard.setBounds(200, 300, 500, 500);
+		_oBoard = new GuiElementEditorBoard(rows, cols);
+		_oBoard.setBounds(getLeftPosition(cols), 300, 500, 500);
 		drawDefaualtElements();
 		
 		getContentPane().repaint();
+	}
+	
+	
+	/**
+	 * 
+	 * little helper methode to calculate left posiition of board
+	 * 
+	 * @param int cols
+	 * @return int
+	 * 
+	 */
+	
+	
+	public int getLeftPosition(int cols)
+	{
+		if (cols > 15)
+		{
+			cols = 15;
+		}
 		
+		int width = 400 / cols;
+		
+		return 200 - width;
 	}
 	
 	

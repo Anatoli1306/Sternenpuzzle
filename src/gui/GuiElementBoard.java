@@ -3,6 +3,8 @@
  */
 package gui;
 
+import gui.GuiElementField.eStates;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -11,6 +13,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import logic.Board;
 
@@ -22,7 +26,7 @@ import logic.Board;
  *
  */
 
-public abstract class GuiElementBoard extends JComponent
+public abstract class GuiElementBoard extends JScrollPane
 {
 	/**
 	 * 
@@ -37,7 +41,22 @@ public abstract class GuiElementBoard extends JComponent
 	/**
 	 * 
 	 */
+	private int _elementWidth = 40;
+	
+	/**
+	 * 
+	 */
+	private int _elementHeight = 40;
+	
+	/**
+	 * 
+	 */
 	protected Board _oLogicBoard = null;
+	
+	/**
+	 * 
+	 */
+	protected JPanel _container = null;
 	
 	/**
 	 * 
@@ -54,30 +73,57 @@ public abstract class GuiElementBoard extends JComponent
 	{
 		this._cols = cols;
 		this._rows = rows;
+		
+		_container = new JPanel();
+		_container.setLayout(null);
+		_container.setLocation(0, 0);
+		
+		
 	}
 	
 	@Override
+	public void setBounds(int x, int y, int width, int height) 
+	{
+		// TODO Auto-generated method stub
+		super.setBounds(x, y, width, height);
+		initControls();
+	}
+	
+	
 	/**
+	 * 
 	 * 
 	 */
 	
-	protected void paintComponent(Graphics g) 
+	public void initControls()
 	{
-	    super.paintComponent(g);
-	    
-	    // draw some lines
-	    // yes i know you can't see them atm
-	    for (int iY = 0; iY <= _rows; iY++)
+		if (_rows > 15)
 		{
-	    	g.setColor(Color.black);
-			g.drawLine(0, iY*40, _cols * 40, iY*40);
+	    	// enable scrollbars
+	    	_elementHeight = (getHeight()) / 15;
+	    	setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		}
+		else
+		{
+			_elementHeight = (getHeight()) / _rows;
+			setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 		}
 	    
-	    for (int iX = 0; iX <= _cols; iX++)
+	    if (_cols > 15)
 		{
-	    	g.setColor(Color.black);
-			g.drawLine(iX*40, 0, iX*40, _rows *40);
+	    	// enable scrollbars
+	    	_elementWidth = (getWidth()) / 15;
+	    	setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		}
+		else
+		{
+			_elementWidth = (getWidth()) / _cols;
+			setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			
+		}
+	    
+	    _container.setSize(_elementWidth * _cols, _elementHeight * _rows);
+	    _container.setPreferredSize(_container.getSize());
 	    
 	    // draw all buttons 
 	    for (int iY = 0; iY < _rows; iY++)
@@ -85,10 +131,14 @@ public abstract class GuiElementBoard extends JComponent
 	    	for (int iX = 0; iX < _cols; iX++)
 			{
 	    		GuiElementField oGuiElementField = (GuiElementField)_fields[iY][iX];
-	    		oGuiElementField.setLocation(iX *40, iY *40);
-	    		add(oGuiElementField);
+	    		oGuiElementField.setLocation((iX) *_elementWidth, (iY) *_elementHeight);
+	    		oGuiElementField.setSize(_elementWidth, _elementHeight);
+	    		oGuiElementField.setState(eStates.BLANK);
+	    		_container.add(oGuiElementField);
 			}
 		}
+	    
+		setViewportView(_container);
 	}
 	
 	/**
