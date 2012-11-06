@@ -15,7 +15,7 @@ public class CommandSetCross implements ICommand {
 	/**
 	 * @see logic.ICommand#execute()
 	 */
-	@Override
+	
 	public void execute() 
 	{
 
@@ -24,7 +24,7 @@ public class CommandSetCross implements ICommand {
 	/**
 	 * @see logic.ICommand#execute()
 	 */
-	@Override
+	
 	public void undo() 
 	{
 

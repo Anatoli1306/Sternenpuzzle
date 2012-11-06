@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Component;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,18 +21,15 @@ import javax.swing.JLabel;
 
 public class PlayFrame extends JFrame
 {	
-	private GuiElementBoard _oBoard = null;
+	public GuiElementBoard _oBoard = null;
 	/**
 	 * 
 	 */
 	public PlayFrame()
 	{
-		super("Sternenhimmel Puzzle");
-		setResizable(false);
-		setSize(800, 850);
-		setLocation(100, 100);
+		super("Sternenhimmel Puzzle");	
+		setSize(1280, 1024);
 		setLayout(null);
-		
 		drawGameBoard();
 	}
 	
@@ -43,12 +41,12 @@ public class PlayFrame extends JFrame
 	{	
 		getContentPane().removeAll();
 		GuiElementField.clearImageCache();
-		int cols = 20;
-		int rows = 20;
+		int cols = 40;
+		int rows = 40;
 		
 		_oBoard = new GuiElementGameBoard(rows, cols);
-		_oBoard.setBounds(getLeftPosition(cols), 300, 500, 500);
-		drawDefaualtElements();
+		_oBoard.setBounds(30, 100, 1205, 850);
+		drawDefaualtElements("Game");
 		
 		getContentPane().repaint();
 	}
@@ -62,12 +60,12 @@ public class PlayFrame extends JFrame
 	{
 		getContentPane().removeAll();
 		GuiElementField.clearImageCache();
-		int cols = 10;
-		int rows = 10;
+		int cols = 40;
+		int rows = 40;
 		
 		_oBoard = new GuiElementEditorBoard(rows, cols);
-		_oBoard.setBounds(getLeftPosition(cols), 300, 500, 500);
-		drawDefaualtElements();
+		_oBoard.setBounds(20, 100, 1225, 850);
+		drawDefaualtElements("Editor");
 		
 		getContentPane().repaint();
 	}
@@ -100,36 +98,36 @@ public class PlayFrame extends JFrame
 	 * 
 	 */
 	
-	public void drawDefaualtElements()
+	public void drawDefaualtElements(String mode)
 	{
-		PlayMenuButtonsTop menuButtonsTop = new PlayMenuButtonsTop(this);
-		menuButtonsTop.setBounds(0, 200, 800, 80);
+		PlayMenuButtonsTop menuButtonsTop = new PlayMenuButtonsTop(this, mode);
+		menuButtonsTop.setBounds(180, 15, 100, 80);
 		menuButtonsTop.setBackground(Color.white);
 		menuButtonsTop.setOpaque(false);
 		add(menuButtonsTop);
 		
+		PlayMenuButtonsBottom menuButtonsBottom = new PlayMenuButtonsBottom(this);
+		menuButtonsBottom.setBounds(900, 15, 350, 500);
+		menuButtonsBottom.setBackground(Color.white);
+		menuButtonsBottom.setOpaque(false);		
+		add(menuButtonsBottom);
+		
 		ImageIcon imgBanner = new ImageIcon(getClass().getResource("/resources/banner.png"));
 	    JLabel lblBanner = new JLabel(imgBanner);
-	    lblBanner.setBounds(0, 0, 800, 250);
+	    lblBanner.setBounds(0, 0, 1280, 110);
 	    add(lblBanner);		
 		
 		setMenuBar(new PlayMenuBar(this));
 							
 		add(_oBoard);
-    	
-		PlayMenuButtonsBottom menuButtonsBottom = new PlayMenuButtonsBottom(this);
-		menuButtonsBottom.setBounds(0, 710, 800, 80);
-		menuButtonsBottom.setBackground(Color.white);
-		menuButtonsBottom.setOpaque(false);
-		add(menuButtonsBottom);
-				
+    				
         JLabel backImgPanel = new JLabel(new ImageIcon(getClass().getResource("/resources/background.png")));
         backImgPanel.setLayout(null);
         backImgPanel.setOpaque(false);
         add(backImgPanel);
-        backImgPanel.setBounds(0,0,800,800);
-		    	
-		setVisible(true);
+        backImgPanel.setBounds(0,0,1280,1024);
+		setExtendedState(MAXIMIZED_BOTH);  
+    	setVisible(true);
 	}
 	
 	

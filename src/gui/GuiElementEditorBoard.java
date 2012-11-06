@@ -58,7 +58,7 @@ public class GuiElementEditorBoard extends GuiElementBoard
 	protected class onKeyPressed implements KeyListener
 	{
 
-		@Override
+		
 		public void keyPressed(KeyEvent arg0) 
 		{
 			GuiElementField oGuiElementField = (GuiElementField)arg0.getSource();
@@ -102,12 +102,12 @@ public class GuiElementEditorBoard extends GuiElementBoard
 			}
 		}
 
-		@Override
+		
 		public void keyReleased(KeyEvent arg0) 
 		{
 		}
 
-		@Override
+		
 		public void keyTyped(KeyEvent arg0) 
 		{
 		}

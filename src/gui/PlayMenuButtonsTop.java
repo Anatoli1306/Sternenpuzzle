@@ -28,12 +28,26 @@ public class PlayMenuButtonsTop extends JPanel
 	 * 
 	 */
 	
-	public PlayMenuButtonsTop(final PlayFrame frame)
+	public PlayMenuButtonsTop(final PlayFrame frame, String mode)
 	{
+			
 		frame.getContentPane().setBackground(Color.white);
 		
-		JButton btnGameMode;
-		btnGameMode = new JButton(new ImageIcon(getClass().getResource("/resources/gameMode.png")));
+		final JButton btnGameMode = new JButton(new ImageIcon(getClass().getResource("/resources/gameMode.png")));
+		final JButton btnEditMode = new JButton(new ImageIcon(getClass().getResource("/resources/editMode.png")));
+		
+		if ("Editor" == mode)
+		{
+			btnGameMode.setVisible(true);
+			btnEditMode.setVisible(false);
+		}
+		else
+		{
+			btnGameMode.setVisible(false);
+			btnEditMode.setVisible(true);
+		}
+		
+		
 		btnGameMode.setAlignmentX(LEFT_ALIGNMENT);
 		btnGameMode.setContentAreaFilled(false);
 		btnGameMode.setToolTipText("Starte den Spielmodus");
@@ -43,16 +57,15 @@ public class PlayMenuButtonsTop extends JPanel
         	 
             public void actionPerformed(ActionEvent e)
             {
-            	 JOptionPane.showMessageDialog(null,"GameMode","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
-            	 frame.drawGameBoard();
+            	frame.drawGameBoard();
+            	btnGameMode.setVisible(false);
+            	btnEditMode.setVisible(true);
             }
         });        
-		//setComponentZOrder(btnGameMode, 1);
 		add(btnGameMode);
 		
 		
-		JButton btnEditMode;
-		btnEditMode = new JButton(new ImageIcon(getClass().getResource("/resources/editMode.png")));
+		
 		btnEditMode.setAlignmentX(LEFT_ALIGNMENT);
 		btnEditMode.setContentAreaFilled(false);
 		btnEditMode.setToolTipText("Starte den Editormodus");
@@ -62,75 +75,13 @@ public class PlayMenuButtonsTop extends JPanel
         	 
             public void actionPerformed(ActionEvent e)
             {
-            	 JOptionPane.showMessageDialog(null,"EditMode","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
             	 frame.drawEditorBoard();
+            	 btnGameMode.setVisible(true);
+             	btnEditMode.setVisible(false);
             }
         });           
 		add(btnEditMode);
-		
-		JButton btnLoad;
-		btnLoad = new JButton(new ImageIcon(getClass().getResource("/resources/load.png")));
-		btnLoad.setAlignmentX(LEFT_ALIGNMENT);
-		btnLoad.setContentAreaFilled(false);
-		btnLoad.setToolTipText("Lade einen vorhandenen Spielstand");
-		btnLoad.setBorder(null);
-		
-		btnLoad.addActionListener(new ActionListener() {
-        	 
-            public void actionPerformed(ActionEvent e)
-            {
-            	 LoadDialog loadDialog = new LoadDialog();
-            }
-        });           
-        add(btnLoad);
-        
-		JButton btnSave;
-		btnSave = new JButton(new ImageIcon(getClass().getResource("/resources/save.png")));
-		btnSave.setAlignmentX(LEFT_ALIGNMENT);
-		btnSave.setContentAreaFilled(false);
-		btnSave.setToolTipText("Speichere den aktuellen Spielstand");
-		btnSave.setBorder(null);
-		
-		btnSave.addActionListener(new ActionListener() {
-        	 
-            public void actionPerformed(ActionEvent e)
-            {
-            	 JOptionPane.showMessageDialog(null,"Save","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
-            }
-        });           
-        add(btnSave);
-        
-		JButton btnInfo;
-		btnInfo = new JButton(new ImageIcon(getClass().getResource("/resources/info.png")));
-		btnInfo.setAlignmentX(LEFT_ALIGNMENT);
-		btnInfo.setContentAreaFilled(false);
-		btnInfo.setToolTipText("Zeige Informationen");
-		btnInfo.setBorder(null);
-		
-		btnInfo.addActionListener(new ActionListener() {
-        	 
-            public void actionPerformed(ActionEvent e)
-            {
-            	InfoDialog infofenster = new InfoDialog();
-            }
-        });           
-        add(btnInfo);
-        
-        JButton btnClose;
-        btnClose = new JButton(new ImageIcon(getClass().getResource("/resources/close.png")));
-        btnClose.setAlignmentX(LEFT_ALIGNMENT);
-        btnClose.setContentAreaFilled(false);
-        btnClose.setToolTipText("Programm beenden");
-        btnClose.setBorder(null);
-		
-        btnClose.addActionListener(new ActionListener() {
-        	 
-            public void actionPerformed(ActionEvent e)
-            {
-            	frame.dispose();
-            }
-        });           
-        add(btnClose);
+				
 	}
 	
 

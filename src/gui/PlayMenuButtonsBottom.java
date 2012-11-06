@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -37,7 +38,6 @@ public class PlayMenuButtonsBottom extends JPanel
 	{
 
 		playFrame = frame;
-		playFrame.getContentPane().setBackground(Color.white);
 		
 		JButton btnSet;
 		btnSet = new JButton(new ImageIcon(getClass().getResource("/resources/set.png")));

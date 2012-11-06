@@ -47,9 +47,15 @@ class PlayMenuBar extends MenuBar
 		MenuItem neu = new MenuItem("Neu");
 		neu.addActionListener(new ActionListener(){
 			
-			@Override
+			
 			public void actionPerformed(ActionEvent arg0) 
 			{	
+				QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
+				
+				if(playFrame._oBoard instanceof GuiElementGameBoard)
+				playFrame.drawGameBoard();
+				else
+					playFrame.drawEditorBoard();
 			}
 			
 		});
@@ -58,7 +64,7 @@ class PlayMenuBar extends MenuBar
 		MenuItem laden = new MenuItem("Laden");
 		laden.addActionListener(new ActionListener(){
 			
-			@Override
+			
 			public void actionPerformed(ActionEvent arg0) 
 			{	
 				LoadDialog loadDialog = new LoadDialog();
@@ -70,7 +76,7 @@ class PlayMenuBar extends MenuBar
 		MenuItem speichern = new MenuItem("Speichern");
 		speichern.addActionListener(new ActionListener(){
 			
-			@Override
+			
 			public void actionPerformed(ActionEvent arg0) 
 			{
 			}
@@ -81,7 +87,7 @@ class PlayMenuBar extends MenuBar
 		MenuItem speichern_unter = new MenuItem("Speichern Unter");
 		speichern_unter.addActionListener(new ActionListener(){
 			
-			@Override
+			
 			public void actionPerformed(ActionEvent arg0) 
 			{	
 				SaveDialog saveDialog = new SaveDialog();
@@ -93,7 +99,7 @@ class PlayMenuBar extends MenuBar
 		MenuItem beenden = new MenuItem("Beenden");
 		beenden.addActionListener(new ActionListener(){
 			
-			@Override
+			
 			public void actionPerformed(ActionEvent arg0) 
 			{	
 				playFrame.dispose();
@@ -118,7 +124,7 @@ class PlayMenuBar extends MenuBar
 		MenuItem marker_setzen = new MenuItem("Marker setzen");
 		marker_setzen.addActionListener(new ActionListener(){
 					
-			@Override
+			
 			public void actionPerformed(ActionEvent arg0) 
 			{	
 			}
@@ -129,7 +135,7 @@ class PlayMenuBar extends MenuBar
 		MenuItem zurück_zum_marker = new MenuItem("Zurück zum Marker");
 		zurück_zum_marker.addActionListener(new ActionListener(){
 					
-			@Override
+			
 			public void actionPerformed(ActionEvent arg0) 
 			{	
 			}
@@ -140,7 +146,7 @@ class PlayMenuBar extends MenuBar
 		MenuItem rückgängig_zum_ersten_fehler = new MenuItem("Rückgängig zum ersten Fehler");
 		rückgängig_zum_ersten_fehler.addActionListener(new ActionListener(){
 			
-			@Override
+			
 			public void actionPerformed(ActionEvent arg0) 
 			{	
 			}
@@ -161,7 +167,7 @@ class PlayMenuBar extends MenuBar
 		MenuItem spielmodus = new MenuItem("Spielmodus");
 		spielmodus.addActionListener(new ActionListener(){
 			
-			@Override
+			
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				
@@ -173,7 +179,7 @@ class PlayMenuBar extends MenuBar
 		MenuItem editiermodus = new MenuItem("Editiermodus");
 		editiermodus.addActionListener(new ActionListener(){
 			
-			@Override
+			
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				
@@ -194,7 +200,7 @@ class PlayMenuBar extends MenuBar
 		MenuItem spielbeschreibung = new MenuItem("Spielbeschreibung");
 		spielbeschreibung.addActionListener(new ActionListener(){
 			
-			@Override
+			
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				InstructionDialog instructionDialog = new InstructionDialog();
@@ -206,7 +212,7 @@ class PlayMenuBar extends MenuBar
 		MenuItem info = new MenuItem("Info");
 		info.addActionListener(new ActionListener(){
 			
-			@Override
+			
 			public void actionPerformed(ActionEvent a) 
 			{
 				InfoDialog infofenster = new InfoDialog();

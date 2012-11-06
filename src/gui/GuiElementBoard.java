@@ -100,7 +100,7 @@ public abstract class GuiElementBoard extends JScrollPane
 		if (_rows > 15)
 		{
 	    	// enable scrollbars
-	    	_elementHeight = (getHeight()) / 15;
+	    	_elementHeight = (getHeight()) / _rows;
 	    	setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		}
 		else
@@ -112,7 +112,7 @@ public abstract class GuiElementBoard extends JScrollPane
 	    if (_cols > 15)
 		{
 	    	// enable scrollbars
-	    	_elementWidth = (getWidth()) / 15;
+	    	_elementWidth = (getWidth()) / _cols;
 	    	setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		}
 		else
@@ -148,7 +148,7 @@ public abstract class GuiElementBoard extends JScrollPane
 	 */
 	protected class onClick implements MouseListener 
 	{
-		@Override
+		
 		public void mouseClicked(MouseEvent e) 
 		{
 			
@@ -166,8 +166,7 @@ public abstract class GuiElementBoard extends JScrollPane
 			
 		}
 
-		@Override
-		public void mouseEntered(MouseEvent e) 
+			public void mouseEntered(MouseEvent e) 
 		{
 			// TODO Auto-generated method stub
 			GuiElementField oGuiElementField = (GuiElementField)e.getSource();
@@ -175,20 +174,17 @@ public abstract class GuiElementBoard extends JScrollPane
 			
 		}
 
-		@Override
-		public void mouseExited(MouseEvent e) {
+			public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
 			
 		}
 
-		@Override
-		public void mousePressed(MouseEvent e) {
+				public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
 			
 		}
 
-		@Override
-		public void mouseReleased(MouseEvent e) {
+				public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
 			
 		}

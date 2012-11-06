@@ -37,7 +37,7 @@ public class GuiElementGameBoard extends GuiElementBoard
 			for (int iX = 0; iX < cols; iX++)
 			{
 				GuiElementField oGuiElementField = new GuiElementGameField();
-				oGuiElementField.setSize(40, 40);
+				oGuiElementField.setSize(80, 80);
 				oGuiElementField.addMouseListener(oOnClick);
 				this._fields[iY][iX] = oGuiElementField;
 			}
