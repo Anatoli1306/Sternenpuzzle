@@ -48,14 +48,17 @@ class PlayMenuBar extends MenuBar
 		neu.addActionListener(new ActionListener(){
 			
 			
-			public void actionPerformed(ActionEvent arg0) 
+			public void actionPerformed(ActionEvent arg0)
 			{	
 				QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
 				
-				if(playFrame._oBoard instanceof GuiElementGameBoard)
-				playFrame.drawGameBoard();
-				else
-					playFrame.drawEditorBoard();
+				if(questionToSaveDialog.isYes_no_answer()){
+					if(playFrame._oBoard instanceof GuiElementGameBoard){
+						playFrame.drawGameBoard();
+					}
+					else
+						playFrame.drawEditorBoard();
+				}
 			}
 			
 		});
@@ -102,7 +105,10 @@ class PlayMenuBar extends MenuBar
 			
 			public void actionPerformed(ActionEvent arg0) 
 			{	
-				playFrame.dispose();
+				QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
+				if(questionToSaveDialog.isYes_no_answer()){
+					playFrame.dispose();
+				}
 			}
 			
 		});

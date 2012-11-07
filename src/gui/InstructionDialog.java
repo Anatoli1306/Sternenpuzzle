@@ -27,7 +27,7 @@ public class InstructionDialog {
 	        label = new JLabel ("");
 	        label.setHorizontalAlignment(JLabel.CENTER);
 	        label.setVerticalAlignment(JLabel.TOP);
-	        label.setForeground(Color.black);
+	        label.setForeground(Color.white);
 	        label.setText("<html><p/><p/><h1>Anleitung: </h1><p/><p/>" +
 	        		"Zeichnen Sie die Sterne ein. <p/>"+
 	        		"Auf jeden Stern muss mindestens ein Pfeil zeigen, <p/>" +
@@ -51,10 +51,10 @@ public class InstructionDialog {
 	        frame.setResizable(false);
 	        frame.setLocationRelativeTo(null);
 	        
-	        backGroundImage = new JLabel(new ImageIcon(getClass().getResource("/resources/infoBackground.png")));
+	        backGroundImage = new JLabel(new ImageIcon(getClass().getResource("/resources/instructionBackground.png")));
 	        backGroundImage.setLayout(null);
 	        backGroundImage.setOpaque(false);
-	        //frame.getContentPane().add(backGroundImage);
+	        frame.getContentPane().add(backGroundImage);
 	        backGroundImage.setBounds(0,0,200,300);
 	    }
 }

@@ -126,7 +126,7 @@ public class PlayFrame extends JFrame
         backImgPanel.setOpaque(false);
         add(backImgPanel);
         backImgPanel.setBounds(0,0,1280,1024);
-		setExtendedState(MAXIMIZED_BOTH);  
+		//setExtendedState(MAXIMIZED_BOTH);  
     	setVisible(true);
 	}
 	
