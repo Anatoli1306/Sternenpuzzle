@@ -3,6 +3,8 @@
  */
 package logic;
 
+import gui.GuiElementField.eStates;
+
 /**
  * 
  * @author Andreas
@@ -12,17 +14,6 @@ package logic;
 
 public class Field 
 {
-	/**
-	 *
-	 */
-	public static enum eStates 
-	{
-	    BLANK, 
-	    STAR, 
-	    CROSS, 
-	    QUESTION
-	}
-	
 	/**
 	 * 
 	 */
@@ -55,5 +46,16 @@ public class Field
 	public void setState(eStates state) 
 	{
 		this._state = state;
+	}
+	
+	/**
+	 * 
+	 * @return Board
+	 * 
+	 */
+	
+	public Board getBoard()
+	{
+		return _oBoard;
 	}
 }

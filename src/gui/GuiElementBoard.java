@@ -63,6 +63,7 @@ public abstract class GuiElementBoard extends JScrollPane
 	 */
 	protected GuiElementField[][] _fields = new GuiElementField[0][0];
 	
+	
 	/**
 	 * 
 	 * @param int rows
@@ -189,5 +190,12 @@ public abstract class GuiElementBoard extends JScrollPane
 			
 		}
 	 }
+	
+	
+	public void save(String filename)
+	{
+		_oLogicBoard.save(filename);
+		System.out.println(_oLogicBoard);
+	}
 
 }

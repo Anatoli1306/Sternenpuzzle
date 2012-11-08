@@ -3,6 +3,8 @@
  */
 package logic;
 
+import gui.GuiElementField.eStates;
+
 
 /**
  * 
@@ -11,7 +13,7 @@ package logic;
  * 
  */
 
-public class Board 
+public abstract class Board 
 {
 	/**
 	 *
@@ -71,4 +73,71 @@ public class Board
 	{
 		this._width = width;
 	}
+	
+	
+	/**
+	 * 
+	 * @param int posY
+	 * @param int posX
+	 * @return Field
+	 * 
+	 */
+	public Field getField(int posY, int posX)
+	{
+		return this._fields[posY][posX];
+	}
+	
+	
+	/**
+	 * 
+	 * @param int row
+	 * @return int
+	 * 
+	 */
+	
+	public int getCountStarsForRow(int row)
+	{
+		int countStars = 0;
+		for (int i = 0; i < _width; i++) 
+		{
+			Field oField = (Field)_fields[row][i];
+			if (eStates.STAR == oField.getState())
+			{
+				countStars++;
+			}
+		}
+		return countStars;
+	}
+	
+	
+	/**
+	 * 
+	 * @param int column
+	 * @return int
+	 * 
+	 */
+	
+	public int getCountStarsForColumn(int column)
+	{
+		int countStars = 0;
+		for (int i = 0; i < _height; i++) 
+		{
+			Field oField = (Field)_fields[i][column];
+			if (eStates.STAR == oField.getState())
+			{
+				countStars++;
+			}
+		}
+		return countStars;
+	}
+	
+	/**
+	 * @param String filename
+	 */
+	abstract public void save(String filename);
+	
+	/**
+	 * @param String filename
+	 */
+	abstract public void load(String filename);
 }

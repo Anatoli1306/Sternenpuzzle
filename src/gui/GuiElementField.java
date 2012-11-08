@@ -11,6 +11,9 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import logic.Board;
+import logic.Field;
+
 /**
  * 
  * @author Andreas
@@ -69,6 +72,11 @@ abstract public class GuiElementField extends JButton
 	/**
 	 * 
 	 */
+	protected Field _oLogicField = null;
+	
+	/**
+	 * 
+	 */
 	public GuiElementField() 
 	{
 		_eStateToResource.put(eStates.BLANK, "/resources/fieldBlank.png");
@@ -92,7 +100,14 @@ abstract public class GuiElementField extends JButton
 	public void setState(eStates state)
 	{
 		_currentState = state;
+		_oLogicField.setState(state);
 		setScaledImage(_eStateToResource.get(state));
+		
+		int starsOfFirstRow = _oLogicField.getBoard().getCountStarsForRow(0);
+		int starsOfSecondColumn = _oLogicField.getBoard().getCountStarsForColumn(1);
+		
+		System.out.println("First row has "+starsOfFirstRow+" stars");
+		System.out.println("Second column has "+starsOfSecondColumn+" stars");
 	}
 	
 	/**
@@ -179,5 +194,15 @@ abstract public class GuiElementField extends JButton
 	public static void clearImageCache()
 	{
 		_instancesOfImages = new HashMap<String, ImageIcon>();
+	}
+	
+	/**
+	 * 
+	 * @param Field oLogicField
+	 * 
+	 */
+	public void setLogicField(Field oLogicField)
+	{
+		_oLogicField = oLogicField;
 	}
 }

@@ -64,7 +64,7 @@ public class PlayFrame extends JFrame
 		int rows = 40;
 		
 		_oBoard = new GuiElementEditorBoard(rows, cols);
-		_oBoard.setBounds(20, 100, 1225, 850);
+		_oBoard.setBounds(30, 100, 1205, 850);
 		drawDefaualtElements("Editor");
 		
 		getContentPane().repaint();
