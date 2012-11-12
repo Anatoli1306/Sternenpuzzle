@@ -53,11 +53,8 @@ class PlayMenuBar extends MenuBar
 				QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
 				
 				if(questionToSaveDialog.isYes_no_answer()){
-					if(playFrame._oBoard instanceof GuiElementGameBoard){
-						playFrame.drawGameBoard();
-					}
-					else
-						playFrame.drawEditorBoard();
+					BoardSizeDialog boardSizeDialog = new BoardSizeDialog(playFrame);					
+									
 				}
 			}
 			

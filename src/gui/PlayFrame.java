@@ -30,19 +30,18 @@ public class PlayFrame extends JFrame
 		super("Sternenhimmel Puzzle");	
 		setSize(1280, 1024);
 		setLayout(null);
-		drawGameBoard();
+		
+		drawGameBoard(40,40);
 	}
 	
 	/**
 	 * 
 	 */
 	
-	public void drawGameBoard()
+	public void drawGameBoard(int rows, int cols)
 	{	
 		getContentPane().removeAll();
 		GuiElementField.clearImageCache();
-		int cols = 40;
-		int rows = 40;
 		
 		_oBoard = new GuiElementGameBoard(rows, cols);
 		_oBoard.setBounds(30, 100, 1205, 850);
@@ -56,12 +55,10 @@ public class PlayFrame extends JFrame
 	 * 
 	 */
 	
-	public void drawEditorBoard()
+	public void drawEditorBoard(int rows, int cols)
 	{
 		getContentPane().removeAll();
 		GuiElementField.clearImageCache();
-		int cols = 40;
-		int rows = 40;
 		
 		_oBoard = new GuiElementEditorBoard(rows, cols);
 		_oBoard.setBounds(30, 100, 1205, 850);
@@ -100,15 +97,13 @@ public class PlayFrame extends JFrame
 	
 	public void drawDefaualtElements(String mode)
 	{
-		PlayMenuButtonsTop menuButtonsTop = new PlayMenuButtonsTop(this, mode);
-		menuButtonsTop.setBounds(180, 15, 100, 80);
-		menuButtonsTop.setBackground(Color.white);
+		PlayMenuGameEditButtons menuButtonsTop = new PlayMenuGameEditButtons(this, mode);
+		menuButtonsTop.setBounds(180, 10, 100, 80);
 		menuButtonsTop.setOpaque(false);
 		add(menuButtonsTop);
 		
-		PlayMenuButtonsBottom menuButtonsBottom = new PlayMenuButtonsBottom(this);
+		PlayMenuButtonsTop menuButtonsBottom = new PlayMenuButtonsTop(this);
 		menuButtonsBottom.setBounds(900, 15, 350, 500);
-		menuButtonsBottom.setBackground(Color.white);
 		menuButtonsBottom.setOpaque(false);		
 		add(menuButtonsBottom);
 		
@@ -128,6 +123,8 @@ public class PlayFrame extends JFrame
         backImgPanel.setBounds(0,0,1280,1024);
 		//setExtendedState(MAXIMIZED_BOTH);  
     	setVisible(true);
+    	
+    	
 	}
 	
 	

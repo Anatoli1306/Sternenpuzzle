@@ -5,12 +5,13 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-// Klasse enthällt die Reihe der oberen Buttons
+// Klasse enthällt die Reihe der unteren Buttons
 
 /**
  * 
@@ -21,6 +22,11 @@ import javax.swing.JPanel;
 
 public class PlayMenuButtonsTop extends JPanel
 {
+	/**
+	 * 
+	 */
+	private PlayFrame playFrame;
+	
 	
 	/**
 	 * 
@@ -28,62 +34,54 @@ public class PlayMenuButtonsTop extends JPanel
 	 * 
 	 */
 	
-	public PlayMenuButtonsTop(final PlayFrame frame, String mode)
+	public PlayMenuButtonsTop(PlayFrame frame)
 	{
-			
-		frame.getContentPane().setBackground(Color.white);
+
+		playFrame = frame;
 		
-		final JButton btnGameMode = new JButton(new ImageIcon(getClass().getResource("/resources/gameMode.png")));
-		final JButton btnEditMode = new JButton(new ImageIcon(getClass().getResource("/resources/editMode.png")));
+		JButton btnSet;
+		btnSet = new JButton(new ImageIcon(getClass().getResource("/resources/set.png")));
+		btnSet.setAlignmentX(LEFT_ALIGNMENT);
+		btnSet.setContentAreaFilled(false);
+		btnSet.setBorder(null);
 		
-		if ("Editor" == mode)
-		{
-			btnGameMode.setVisible(true);
-			btnEditMode.setVisible(false);
-		}
-		else
-		{
-			btnGameMode.setVisible(false);
-			btnEditMode.setVisible(true);
-		}
-		
-		
-		btnGameMode.setAlignmentX(LEFT_ALIGNMENT);
-		btnGameMode.setContentAreaFilled(false);
-		btnGameMode.setToolTipText("Starte den Spielmodus");
-		btnGameMode.setBorder(null);
-		
-		btnGameMode.addActionListener(new ActionListener() {
+		btnSet.addActionListener(new ActionListener() {
         	 
             public void actionPerformed(ActionEvent e)
             {
-            	frame.drawGameBoard();
-            	btnGameMode.setVisible(false);
-            	btnEditMode.setVisible(true);
+            	 JOptionPane.showMessageDialog(null,"Marker setzen","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
             }
         });        
-		add(btnGameMode);
+		add(btnSet);
 		
+		JButton btnCheck;
+		btnCheck = new JButton(new ImageIcon(getClass().getResource("/resources/check.png")));
+		btnCheck.setAlignmentX(LEFT_ALIGNMENT);
+		btnCheck.setContentAreaFilled(false);
+		btnCheck.setBorder(null);
 		
-		
-		btnEditMode.setAlignmentX(LEFT_ALIGNMENT);
-		btnEditMode.setContentAreaFilled(false);
-		btnEditMode.setToolTipText("Starte den Editormodus");
-		btnEditMode.setBorder(null);
-		
-		btnEditMode.addActionListener(new ActionListener() {
+		btnCheck.addActionListener(new ActionListener() {
         	 
             public void actionPerformed(ActionEvent e)
             {
-            	 frame.drawEditorBoard();
-            	 btnGameMode.setVisible(true);
-             	btnEditMode.setVisible(false);
+            	 JOptionPane.showMessageDialog(null,"Zurück zum Marker","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
             }
-        });           
-		add(btnEditMode);
-				
+        });        
+		add(btnCheck);
+		
+		JButton btnUndo;
+		btnUndo = new JButton(new ImageIcon(getClass().getResource("/resources/undo.png")));
+		btnUndo.setAlignmentX(LEFT_ALIGNMENT);
+		btnUndo.setContentAreaFilled(false);
+		btnUndo.setBorder(null);
+		
+		btnUndo.addActionListener(new ActionListener() {
+        	 
+            public void actionPerformed(ActionEvent e)
+            {
+            	 JOptionPane.showMessageDialog(null,"Rückgängig zum ersten Fehler","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+            }
+        });        
+		add(btnUndo);
 	}
-	
-
 }
-

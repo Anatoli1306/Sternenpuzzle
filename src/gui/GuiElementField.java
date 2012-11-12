@@ -108,6 +108,8 @@ abstract public class GuiElementField extends JButton
 		
 		System.out.println("First row has "+starsOfFirstRow+" stars");
 		System.out.println("Second column has "+starsOfSecondColumn+" stars");
+		
+		 
 	}
 	
 	/**

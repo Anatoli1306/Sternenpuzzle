@@ -38,7 +38,7 @@ public class PlayMenuButtons extends JPanel
 
 		playFrame = frame;
 		playFrame.getContentPane().setBackground(Color.white);
-		
+
 		JButton btnGameMode;
 		btnGameMode = new JButton(new ImageIcon("images/gameMode.png"));
 		btnGameMode.setAlignmentX(LEFT_ALIGNMENT);

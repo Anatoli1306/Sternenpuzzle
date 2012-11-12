@@ -12,10 +12,14 @@ public class Main
 	 */
 	public static void main(String[] args) 
 	{
-//		startBoardDemo();
 		PlayFrame wnd = new PlayFrame();
 		wnd.getContentPane().setBackground(Color.white);		
 		wnd.setDefaultCloseOperation(wnd.EXIT_ON_CLOSE);
+		wnd.setExtendedState(wnd.MAXIMIZED_BOTH);  
+		int test[] = new int[2];
+		
+		
+		
 	}
 	
 	
