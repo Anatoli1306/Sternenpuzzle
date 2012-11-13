@@ -69,6 +69,12 @@ abstract public class GuiElementField extends JButton
 	 */
 	private eStates _currentState = null;
 	
+	
+	/**
+	 * 
+	 */
+	protected GuiElementBoard _oBoard = null;
+	
 	/**
 	 * 
 	 */
@@ -77,7 +83,7 @@ abstract public class GuiElementField extends JButton
 	/**
 	 * 
 	 */
-	public GuiElementField() 
+	public GuiElementField(GuiElementBoard oBoard) 
 	{
 		_eStateToResource.put(eStates.BLANK, "/resources/fieldBlank.png");
 		_eStateToResource.put(eStates.STAR, "/resources/fieldStar.png");
@@ -91,6 +97,9 @@ abstract public class GuiElementField extends JButton
 		_eStateToResource.put(eStates.ARROW_SW, "/resources/fieldArrowSW.png");
 		_eStateToResource.put(eStates.ARROW_W, "/resources/fieldArrowW.png");
 		_eStateToResource.put(eStates.ARROW_NW, "/resources/fieldArrowNW.png");
+		
+		setContentAreaFilled(false);
+		_oBoard = oBoard;
 	}
 	
 	/**
@@ -102,14 +111,6 @@ abstract public class GuiElementField extends JButton
 		_currentState = state;
 		_oLogicField.setState(state);
 		setScaledImage(_eStateToResource.get(state));
-		
-		int starsOfFirstRow = _oLogicField.getBoard().getCountStarsForRow(0);
-		int starsOfSecondColumn = _oLogicField.getBoard().getCountStarsForColumn(1);
-		
-		System.out.println("First row has "+starsOfFirstRow+" stars");
-		System.out.println("Second column has "+starsOfSecondColumn+" stars");
-		
-		 
 	}
 	
 	/**

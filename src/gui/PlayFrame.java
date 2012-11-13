@@ -21,6 +21,8 @@ import javax.swing.JLabel;
 
 public class PlayFrame extends JFrame
 {	
+	static private PlayFrame _oPlayFrame = null;
+	
 	public GuiElementBoard _oBoard = null;
 	/**
 	 * 
@@ -28,6 +30,7 @@ public class PlayFrame extends JFrame
 	public PlayFrame()
 	{
 		super("Sternenhimmel Puzzle");	
+		_oPlayFrame = this;
 		setSize(1280, 1024);
 		setLayout(null);
 		
@@ -44,10 +47,12 @@ public class PlayFrame extends JFrame
 		GuiElementField.clearImageCache();
 		
 		_oBoard = new GuiElementGameBoard(rows, cols);
-		_oBoard.setBounds(30, 100, 1205, 850);
+		_oBoard.setBounds(10, 100, 1240, 870);
 		drawDefaualtElements("Game");
 		
+		
 		getContentPane().repaint();
+		validate();
 	}
 	
 	
@@ -61,10 +66,12 @@ public class PlayFrame extends JFrame
 		GuiElementField.clearImageCache();
 		
 		_oBoard = new GuiElementEditorBoard(rows, cols);
-		_oBoard.setBounds(30, 100, 1205, 850);
+		_oBoard.setBounds(10, 100, 1240, 870);
 		drawDefaualtElements("Editor");
 		
+		validate();
 		getContentPane().repaint();
+		validate();
 	}
 	
 	
@@ -123,8 +130,7 @@ public class PlayFrame extends JFrame
         backImgPanel.setBounds(0,0,1280,1024);
 		//setExtendedState(MAXIMIZED_BOTH);  
     	setVisible(true);
-    	
-    	
+    	validate();
 	}
 	
 	
@@ -137,5 +143,11 @@ public class PlayFrame extends JFrame
 	public Component add(Component comp)
 	{
 		return getContentPane().add(comp);
+	}
+	
+	public static void refreshWindow()
+	{
+		_oPlayFrame.validate();
+		_oPlayFrame.repaint();
 	}
 }

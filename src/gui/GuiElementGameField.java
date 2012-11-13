@@ -18,9 +18,9 @@ public class GuiElementGameField  extends GuiElementField
 	/**
 	 * 
 	 */
-	public GuiElementGameField() 
+	public GuiElementGameField(GuiElementBoard oBoard) 
 	{
-		super();
+		super(oBoard);
 		
 		eStates tmpAllowedLeftTypes[] = {eStates.BLANK, eStates.QUESTION, eStates.CROSS};
 		_allowedLeftTypes = tmpAllowedLeftTypes;

@@ -16,6 +16,8 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import sun.applet.Main;
+
 import logic.Board;
 
 
@@ -51,6 +53,16 @@ public abstract class GuiElementBoard extends JScrollPane
 	/**
 	 * 
 	 */
+	private GuiElementStarCounter[] _rowStarElements = null;
+	
+	/**
+	 * 
+	 */
+	private GuiElementStarCounter[] _columnStarElements = null;
+	
+	/**
+	 * 
+	 */
 	protected Board _oLogicBoard = null;
 	
 	/**
@@ -79,7 +91,27 @@ public abstract class GuiElementBoard extends JScrollPane
 		_container.setLayout(null);
 		_container.setLocation(0, 0);
 		
+		Color oTransCol = new Color(0, 0, 0, 0);
+		_container.setBackground(oTransCol);
+		setBackground(oTransCol);
+		setBorder(null);
 		
+		_rowStarElements = new GuiElementStarCounter[_rows];
+	    _columnStarElements = new GuiElementStarCounter[_cols];
+	    
+	    for (int iY = 0; iY < _rows; iY++)
+		{
+	    	GuiElementStarCounter oGuiStarCounter = new GuiElementStarCounter(0);
+	    	_container.add(oGuiStarCounter);
+	    	_rowStarElements[iY] = oGuiStarCounter;
+		}
+	    
+	    for (int iX = 0; iX < _cols; iX++)
+		{
+	    	GuiElementStarCounter oGuiStarCounter = new GuiElementStarCounter(0);
+	    	_columnStarElements[iX] = oGuiStarCounter;
+	    	_container.add(oGuiStarCounter);
+		}
 	}
 	
 	@Override
@@ -98,33 +130,28 @@ public abstract class GuiElementBoard extends JScrollPane
 	
 	public void initControls()
 	{
-		if (_rows > 15)
-		{
-	    	// enable scrollbars
-	    	_elementHeight = (getHeight()) / _rows;
-	    	setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		}
-		else
-		{
-			_elementHeight = (getHeight()) / _rows;
-			setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-		}
+		_elementHeight = (getHeight()) / (_rows+1);
+		setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		
+		_elementWidth = (getWidth()) / (_cols+1);
+		setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	    
-	    if (_cols > 15)
-		{
-	    	// enable scrollbars
-	    	_elementWidth = (getWidth()) / _cols;
-	    	setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		}
-		else
-		{
-			_elementWidth = (getWidth()) / _cols;
-			setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-			
-		}
-	    
-	    _container.setSize(_elementWidth * _cols, _elementHeight * _rows);
+	    _container.setSize(_elementWidth * (_cols+1), _elementHeight * (_rows+1));
 	    _container.setPreferredSize(_container.getSize());
+	    
+	    for (int iY = 0; iY < _rows; iY++)
+		{
+	    	GuiElementStarCounter oGuiStarCounter = _rowStarElements[iY];
+	    	oGuiStarCounter.setLocation(0, (iY+1) *_elementHeight);
+	    	oGuiStarCounter.setSize(_elementWidth, _elementHeight);
+		}
+	    
+	    for (int iX = 0; iX < _cols; iX++)
+		{
+	    	GuiElementStarCounter oGuiStarCounter = _columnStarElements[iX];
+	    	oGuiStarCounter.setLocation((iX+1) *_elementWidth, 0);
+	    	oGuiStarCounter.setSize(_elementWidth, _elementHeight);
+		}
 	    
 	    // draw all buttons 
 	    for (int iY = 0; iY < _rows; iY++)
@@ -132,7 +159,7 @@ public abstract class GuiElementBoard extends JScrollPane
 	    	for (int iX = 0; iX < _cols; iX++)
 			{
 	    		GuiElementField oGuiElementField = (GuiElementField)_fields[iY][iX];
-	    		oGuiElementField.setLocation((iX) *_elementWidth, (iY) *_elementHeight);
+	    		oGuiElementField.setLocation((iX+1) *_elementWidth, (iY+1) *_elementHeight);
 	    		oGuiElementField.setSize(_elementWidth, _elementHeight);
 	    		oGuiElementField.setState(eStates.BLANK);
 	    		_container.add(oGuiElementField);
@@ -195,7 +222,30 @@ public abstract class GuiElementBoard extends JScrollPane
 	public void save(String filename)
 	{
 		_oLogicBoard.save(filename);
-		System.out.println(_oLogicBoard);
+	}
+	
+	
+	/**
+	 * 
+	 */
+	public void calculateStars()
+	{
+		int count = 0;
+		for (int iY = 0; iY < _rows; iY++)
+		{
+	    	count = _oLogicBoard.getCountStarsForRow(iY);
+	    	_rowStarElements[iY].setStars(count);
+	    	count = 0;
+		}
+		
+		for (int iX = 0; iX < _cols; iX++)
+		{
+			count = _oLogicBoard.getCountStarsForColumn(iX);
+			_columnStarElements[iX].setStars(count);
+	    	count = 0;
+		}
+		
+		PlayFrame.refreshWindow();
 	}
 
 }

@@ -39,7 +39,7 @@ public class GuiElementEditorBoard extends GuiElementBoard
 		{
 			for (int iX = 0; iX < cols; iX++)
 			{
-				GuiElementField oGuiElementField = new GuiElementEditorField();
+				GuiElementField oGuiElementField = new GuiElementEditorField(this);
 				oGuiElementField.setSize(40, 40);
 				oGuiElementField.addMouseListener(oOnClick);
 				oGuiElementField.addKeyListener(oOnKeyPressed);
