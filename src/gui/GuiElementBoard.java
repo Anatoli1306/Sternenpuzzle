@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import sun.applet.Main;
 
 import logic.Board;
+import logic.CheckBoard;
 
 
 /**
@@ -246,6 +247,11 @@ public abstract class GuiElementBoard extends JScrollPane
 		}
 		
 		PlayFrame.refreshWindow();
+	}
+	
+	public boolean check()
+	{
+		return CheckBoard.getInstance(_oLogicBoard).check();
 	}
 
 }

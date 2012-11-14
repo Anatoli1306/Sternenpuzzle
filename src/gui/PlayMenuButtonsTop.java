@@ -64,7 +64,21 @@ public class PlayMenuButtonsTop extends JPanel
         	 
             public void actionPerformed(ActionEvent e)
             {
-            	 JOptionPane.showMessageDialog(null,"Zurück zum Marker","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+            	if (playFrame._oBoard instanceof GuiElementGameBoard)
+            	{
+            		JOptionPane.showMessageDialog(null,"Zurück zum Marker","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+            	}
+            	else
+            	{
+            		boolean result = playFrame._oBoard.check();
+            		String message = "Spiel entspricht nicht den Regeln";
+            		if (!result)
+            		{
+            			message = "Spiel entspricht den Regeln";
+            		}
+            		JOptionPane.showMessageDialog(null, message, "SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+            	}
+            	 
             }
         });        
 		add(btnCheck);
