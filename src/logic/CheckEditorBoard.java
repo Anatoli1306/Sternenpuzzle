@@ -33,7 +33,7 @@ public class CheckEditorBoard extends CheckBoard
 				else if (oField.getState() == eStates.ARROW_N)
 				{
 					error = true;
-					for (int iCheckY = iY; iCheckY > 0; iCheckY--)
+					for (int iCheckY = iY; iCheckY >= 0; iCheckY--)
 					{
 						Field oTmpField = _oBoard.getField(iCheckY, iX);
 						if (oTmpField.getState() == eStates.STAR)
@@ -126,7 +126,7 @@ public class CheckEditorBoard extends CheckBoard
 				else if (oField.getState() == eStates.ARROW_W)
 				{
 					error = true;
-					for (int iCheckX = iX; iCheckX > 0; iCheckX--)
+					for (int iCheckX = iX; iCheckX >= 0; iCheckX--)
 					{
 						Field oTmpField = _oBoard.getField(iY, iCheckX);
 						if (oTmpField.getState() == eStates.STAR)
@@ -173,7 +173,7 @@ public class CheckEditorBoard extends CheckBoard
 
 		// check if south arrow is pointing at star
 		error = true;
-		for (int iCheckY = curY; iCheckY > 0; iCheckY--)
+		for (int iCheckY = curY; iCheckY >= 0; iCheckY--)
 		{
 			Field oTmpField = _oBoard.getField(iCheckY, curX);
 			if (oTmpField.getState() == eStates.ARROW_S)
@@ -294,7 +294,7 @@ public class CheckEditorBoard extends CheckBoard
 		
 		// check if east arrow is pointing at star
 		error = true;
-		for (int iCheckX = curX; iCheckX > 0; iCheckX--)
+		for (int iCheckX = curX; iCheckX >= 0; iCheckX--)
 		{
 			Field oTmpField = _oBoard.getField(curY, iCheckX);
 			if (oTmpField.getState() == eStates.ARROW_E)
@@ -320,7 +320,7 @@ public class CheckEditorBoard extends CheckBoard
 		for (int iCheck = 1; iCheck <= minDiff; iCheck++)
 		{
 			Field oTmpField = _oBoard.getField(curY-iCheck, curX-iCheck);
-			if (oTmpField.getState() == eStates.STAR)
+			if (oTmpField.getState() == eStates.ARROW_SE)
 			{
 				error = false;
 				break;

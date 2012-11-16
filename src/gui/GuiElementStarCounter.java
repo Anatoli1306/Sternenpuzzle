@@ -23,8 +23,8 @@ public class GuiElementStarCounter extends JLabel
 	{
 		setText(Integer.toString(countStars));
 		setForeground(Color.WHITE);
-		Border border = LineBorder.createGrayLineBorder();
-		setBorder(border);
+//		Border border = LineBorder.createGrayLineBorder();
+//		setBorder(border);
 		setHorizontalAlignment(JLabel.CENTER);
 		setVerticalAlignment(JLabel.CENTER);
 		setStars(countStars);

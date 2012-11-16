@@ -131,6 +131,8 @@ public class PlayFrame extends JFrame
 		//setExtendedState(MAXIMIZED_BOTH);  
     	setVisible(true);
     	validate();
+    	
+    	this.refreshWindow();
 	}
 	
 	
