@@ -104,12 +104,12 @@ public class PlayFrame extends JFrame
 	
 	public void drawDefaualtElements(String mode)
 	{
-		PlayMenuGameEditButtons menuButtonsTop = new PlayMenuGameEditButtons(this, mode);
+		PlayMenuModeButton menuButtonsTop = new PlayMenuModeButton(this, mode);
 		menuButtonsTop.setBounds(180, 10, 100, 80);
 		menuButtonsTop.setOpaque(false);
 		add(menuButtonsTop);
 		
-		PlayMenuButtonsTop menuButtonsBottom = new PlayMenuButtonsTop(this);
+		PlayMenuMarkerButton menuButtonsBottom = new PlayMenuMarkerButton(this);
 		menuButtonsBottom.setBounds(900, 15, 350, 500);
 		menuButtonsBottom.setOpaque(false);		
 		add(menuButtonsBottom);

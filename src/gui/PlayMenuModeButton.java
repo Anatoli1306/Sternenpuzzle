@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  *
  */
 
-public class PlayMenuGameEditButtons extends JPanel
+public class PlayMenuModeButton extends JPanel
 {
 	
 	/**
@@ -28,7 +28,7 @@ public class PlayMenuGameEditButtons extends JPanel
 	 * 
 	 */
 	
-	public PlayMenuGameEditButtons(final PlayFrame frame, String mode)
+	public PlayMenuModeButton(final PlayFrame frame, String mode)
 	{
 			
 		frame.getContentPane().setBackground(Color.white);
