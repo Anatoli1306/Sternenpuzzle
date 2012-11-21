@@ -5,9 +5,14 @@ import javax.swing.JOptionPane;
 public class QuestionToSaveDialog {
 	
 	private boolean yes_no_answer = false;
+	private boolean save_is_cancel = false;
 	
 	public boolean isYes_no_answer() {
 		return yes_no_answer;
+	}
+	
+	public boolean isSave_is_cancel() {
+		return save_is_cancel;
 	}
 
 	public QuestionToSaveDialog()
@@ -26,6 +31,10 @@ public class QuestionToSaveDialog {
 	    if ( n == JOptionPane.YES_OPTION ){
 	    	SaveDialog saveDialog = new SaveDialog();
 	    	yes_no_answer = true;
+	    	save_is_cancel = saveDialog.isCancel();
+	    	
+	    	System.out.println(saveDialog.isCancel());
+	    	
 	    }
 	    
 	    if( n == JOptionPane.NO_OPTION ){

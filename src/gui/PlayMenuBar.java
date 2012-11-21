@@ -52,7 +52,7 @@ class PlayMenuBar extends MenuBar
 			{	
 				QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
 				
-				if(questionToSaveDialog.isYes_no_answer()){
+				if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
 					BoardSizeDialog boardSizeDialog = new BoardSizeDialog(playFrame);					
 									
 				}
@@ -111,7 +111,9 @@ class PlayMenuBar extends MenuBar
 		});
 		
 		// Schaltflächen hinzufügen
-		m.add(neu);
+		if(frame._oBoard instanceof GuiElementEditorBoard){
+			m.add(neu);
+		}
 		m.add(laden);
 		m.addSeparator();
 		m.add(speichern);

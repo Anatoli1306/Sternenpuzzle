@@ -55,16 +55,19 @@ public class PlayMenuModeButton extends JPanel
 		
 		btnGameMode.addActionListener(new ActionListener() {
         	 
-            public void actionPerformed(ActionEvent e)
+			public void actionPerformed(ActionEvent e)
             {
-            	frame.drawGameBoard(40,40);
-            	btnGameMode.setVisible(false);
-            	btnEditMode.setVisible(true);
+            	QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
+            	
+            	if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
+            		frame.drawGameBoard(0,0);          	
+            	
+            		btnGameMode.setVisible(false);
+            		btnEditMode.setVisible(true);
+            	}
             }
-        });        
+        });      
 		add(btnGameMode);
-		
-		
 		
 		btnEditMode.setAlignmentX(LEFT_ALIGNMENT);
 		btnEditMode.setContentAreaFilled(false);
@@ -73,17 +76,21 @@ public class PlayMenuModeButton extends JPanel
 		
 		btnEditMode.addActionListener(new ActionListener() {
         	 
-            public void actionPerformed(ActionEvent e)
+			public void actionPerformed(ActionEvent e)
             {
-            	 frame.drawEditorBoard(40,40);
-            	 btnGameMode.setVisible(true);
-             	btnEditMode.setVisible(false);
+            	QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
+            	
+            	System.out.println(questionToSaveDialog.isSave_is_cancel());
+            	
+            	if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
+            		frame.drawEditorBoard(0,0);          	
+            	           		
+            		btnGameMode.setVisible(false);
+            		btnEditMode.setVisible(true);
+            	}
             }
         });           
-		add(btnEditMode);
-				
+		add(btnEditMode);		
 	}
-	
-
 }
 

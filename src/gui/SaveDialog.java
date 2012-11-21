@@ -20,6 +20,8 @@ import logic.EditorBoard;
  */
 
 public class SaveDialog extends JFrame {
+	
+	private boolean cancel = false;
 
     public SaveDialog() {
     	saveAs(null);
@@ -53,12 +55,21 @@ public class SaveDialog extends JFrame {
    				eB.save(pfad);
    				}
    			}
-   		else{
-               System.out.println(pfad + " ist der falsche Dateityp.");
-            	chooser.setVisible(false);
+   		else if (result == JFileChooser.CANCEL_OPTION){
+               System.out.println("Doch nicht gespeichert");
+               cancel = true;
+               
+               System.out.println(cancel);
+               
+               chooser.setVisible(false);
+               
            	return true;
        	}
    	chooser.setVisible(false);
    	return false;
     }
+
+	public boolean isCancel() {
+		return cancel;
+	}
 }

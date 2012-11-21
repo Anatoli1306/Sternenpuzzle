@@ -51,8 +51,10 @@ public class PlayMenuMarkerButton extends JPanel
             {
             	 JOptionPane.showMessageDialog(null,"Marker setzen","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
             }
-        });        
-		add(btnSet);
+        });  
+		if(frame._oBoard instanceof GuiElementGameBoard){
+			add(btnSet);
+		}
 		
 		JButton btnCheck;
 		btnCheck = new JButton(new ImageIcon(getClass().getResource("/resources/check.png")));
@@ -95,7 +97,9 @@ public class PlayMenuMarkerButton extends JPanel
             {
             	 JOptionPane.showMessageDialog(null,"Rückgängig zum ersten Fehler","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
             }
-        });        
-		add(btnUndo);
+        });  
+		if(frame._oBoard instanceof GuiElementGameBoard){
+			add(btnUndo);
+		}
 	}
 }

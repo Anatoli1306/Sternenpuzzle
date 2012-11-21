@@ -34,7 +34,7 @@ public class PlayFrame extends JFrame
 		setSize(1280, 1024);
 		setLayout(null);
 		
-		drawGameBoard(40,40);
+		drawGameBoard(0,0);
 	}
 	
 	/**
