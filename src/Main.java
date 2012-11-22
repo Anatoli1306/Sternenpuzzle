@@ -1,4 +1,8 @@
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import gui.DemoForm;
 import gui.PlayFrame;
@@ -18,6 +22,14 @@ public class Main
 		wnd.setExtendedState(wnd.MAXIMIZED_BOTH);  
 		int test[] = new int[2];
 		
+		BufferedImage biIcon = null;
+		try {
+			biIcon = ImageIO.read(wnd.getClass().getResource("/resources/msIcon.ico"));
+		} catch (IOException e) {
+
+		e.printStackTrace();
+		}
+		wnd.setIconImage(biIcon);
 		
 		
 	}
