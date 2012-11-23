@@ -27,14 +27,26 @@ public class PlayMenuModeButton extends JPanel
 	 * @param PlayFrame frame
 	 * 
 	 */
+
+	final JButton btnGameMode;
+	final JButton btnEditMode;
+	
+	
+	public void setBtnGameModeVisible(Boolean v){
+		btnGameMode.setVisible(v);
+	}
+	
+	public void setBtnEditModeVisible(Boolean v){
+		btnEditMode.setVisible(v);
+	}
 	
 	public PlayMenuModeButton(final PlayFrame frame, String mode)
 	{
 			
 		frame.getContentPane().setBackground(Color.white);
 		
-		final JButton btnGameMode = new JButton(new ImageIcon(getClass().getResource("/resources/gameMode.png")));
-		final JButton btnEditMode = new JButton(new ImageIcon(getClass().getResource("/resources/editMode.png")));
+		btnGameMode = new JButton(new ImageIcon(getClass().getResource("/resources/gameMode.png")));
+		btnEditMode = new JButton(new ImageIcon(getClass().getResource("/resources/editMode.png")));
 		
 		if ("Editor" == mode)
 		{
@@ -92,5 +104,8 @@ public class PlayMenuModeButton extends JPanel
         });           
 		add(btnEditMode);		
 	}
+	
+	
+	
 }
 

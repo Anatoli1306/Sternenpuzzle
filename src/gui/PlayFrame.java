@@ -2,7 +2,12 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -34,6 +39,19 @@ public class PlayFrame extends JFrame
 		setSize(1280, 1024);
 		setLayout(null);
 		
+
+	    BufferedImage image = null;
+		try {
+			image = ImageIO.read(this.getClass().getResource("/resources/msIcon.ico"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    setIconImage(image);
+	    
+		getContentPane().setBackground(Color.white);		
+		setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+		setExtendedState(this.MAXIMIZED_BOTH);  
+		setVisible(true);
 		drawGameBoard(0,0);
 	}
 	
@@ -105,6 +123,17 @@ public class PlayFrame extends JFrame
 	public void drawDefaualtElements(String mode)
 	{
 		PlayMenuModeButton menuButtonsTop = new PlayMenuModeButton(this, mode);
+		if(mode =="Game")
+		{
+			menuButtonsTop.setBtnEditModeVisible(true);
+			menuButtonsTop.setBtnGameModeVisible(false);
+		}
+		else
+		{
+			menuButtonsTop.setBtnEditModeVisible(false);
+			menuButtonsTop.setBtnGameModeVisible(true);
+		}
+		
 		menuButtonsTop.setBounds(180, 10, 100, 80);
 		menuButtonsTop.setOpaque(false);
 		add(menuButtonsTop);

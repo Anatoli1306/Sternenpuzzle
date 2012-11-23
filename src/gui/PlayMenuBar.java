@@ -175,7 +175,11 @@ class PlayMenuBar extends MenuBar
 			
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				
+            	QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
+            	
+            	if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
+            		playFrame.drawGameBoard(0,0);          	
+            	}
 			}	
 			
 		});
@@ -187,15 +191,27 @@ class PlayMenuBar extends MenuBar
 			
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				
+            	QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
+            	
+            	System.out.println(questionToSaveDialog.isSave_is_cancel());
+            	
+            	if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
+            		playFrame.drawEditorBoard(0,0);          	
+            	}
 			}	
 			
 		});
 		
 		// Schaltflächen hinzufügen
-		m.add(spielmodus);
-		m.addSeparator();
-		m.add(editiermodus);
+		if(frame._oBoard instanceof GuiElementEditorBoard)
+		{
+			m.add(spielmodus);
+		}
+		else
+		{
+			m.add(editiermodus);
+		}
+				
 		add(m);
 		
 		//Hilfe
