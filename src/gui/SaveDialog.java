@@ -4,12 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import logic.Board;
 import logic.EditorBoard;
 
 /**
@@ -20,9 +25,9 @@ import logic.EditorBoard;
  */
 
 public class SaveDialog extends JFrame {
-	
-	private boolean cancel = false;
 
+	private boolean cancel = false;
+	
     public SaveDialog() {
     	saveAs(null);
     }
@@ -45,31 +50,49 @@ public class SaveDialog extends JFrame {
    		chooser.setVisible(true);
     		int result = chooser.showSaveDialog(this);
    		
-   		if (result == JFileChooser.APPROVE_OPTION) {
+   		if (result == JFileChooser.APPROVE_OPTION) 
+   		{
    			pfad = chooser.getSelectedFile().toString();
    			file = new File(pfad);
    			if (plainFilter.accept(file) || markUpFilter.accept(file))
    			{
    				System.out.println(pfad + " kann gespeichert werden.");
-   				EditorBoard eB = new EditorBoard(10,10);
-   				eB.save(pfad);
+   				//Board oBoard = PlayFrame._oPlayFrame._oBoard.getLogicBoard();
+   				Board oBoard = PlayFrame._oPlayFrame._oBoard.getLogicBoard();
+   				if (oBoard instanceof EditorBoard)
+   				{
+   					oBoard.save(pfad);
    				}
+   				else
+   				{
+   					oBoard.save(pfad);
+   				}
+   				
    			}
-   		else if (result == JFileChooser.CANCEL_OPTION){
+   		}
+  		else if (result == JFileChooser.CANCEL_OPTION)
+  		{
                System.out.println("Doch nicht gespeichert");
                cancel = true;
                
                System.out.println(cancel);
                
                chooser.setVisible(false);
-               
+  		}
+  		else
+  		{
+  		
+            System.out.println(pfad + " ist der falsche Dateityp.");
+           	chooser.setVisible(false);
            	return true;
        	}
    	chooser.setVisible(false);
    	return false;
     }
-
-	public boolean isCancel() {
-		return cancel;
+    
+    public boolean isCancel() 
+    {
+    	return cancel;
 	}
+
 }

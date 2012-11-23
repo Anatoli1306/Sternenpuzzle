@@ -115,7 +115,6 @@ abstract public class GuiElementField extends JButton
 	
 	/**
 	 * 
-	 * @param String path
 	 */
 	
 	public void setScaledImage(String path)
@@ -207,5 +206,10 @@ abstract public class GuiElementField extends JButton
 	public void setLogicField(Field oLogicField)
 	{
 		_oLogicField = oLogicField;
+	}
+	
+	public eStates getState()
+	{
+		return _currentState;
 	}
 }

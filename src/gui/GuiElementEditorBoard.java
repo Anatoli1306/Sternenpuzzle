@@ -44,6 +44,7 @@ public class GuiElementEditorBoard extends GuiElementBoard
 				oGuiElementField.addMouseListener(oOnClick);
 				oGuiElementField.addKeyListener(oOnKeyPressed);
 				oGuiElementField.setLogicField(_oLogicBoard.getField(iY, iX));
+				oGuiElementField.setState(eStates.BLANK);
 				this._fields[iY][iX] = oGuiElementField;
 			}
 		}

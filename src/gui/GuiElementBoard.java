@@ -20,6 +20,7 @@ import sun.applet.Main;
 
 import logic.Board;
 import logic.CheckBoard;
+import logic.Field;
 
 
 /**
@@ -154,6 +155,8 @@ public abstract class GuiElementBoard extends JScrollPane
 	    	oGuiStarCounter.setSize(_elementWidth, _elementHeight);
 		}
 	    
+	    GuiElementField.clearImageCache();
+	    
 	    // draw all buttons 
 	    for (int iY = 0; iY < _rows; iY++)
 		{
@@ -162,7 +165,7 @@ public abstract class GuiElementBoard extends JScrollPane
 	    		GuiElementField oGuiElementField = (GuiElementField)_fields[iY][iX];
 	    		oGuiElementField.setLocation((iX+1) *_elementWidth, (iY+1) *_elementHeight);
 	    		oGuiElementField.setSize(_elementWidth, _elementHeight);
-	    		oGuiElementField.setState(eStates.BLANK);
+	    		oGuiElementField.setState(oGuiElementField.getState());
 	    		_container.add(oGuiElementField);
 			}
 		}
@@ -189,10 +192,11 @@ public abstract class GuiElementBoard extends JScrollPane
 			else if (e.getButton() == MouseEvent.BUTTON3)
 			{
 				GuiElementField oGuiElementField = (GuiElementField)e.getSource();
+				System.out.println("asd");
 		    	oGuiElementField.setNextRightState();
 			}
 			
-			PlayFrame.refreshWindow();
+			
 		}
 
 			public void mouseEntered(MouseEvent e) 
@@ -200,7 +204,6 @@ public abstract class GuiElementBoard extends JScrollPane
 			// TODO Auto-generated method stub
 			GuiElementField oGuiElementField = (GuiElementField)e.getSource();
 			oGuiElementField.requestFocusInWindow();
-			PlayFrame.refreshWindow();
 			
 		}
 
@@ -220,6 +223,17 @@ public abstract class GuiElementBoard extends JScrollPane
 		}
 	 }
 	
+	/**
+	 * 
+	 * @param int posY
+	 * @param int posX
+	 * @return GuiElementField
+	 * 
+	 */
+	public GuiElementField getField(int posY, int posX)
+	{
+		return this._fields[posY][posX];
+	}
 	
 	public void save(String filename)
 	{
@@ -255,4 +269,18 @@ public abstract class GuiElementBoard extends JScrollPane
 		return CheckBoard.getInstance(_oLogicBoard).check();
 	}
 
+	public Board getLogicBoard()
+	{
+		return _oLogicBoard;
+	}
+	
+	public int getCols()
+	{
+		return this._cols;
+	}
+	
+	public int getRows()
+	{
+		return this._rows;
+	}
 }

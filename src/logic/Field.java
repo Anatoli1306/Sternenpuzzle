@@ -3,6 +3,8 @@
  */
 package logic;
 
+import java.io.Serializable;
+
 import gui.GuiElementField.eStates;
 
 /**
@@ -12,8 +14,13 @@ import gui.GuiElementField.eStates;
  * 
  */
 
-public class Field 
+public class Field implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * 
 	 */

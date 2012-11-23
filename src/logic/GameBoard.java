@@ -59,9 +59,9 @@ public class GameBoard extends Board
 	/**
 	 * @param String filename
 	 */
-	public void load(String filename)
+	public Board load(String filename)
 	{
-		
+		return null;
 	}
 	
 	/* @Todo change type to match with commandtracker class */

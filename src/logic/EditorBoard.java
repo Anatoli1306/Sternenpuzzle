@@ -3,6 +3,9 @@
  */
 package logic;
 
+import gui.GuiElementEditorBoard;
+import gui.GuiElementField.eStates;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,8 +21,10 @@ import java.io.Serializable;
  * 
  */
 
-public class EditorBoard extends Board implements Serializable
+public class EditorBoard extends Board
 {
+
+
 
 	/**
 	 * @param int height
@@ -69,28 +74,40 @@ public class EditorBoard extends Board implements Serializable
 		
 	}
 
-	public void load(String filename) {
-		// TODO Auto-generated method stub
-		
-	}
 		
 	/**
 	 * @param String filename
 	 * @return 
 	 */
 	
-	/*public EditorBoard load(String filename)
+	public static GuiElementEditorBoard load(String filename)
 	{
 		FileInputStream fis = null;
 		try 
 		{ 
 			fis = new FileInputStream( filename ); 
-			ObjectInputStream o = new ObjectInputStream( fis ); 
-			return (EditorBoard) o.readObject(); 
+			System.out.println(filename);
+			ObjectInputStream o = new ObjectInputStream( fis );
+			
+			EditorBoard oBoard = (EditorBoard) o.readObject();
+			GuiElementEditorBoard oEditor = new GuiElementEditorBoard(oBoard.getHeight(), oBoard.getWidth());
+				
+			for (int x = 0; x < oEditor.getCols(); x++)
+			{
+				for (int y = 0; y < oEditor.getRows();y++)
+				{
+					eStates asd = oBoard.getField(y, x).getState();
+					oEditor.getField(y, x).setState(asd);
+				}
+			}
+				
+			return oEditor;
+			
 		} 
-		catch ( IOException e ) { System.err.println( e ); return null; } 
-		catch ( ClassNotFoundException e ) { System.err.println( e ); return null; } 
+		catch ( IOException e ) { e.printStackTrace(); return null; } 
+		catch ( ClassNotFoundException e ) { e.printStackTrace(); return null; } 
 		finally { try { fis.close(); } catch ( Exception e ) { } }
-	}*/
+		
+	}
 
 }

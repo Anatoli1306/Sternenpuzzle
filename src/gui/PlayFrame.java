@@ -2,8 +2,6 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -26,7 +24,7 @@ import javax.swing.JLabel;
 
 public class PlayFrame extends JFrame
 {	
-	static private PlayFrame _oPlayFrame = null;
+	static public PlayFrame _oPlayFrame = null;
 	
 	public GuiElementBoard _oBoard = null;
 	/**
@@ -71,6 +69,7 @@ public class PlayFrame extends JFrame
 		
 		getContentPane().repaint();
 		validate();
+		this.refreshWindow();
 	}
 	
 	
@@ -90,6 +89,23 @@ public class PlayFrame extends JFrame
 		validate();
 		getContentPane().repaint();
 		validate();
+		this.refreshWindow();
+	}
+	
+	
+	public void drawLoadedBoard(GuiElementEditorBoard gui)
+	{
+		getContentPane().removeAll();
+		GuiElementField.clearImageCache();
+		
+		_oBoard = gui;//new GuiElementEditorBoard(rows, cols);
+		_oBoard.setBounds(10, 100, 1240, 870);
+		drawDefaualtElements("Editor");
+		
+		validate();
+		getContentPane().repaint();
+		validate();
+		this.refreshWindow();
 	}
 	
 	
@@ -161,7 +177,8 @@ public class PlayFrame extends JFrame
     	setVisible(true);
     	validate();
     	
-    	this.refreshWindow();
+		this.refreshWindow();
+
 	}
 	
 	

@@ -3,6 +3,8 @@
  */
 package logic;
 
+import java.io.Serializable;
+
 import gui.GuiElementField.eStates;
 
 
@@ -13,8 +15,14 @@ import gui.GuiElementField.eStates;
  * 
  */
 
-public abstract class Board 
+public abstract class Board implements Serializable
 {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 *
 	 */
@@ -135,9 +143,4 @@ public abstract class Board
 	 * @param String filename
 	 */
 	abstract public void save(String filename);
-	
-	/**
-	 * @param String filename
-	 */
-	abstract public void load(String filename);
 }
