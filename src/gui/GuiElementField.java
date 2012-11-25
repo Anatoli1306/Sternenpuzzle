@@ -3,8 +3,10 @@
  */
 package gui;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -115,6 +117,7 @@ abstract public class GuiElementField extends JButton
 	
 	/**
 	 * 
+	 * @param String path
 	 */
 	
 	public void setScaledImage(String path)
@@ -122,10 +125,42 @@ abstract public class GuiElementField extends JButton
 		if (!_instancesOfImages.containsKey(path))
 		{
 			Toolkit toolkit = Toolkit.getDefaultToolkit();
+			ImageIcon oScaledIcon = null;
 			
-			Image oImage = toolkit.getImage(getClass().getResource(path));
-			Image scaledImage = oImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);   
-			ImageIcon oScaledIcon = new ImageIcon(scaledImage);
+			if (_eStateToResource.get(eStates.BLANK) == path)
+			{
+				Image oImage = toolkit.getImage(getClass().getResource(path));
+				Image scaledImage = oImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);   
+				oScaledIcon = new ImageIcon(scaledImage);
+			}
+			else
+			{
+				if (!_instancesOfImages.containsKey(_eStateToResource.get(eStates.BLANK)))
+				{
+					Image oImage = toolkit.getImage(getClass().getResource(_eStateToResource.get(eStates.BLANK)));
+					Image scaledImage = oImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);   
+					oScaledIcon = new ImageIcon(scaledImage);
+					_instancesOfImages.put(_eStateToResource.get(eStates.BLANK), oScaledIcon);
+				}
+				
+				ImageIcon oBackgroundImage = _instancesOfImages.get(_eStateToResource.get(eStates.BLANK));
+				
+				Image oImage = toolkit.getImage(getClass().getResource(path));
+				
+				int getMin = Math.min(getWidth(), getHeight());
+				
+				Image scaledForegroundImage = oImage.getScaledInstance(getMin, getMin, Image.SCALE_DEFAULT);
+				ImageIcon oScaledIconForeground = new ImageIcon(scaledForegroundImage);
+				
+				BufferedImage combined = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+
+				Graphics g = combined.getGraphics();
+				g.drawImage(oBackgroundImage.getImage(), 0, 0, null);
+				g.drawImage(oScaledIconForeground.getImage(), ((getWidth() - getMin)/2), ((getHeight() - getMin)/2), null);
+				
+				oScaledIcon = new ImageIcon(combined);
+			}
+			
 			
 			_instancesOfImages.put(path, oScaledIcon);
 		}
@@ -212,4 +247,5 @@ abstract public class GuiElementField extends JButton
 	{
 		return _currentState;
 	}
+
 }
