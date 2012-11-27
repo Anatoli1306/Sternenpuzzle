@@ -43,18 +43,26 @@ public class LoadDialog
      System.out.println("assd");
     if (oBoard instanceof EditorBoard)
 	{
-		GuiElementEditorBoard oGuiBoard = EditorBoard.load(fc.getSelectedFile().getAbsolutePath());
-//		System.out.println(oGuiBoard._fields[0][0].getState());
+    	    	
+		GuiElementBoard oGuiBoard = EditorBoard.loadEdit(fc.getSelectedFile().getAbsolutePath());
 		System.out.println( "BlaBla" );
 		PlayFrame._oPlayFrame.drawLoadedBoard(oGuiBoard);
 		PlayFrame.refreshWindow();
 	}
 	else
-		if (oBoard instanceof GameBoard)
+		
+	if (oBoard instanceof GameBoard)
 	{
-		System.out.println("ewrserser");
-		GuiElementEditorBoard oGuiBoard = EditorBoard.load(file.getName());
+		
+		GuiElementBoard oGameBoard = GameBoard.load(fc.getSelectedFile().getAbsolutePath());
+		//System.out.print(oGameBoard);
+		PlayFrame._oPlayFrame.drawLoadedGameBoard(oGameBoard);
+		PlayFrame.refreshWindow();
+		
+			
+		
 	}else {System.out.println("Weder Game noch Editorboard vorhanden");}
+    
     }
     else
       System.out.println( "Auswahl abgebrochen" );

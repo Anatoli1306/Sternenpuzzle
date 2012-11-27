@@ -192,8 +192,7 @@ public abstract class GuiElementBoard extends JScrollPane
 			else if (e.getButton() == MouseEvent.BUTTON3)
 			{
 				GuiElementField oGuiElementField = (GuiElementField)e.getSource();
-				System.out.println("asd");
-		    	oGuiElementField.setNextRightState();
+				oGuiElementField.setNextRightState();
 			}
 			
 			PlayFrame._oPlayFrame.refreshWindow();

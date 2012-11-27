@@ -3,6 +3,7 @@
  */
 package logic;
 
+import gui.GuiElementBoard;
 import gui.GuiElementEditorBoard;
 import gui.GuiElementField.eStates;
 
@@ -13,6 +14,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  * 
@@ -80,27 +84,38 @@ public class EditorBoard extends Board
 	 * @return 
 	 */
 	
-	public static GuiElementEditorBoard load(String filename)
+	public static GuiElementBoard loadEdit(String filename)
 	{
 		FileInputStream fis = null;
 		try 
 		{ 
 			fis = new FileInputStream( filename ); 
-			System.out.println(filename);
+			
 			ObjectInputStream o = new ObjectInputStream( fis );
 			
-			EditorBoard oBoard = (EditorBoard) o.readObject();
+			Board oBoard = (Board) o.readObject();
 			GuiElementEditorBoard oEditor = new GuiElementEditorBoard(oBoard.getHeight(), oBoard.getWidth());
 				
-			for (int x = 0; x < oEditor.getCols(); x++)
-			{
-				for (int y = 0; y < oEditor.getRows();y++)
-				{
-					eStates asd = oBoard.getField(y, x).getState();
-					oEditor.getField(y, x).setState(asd);
-				}
-			}
-				
+		   if (oBoard instanceof EditorBoard) 
+		   {
+			
+			   for (int x = 0; x < oEditor.getCols(); x++)
+			   {
+				   for (int y = 0; y < oEditor.getRows();y++)
+				   {
+					   eStates asd = oBoard.getField(y, x).getState();
+					   oEditor.getField(y, x).setState(asd);
+				   }
+			   }
+		   }else{
+			   
+			    JOptionPane pane = new JOptionPane("Sie können kein Game im Editormodus laden!! ", JOptionPane.ERROR_MESSAGE);
+				JDialog dialog = pane.createDialog("SternenHimmelPuzzle");
+				dialog.setAlwaysOnTop(true);
+				dialog.setVisible(true);
+		   }
+			
+			
 			return oEditor;
 			
 		} 

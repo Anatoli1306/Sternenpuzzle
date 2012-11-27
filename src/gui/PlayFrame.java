@@ -93,7 +93,7 @@ public class PlayFrame extends JFrame
 	}
 	
 	
-	public void drawLoadedBoard(GuiElementEditorBoard gui)
+	public void drawLoadedBoard(GuiElementBoard gui)
 	{
 		getContentPane().removeAll();
 		GuiElementField.clearImageCache();
@@ -107,6 +107,25 @@ public class PlayFrame extends JFrame
 		validate();
 		this.refreshWindow();
 	}
+	
+	public void drawLoadedGameBoard(GuiElementBoard game)
+	{
+		getContentPane().removeAll();
+		GuiElementField.clearImageCache();
+		
+		_oBoard = game;
+		_oBoard.setBounds(10, 100, 1240, 870);
+		drawDefaualtElements("Game");
+		
+		
+		getContentPane().repaint();
+		validate();
+		this.refreshWindow();
+	}
+	
+	
+	
+	
 	
 	
 	/**

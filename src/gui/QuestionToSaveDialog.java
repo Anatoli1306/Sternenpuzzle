@@ -17,6 +17,10 @@ public class QuestionToSaveDialog {
 
 	public QuestionToSaveDialog()
 	{		
+		
+	
+	//System.out.print(oBoard);	
+		
 	    // Auswahldialog
 		String[] options = {
 			      "Ja", "Nein", "Abbrechen"};
