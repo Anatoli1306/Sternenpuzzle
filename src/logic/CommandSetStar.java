@@ -3,6 +3,8 @@
  */
 package logic;
 
+import gui.GuiElementField.eStates;
+
 /**
  * 
  * @author Andreas
@@ -10,15 +12,25 @@ package logic;
  *
  */
 
-public class CommandSetStar implements ICommand {
+public class CommandSetStar implements ICommand 
+{
+	GameField _oField = null;
+	
+	eStates oldState = null;
 
+	public CommandSetStar(GameField field)
+	{
+		_oField = field;
+		oldState = field.getState();
+	}
+	
 	/**
 	 * @see logic.ICommand#execute()
 	 */
 	
 	public void execute() 
 	{
-
+		_oField.setState(eStates.STAR, true);
 	}
 
 	/**
@@ -27,7 +39,7 @@ public class CommandSetStar implements ICommand {
 	
 	public void undo() 
 	{
-
+		_oField.setState(oldState, true);
 	}
 
 }

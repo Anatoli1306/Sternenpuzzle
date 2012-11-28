@@ -3,6 +3,8 @@
  */
 package logic;
 
+import gui.GuiElementField.eStates;
+
 /**
  * 
  * @author Andreas
@@ -10,7 +12,17 @@ package logic;
  *
  */
 
-public class CommandSetCross implements ICommand {
+public class CommandSetCross implements ICommand 
+{
+	GameField _oField = null;
+	
+	eStates oldState = null;
+	
+	public CommandSetCross(GameField field)
+	{
+		_oField = field;
+		oldState = field.getState();
+	}
 
 	/**
 	 * @see logic.ICommand#execute()
@@ -18,7 +30,7 @@ public class CommandSetCross implements ICommand {
 	
 	public void execute() 
 	{
-
+		_oField.setState(eStates.CROSS, true);
 	}
 
 	/**
@@ -27,7 +39,7 @@ public class CommandSetCross implements ICommand {
 	
 	public void undo() 
 	{
-
+		_oField.setState(oldState, true);
 	}
 
 }

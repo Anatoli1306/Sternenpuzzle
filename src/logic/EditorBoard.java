@@ -44,7 +44,7 @@ public class EditorBoard extends Board
 		{
 			for (int iX = 0; iX < width; iX++)
 			{
-				this._fields[iY][iX] = new EditorField(this);
+				this._fields[iY][iX] = new EditorField(this, iX, iY);
 			}
 		}
 	}

@@ -47,5 +47,17 @@ public class GuiElementGameBoard extends GuiElementBoard
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param int posY
+	 * @param int posX
+	 * @return GuiElementField
+	 * 
+	 */
+	public GuiElementGameField getField(int posY, int posX)
+	{
+		return (GuiElementGameField)super.getField(posY, posX);
+	}
 
 }

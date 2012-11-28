@@ -16,9 +16,9 @@ public class EditorField extends Field
 	/**
 	 * @param oBoard
 	 */
-	public EditorField(Board oBoard) 
+	public EditorField(Board oBoard, int xPos, int yPos) 
 	{
-		super(oBoard);
+		super(oBoard, xPos, yPos);
 	}
 
 }

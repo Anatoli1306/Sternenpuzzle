@@ -69,7 +69,7 @@ abstract public class GuiElementField extends JButton
 	/**
 	 * 
 	 */
-	private eStates _currentState = null;
+	protected eStates _currentState = null;
 	
 	
 	/**
@@ -112,6 +112,17 @@ abstract public class GuiElementField extends JButton
 	{
 		_currentState = state;
 		_oLogicField.setState(state);
+		setScaledImage(_eStateToResource.get(state));
+	}
+	
+	/**
+	 * 
+	 * @param eStates state
+	 */
+	public void setState(eStates state, int skipTracker)
+	{
+		_currentState = state;
+		_oLogicField.setState(state, skipTracker);
 		setScaledImage(_eStateToResource.get(state));
 	}
 	

@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import logic.GameBoard;
+
 // Klasse enthällt die Reihe der unteren Buttons
 
 /**
@@ -95,7 +97,9 @@ public class PlayMenuMarkerButton extends JPanel
         	 
             public void actionPerformed(ActionEvent e)
             {
-            	 JOptionPane.showMessageDialog(null,"Rückgängig zum ersten Fehler","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+//            	 JOptionPane.showMessageDialog(null,"Rückgängig zum ersten Fehler","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+            	GameBoard oLogicBoard = (GameBoard)playFrame._oBoard.getLogicBoard();
+            	oLogicBoard.getCommandTracker().undo();
             }
         });  
 		if(frame._oBoard instanceof GuiElementGameBoard){

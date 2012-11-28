@@ -198,11 +198,11 @@ public abstract class GuiElementBoard extends JScrollPane
 			PlayFrame._oPlayFrame.refreshWindow();
 		}
 
-			public void mouseEntered(MouseEvent e) 
+		public void mouseEntered(MouseEvent e) 
 		{
 			// TODO Auto-generated method stub
 			GuiElementField oGuiElementField = (GuiElementField)e.getSource();
-			oGuiElementField.requestFocusInWindow();
+//			oGuiElementField.requestFocusInWindow();
 			PlayFrame._oPlayFrame.refreshWindow();
 		}
 

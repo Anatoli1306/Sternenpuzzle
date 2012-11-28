@@ -26,7 +26,7 @@ public class GameBoard extends Board
 	/**
 	 * 
 	 */
-	private String _oCommandTracker = null;
+	private CommandTracker _oCommandTracker = null;
 	
 	/**
 	 * 
@@ -46,9 +46,11 @@ public class GameBoard extends Board
 		{
 			for (int iX = 0; iX < width; iX++)
 			{
-				this._fields[iY][iX] = new GameField(this);
+				this._fields[iY][iX] = new GameField(this, iX, iY);
 			}
 		}
+		
+		_oCommandTracker = new CommandTracker();
 	}
 
 	/**
@@ -78,22 +80,11 @@ public class GameBoard extends Board
 		
 	}
 	
-	/**
-	 * @param String filename
-	 */
-	//public Board load(String filename)
-	
-	
-	//{
-	//	return null;
-	//}
-	
-	/* @Todo change type to match with commandtracker class */
 
 	/**
 	 * @return the _oCommandTracker
 	 */
-	public String get_oCommandTracker() 
+	public CommandTracker getCommandTracker() 
 	{
 		return _oCommandTracker;
 	}
@@ -101,7 +92,7 @@ public class GameBoard extends Board
 	/**
 	 * @param _oCommandTracker the _oCommandTracker to set
 	 */
-	public void set_oCommandTracker(String _oCommandTracker) 
+	public void set_oCommandTracker(CommandTracker _oCommandTracker) 
 	{
 		this._oCommandTracker = _oCommandTracker;
 	}
@@ -144,16 +135,18 @@ public class GameBoard extends Board
 						
 						eStates asd = oBoard.getField(y, x).getState();
 						oGame.getField(y, x).setState(asd);
-						
-					}else {		
-					
+					}
+					else 
+					{		
 						eStates asd = oBoard.getField(y, x).getState();
-						if (asd != eStates.STAR )
+						if (asd != eStates.STAR)
 						{
-						
 							oGame.getField(y, x).setState(asd);
 						}
-						
+						else
+						{
+							oGame.getField(y, x).setIsStarField(true);
+						}
 					}	
 				}
 			}
