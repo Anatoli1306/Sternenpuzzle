@@ -34,17 +34,23 @@ public class SaveDialog extends JFrame {
 
     boolean saveAs(String pfad) {
    		JFileChooser chooser;
-   		if (pfad == null)
+   		if (pfad == null){
    			pfad = System.getProperty("user.home");
+   			pfad = pfad + "\\Sternenhimmel-Puzzle";
+   			File saveDirectory = new File(pfad);
+   			if(saveDirectory.isDirectory()){}
+   			else{
+   				saveDirectory.mkdir();
+   			}
+   		}
    		File file = new File(pfad.trim());
     		chooser = new JFileChooser(pfad);
    		chooser.setDialogType(JFileChooser.SAVE_DIALOG);
-   		FileNameExtensionFilter plainFilter = new FileNameExtensionFilter(
-   			"Plaintext: txt, csv", "txt", "csv");
+
    		FileNameExtensionFilter markUpFilter = new FileNameExtensionFilter(
-               "Markup: xml, htm, html", "xml", "html", "htm");
+               "xml", "xml");
    		chooser.removeChoosableFileFilter(chooser.getAcceptAllFileFilter());
-   		chooser.setFileFilter(plainFilter);
+
    		chooser.setFileFilter(markUpFilter);
    		chooser.setDialogTitle("Speichern unter...");
    		chooser.setVisible(true);
@@ -53,8 +59,12 @@ public class SaveDialog extends JFrame {
    		if (result == JFileChooser.APPROVE_OPTION) 
    		{
    			pfad = chooser.getSelectedFile().toString();
+   			if(pfad.matches(".*(.xml).*")){}
+   			else{
+   				pfad = pfad + ".xml";
+   			}
    			file = new File(pfad);
-   			if (plainFilter.accept(file) || markUpFilter.accept(file))
+   			if (markUpFilter.accept(file))
    			{
    				System.out.println(pfad + " kann gespeichert werden.");
    				//Board oBoard = PlayFrame._oPlayFrame._oBoard.getLogicBoard();
