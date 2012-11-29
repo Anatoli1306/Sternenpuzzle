@@ -42,7 +42,6 @@ public class GameField extends Field
 	 */
 	public void setState(eStates state) 
 	{
-		System.out.println("as");
 		ICommand command = null;
 		switch (state) 
 		{

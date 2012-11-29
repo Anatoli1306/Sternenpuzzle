@@ -187,12 +187,38 @@ public abstract class GuiElementBoard extends JScrollPane
 			if (e.getButton() == MouseEvent.BUTTON1)
 			{
 				GuiElementField oGuiElementField = (GuiElementField)e.getSource();
-		    	oGuiElementField.setNextLeftState();
+				if (PlayFrame._oPlayFrame._oBoard instanceof GuiElementGameBoard)
+				{
+					if (eStates.BLANK == oGuiElementField.getState() ||
+						eStates.CROSS == oGuiElementField.getState() ||
+						eStates.STAR == oGuiElementField.getState() ||
+						eStates.QUESTION == oGuiElementField.getState())
+					{
+						oGuiElementField.setNextLeftState();
+					}
+				}
+				else
+				{
+					oGuiElementField.setNextLeftState();
+				}
 			}
 			else if (e.getButton() == MouseEvent.BUTTON3)
 			{
 				GuiElementField oGuiElementField = (GuiElementField)e.getSource();
-				oGuiElementField.setNextRightState();
+				if (PlayFrame._oPlayFrame._oBoard instanceof GuiElementGameBoard)
+				{
+					if (eStates.BLANK == oGuiElementField.getState() ||
+						eStates.CROSS == oGuiElementField.getState() ||
+						eStates.STAR == oGuiElementField.getState() ||
+						eStates.QUESTION == oGuiElementField.getState())
+					{
+						oGuiElementField.setNextRightState();
+					}
+				}
+				else
+				{
+					oGuiElementField.setNextRightState();
+				}
 			}
 			
 			PlayFrame._oPlayFrame.refreshWindow();

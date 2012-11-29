@@ -113,6 +113,14 @@ public abstract class Board implements Serializable
 			{
 				countStars++;
 			}
+			else if(this instanceof GameBoard)
+			{
+				GameField oGameField = (GameField)_fields[row][i];
+				if (oGameField.isStarField())
+				{
+					countStars++;
+				}
+			}
 		}
 		return countStars;
 	}
@@ -134,6 +142,14 @@ public abstract class Board implements Serializable
 			if (eStates.STAR == oField.getState())
 			{
 				countStars++;
+			}
+			else if(this instanceof GameBoard)
+			{
+				GameField oGameField = (GameField)_fields[i][column];
+				if (oGameField.isStarField())
+				{
+					countStars++;
+				}
 			}
 		}
 		return countStars;

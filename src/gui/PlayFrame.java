@@ -116,7 +116,7 @@ public class PlayFrame extends JFrame
 		_oBoard = game;
 		_oBoard.setBounds(10, 100, 1240, 870);
 		drawDefaualtElements("Game");
-		
+		_oBoard.calculateStars();
 		
 		getContentPane().repaint();
 		validate();
