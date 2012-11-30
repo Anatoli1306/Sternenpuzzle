@@ -42,7 +42,7 @@ public class GuiElementGameBoard extends GuiElementBoard
 				oGuiElementField.setSize(40, 40);
 				oGuiElementField.addMouseListener(oOnClick);
 				oGuiElementField.setLogicField(_oLogicBoard.getField(iY, iX));
-				oGuiElementField.setState(eStates.BLANK);
+				oGuiElementField.setState(eStates.BLANK, 1);
 				this._fields[iY][iX] = oGuiElementField;
 			}
 		}

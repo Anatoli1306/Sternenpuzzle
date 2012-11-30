@@ -15,6 +15,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
+
 /**
  * 
  * @author Andreas
@@ -134,14 +136,14 @@ public class GameBoard extends Board
 					if (oBoard instanceof GameBoard){
 						
 						eStates asd = oBoard.getField(y, x).getState();
-						oGame.getField(y, x).setState(asd);
+						oGame.getField(y, x).setState(asd, 1);
 					}
 					else 
 					{		
 						eStates asd = oBoard.getField(y, x).getState();
 						if (asd != eStates.STAR)
 						{
-							oGame.getField(y, x).setState(asd);
+							oGame.getField(y, x).setState(asd, 1);
 						}
 						else
 						{
@@ -157,6 +159,33 @@ public class GameBoard extends Board
 		catch ( IOException e ) { e.printStackTrace(); return null; } 
 		catch ( ClassNotFoundException e ) { e.printStackTrace(); return null; } 
 		finally { try { fis.close(); } catch ( Exception e ) { } }
+		
+	}
+	
+	
+	public void checkIfGameIsWon()
+	{
+		boolean isWon = true;
+		for (int x = 0; x < getWidth(); x++)
+		{
+			for (int y = 0; y < getHeight();y++)
+			{
+				GameField field = (GameField)getField(y, x);
+				if (field.isStarField() && field.getState() != eStates.STAR)
+				{
+					isWon = false;
+				}
+				else if (!field.isStarField() && field.getState() == eStates.STAR)
+				{
+					isWon = false;
+				}
+			}
+		}
+		
+		if (isWon)
+		{
+			System.out.println("winning");
+		}
 		
 	}
 }

@@ -69,6 +69,8 @@ public class LoadDialog
 		PlayFrame._oPlayFrame.drawLoadedGameBoard(oGameBoard);
 		PlayFrame.refreshWindow();
 		
+		GameBoard lBoard = (GameBoard)oGameBoard.getLogicBoard();
+		lBoard.getCommandTracker().resetTracker();
 			
 		
 	}else {System.out.println("Weder Game noch Editorboard vorhanden");}

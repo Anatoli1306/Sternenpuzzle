@@ -69,6 +69,9 @@ public class GameField extends Field
 		oBoard.getCommandTracker().add(command);
 		
 		super.setState(state);
+		
+		GameBoard tmpBoard = (GameBoard)_oBoard;
+		tmpBoard.checkIfGameIsWon();
 	}
 	
 	/**
@@ -76,6 +79,7 @@ public class GameField extends Field
 	 */
 	public void setState(eStates state, int aas)
 	{
+		System.out.println("asd");
 		super.setState(state);
 	}
 	
