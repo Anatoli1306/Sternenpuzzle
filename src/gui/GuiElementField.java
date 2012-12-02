@@ -55,6 +55,13 @@ abstract public class GuiElementField extends JButton
 	 * we store the resized image
 	 */
 	private static Map<String, ImageIcon> _instancesOfImages = new HashMap<String, ImageIcon>();
+	
+	/**
+	 * this mapping speed things up.
+	 * instead of resizing alle images everytime
+	 * we store the resized image
+	 */
+	private static Map<String, ImageIcon> _instancesOfHighlightedImages = new HashMap<String, ImageIcon>();
 
 	/**
 	 * 
@@ -102,6 +109,8 @@ abstract public class GuiElementField extends JButton
 		
 		setContentAreaFilled(false);
 		_oBoard = oBoard;
+		setFocusPainted(false);
+		setFocusable(false);
 	}
 	
 	/**
@@ -143,6 +152,11 @@ abstract public class GuiElementField extends JButton
 				Image oImage = toolkit.getImage(getClass().getResource(path));
 				Image scaledImage = oImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);   
 				oScaledIcon = new ImageIcon(scaledImage);
+				
+				Image oImageHighlight = toolkit.getImage(getClass().getResource("/resources/fieldBlankHighlight.png"));
+				Image scaledImageHighlight = oImageHighlight.getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);   
+				ImageIcon oScaledIconHighlight = new ImageIcon(scaledImageHighlight);
+				_instancesOfHighlightedImages.put(path, oScaledIconHighlight);
 			}
 			else
 			{
@@ -152,9 +166,15 @@ abstract public class GuiElementField extends JButton
 					Image scaledImage = oImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);   
 					oScaledIcon = new ImageIcon(scaledImage);
 					_instancesOfImages.put(_eStateToResource.get(eStates.BLANK), oScaledIcon);
+					
+					Image oImageHighlight = toolkit.getImage(getClass().getResource("/resources/fieldBlankHighlight.png"));
+					Image scaledImageHighlight = oImageHighlight.getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);   
+					ImageIcon oScaledIconHighlight = new ImageIcon(scaledImageHighlight);
+					_instancesOfHighlightedImages.put(_eStateToResource.get(eStates.BLANK), oScaledIconHighlight);
 				}
 				
 				ImageIcon oBackgroundImage = _instancesOfImages.get(_eStateToResource.get(eStates.BLANK));
+				ImageIcon oBackgroundImageHighlight = _instancesOfHighlightedImages.get(_eStateToResource.get(eStates.BLANK));
 				
 				Image oImage = toolkit.getImage(getClass().getResource(path));
 				
@@ -170,6 +190,14 @@ abstract public class GuiElementField extends JButton
 				g.drawImage(oScaledIconForeground.getImage(), ((getWidth() - getMin)/2), ((getHeight() - getMin)/2), null);
 				
 				oScaledIcon = new ImageIcon(combined);
+				
+				BufferedImage combinedHighlight = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+				Graphics g1 = combinedHighlight.getGraphics();
+				g1.drawImage(oBackgroundImageHighlight.getImage(), 0, 0, null);
+				g1.drawImage(oScaledIconForeground.getImage(), ((getWidth() - getMin)/2), ((getHeight() - getMin)/2), null);
+				
+				ImageIcon oScaledIconHighlight = new ImageIcon(combinedHighlight);
+				_instancesOfHighlightedImages.put(path, oScaledIconHighlight);
 			}
 			
 			
@@ -259,4 +287,32 @@ abstract public class GuiElementField extends JButton
 		return _currentState;
 	}
 
+	
+	public void setToHighlightField()
+	{
+		String path = _eStateToResource.get(_currentState);
+		setIcon(_instancesOfHighlightedImages.get(path));
+		repaint();
+	}
+	
+	public void setToNormalField()
+	{
+		String path = _eStateToResource.get(_currentState);
+		setIcon(_instancesOfImages.get(path));
+		repaint();
+	}
+	
+	/**
+	 * @return the _xPos
+	 */
+	public int getXPos() {
+		return _oLogicField.getXPos();
+	}
+
+	/**
+	 * @return the _yPos
+	 */
+	public int getYPos() {
+		return _oLogicField.getYPos();
+	}
 }

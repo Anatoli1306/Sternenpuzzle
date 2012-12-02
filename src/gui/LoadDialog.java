@@ -46,38 +46,33 @@ public class LoadDialog
     if ( state == JFileChooser.APPROVE_OPTION )
     {
 
-      File file = chooser.getSelectedFile();
-      System.out.println(chooser.getSelectedFile());
+    	File file = chooser.getSelectedFile();
 
-     Board oBoard = PlayFrame._oPlayFrame._oBoard.getLogicBoard();
-     System.out.println("assd");
-    if (oBoard instanceof EditorBoard)
-	{
-    	    	
-		GuiElementBoard oGuiBoard = EditorBoard.loadEdit(chooser.getSelectedFile().getAbsolutePath());
-		System.out.println( "BlaBla" );
-		PlayFrame._oPlayFrame.drawLoadedBoard(oGuiBoard);
-		PlayFrame.refreshWindow();
-	}
-	else
-		
-	if (oBoard instanceof GameBoard)
-	{
-		
-		GuiElementBoard oGameBoard = GameBoard.load(chooser.getSelectedFile().getAbsolutePath());
-		//System.out.print(oGameBoard);
-		PlayFrame._oPlayFrame.drawLoadedGameBoard(oGameBoard);
-		PlayFrame.refreshWindow();
-		
-		GameBoard lBoard = (GameBoard)oGameBoard.getLogicBoard();
-		lBoard.getCommandTracker().resetTracker();
-			
-		
-	}else {System.out.println("Weder Game noch Editorboard vorhanden");}
+    	Board oBoard = PlayFrame._oPlayFrame._oBoard.getLogicBoard();
+	    if (oBoard instanceof EditorBoard)
+		{
+	    	    	
+			GuiElementBoard oGuiBoard = EditorBoard.loadEdit(chooser.getSelectedFile().getAbsolutePath());
+			PlayFrame._oPlayFrame.drawLoadedBoard(oGuiBoard);
+			PlayFrame.refreshWindow();
+		}
+		else
+		{
+			if (oBoard instanceof GameBoard)
+			{
+				
+				GuiElementBoard oGameBoard = GameBoard.load(chooser.getSelectedFile().getAbsolutePath());
+				PlayFrame._oPlayFrame.drawLoadedGameBoard(oGameBoard);
+				PlayFrame.refreshWindow();
+				
+				GameBoard lBoard = (GameBoard)oGameBoard.getLogicBoard();
+				lBoard.getCommandTracker().resetTracker();
+					
+				
+			}
+		}
     
     }
-    else
-      System.out.println( "Auswahl abgebrochen" );
 
   }
 }

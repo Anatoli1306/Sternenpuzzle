@@ -201,6 +201,7 @@ public abstract class GuiElementBoard extends JScrollPane
 				{
 					oGuiElementField.setNextLeftState();
 				}
+				drawHelpingLines(oGuiElementField.getXPos(), oGuiElementField.getYPos());
 			}
 			else if (e.getButton() == MouseEvent.BUTTON3)
 			{
@@ -219,6 +220,7 @@ public abstract class GuiElementBoard extends JScrollPane
 				{
 					oGuiElementField.setNextRightState();
 				}
+				drawHelpingLines(oGuiElementField.getXPos(), oGuiElementField.getYPos());
 			}
 			
 			PlayFrame._oPlayFrame.refreshWindow();
@@ -229,6 +231,7 @@ public abstract class GuiElementBoard extends JScrollPane
 			// TODO Auto-generated method stub
 			GuiElementField oGuiElementField = (GuiElementField)e.getSource();
 //			oGuiElementField.requestFocusInWindow();
+			drawHelpingLines(oGuiElementField.getXPos(), oGuiElementField.getYPos());
 			PlayFrame._oPlayFrame.refreshWindow();
 		}
 
@@ -263,6 +266,103 @@ public abstract class GuiElementBoard extends JScrollPane
 	public void save(String filename)
 	{
 		_oLogicBoard.save(filename);
+	}
+	
+	
+	
+	public void drawHelpingLines(int curXPos, int curYPos)
+	{
+		int adder = 1;
+		// first set all to normal fields
+		for (int iY = 0; iY < _rows; iY++)
+		{
+	    	for (int iX = 0; iX < _cols; iX++)
+			{
+	    		GuiElementField oGuiElementField = (GuiElementField)_fields[iY][iX];
+	    		oGuiElementField.setToNormalField();
+			}
+		}
+		
+		GuiElementField oGuiElementField = (GuiElementField)_fields[curYPos][curXPos];
+		oGuiElementField.setToHighlightField();
+		
+		switch (oGuiElementField.getState()) 
+		{
+			case ARROW_E:
+				for (int iX = curXPos; iX < _cols; iX++)
+				{
+		    		GuiElementField oTmpGuiElementField = (GuiElementField)_fields[curYPos][iX];
+		    		oTmpGuiElementField.setToHighlightField();
+				}
+				break;
+				
+			case ARROW_W:
+				for (int iX = 0; iX < curXPos; iX++)
+				{
+		    		GuiElementField oTmpGuiElementField = (GuiElementField)_fields[curYPos][iX];
+		    		oTmpGuiElementField.setToHighlightField();
+				}
+				break;
+				
+			case ARROW_S:
+				for (int iY = curYPos; iY < _rows; iY++)
+				{
+		    		GuiElementField oTmpGuiElementField = (GuiElementField)_fields[iY][curXPos];
+		    		oTmpGuiElementField.setToHighlightField();
+				}
+				break;
+				
+			case ARROW_N:
+				for (int iY = 0; iY < curYPos; iY++)
+				{
+		    		GuiElementField oTmpGuiElementField = (GuiElementField)_fields[iY][curXPos];
+		    		oTmpGuiElementField.setToHighlightField();
+				}
+				break;
+				
+			case ARROW_NE:
+				adder = 1;
+				while (((curYPos - adder) >= 0) && ((curXPos + adder) < _cols))
+				{
+					GuiElementField oTmpGuiElementField = (GuiElementField)_fields[(curYPos - adder)][(curXPos + adder)];
+		    		oTmpGuiElementField.setToHighlightField();
+		    		adder++;
+				}
+				break;
+				
+			case ARROW_SE:
+				adder = 1;
+				while (((curYPos + adder) < _rows) && ((curXPos + adder) < _cols))
+				{
+					GuiElementField oTmpGuiElementField = (GuiElementField)_fields[(curYPos + adder)][(curXPos + adder)];
+		    		oTmpGuiElementField.setToHighlightField();
+		    		adder++;
+				}
+				break;
+				
+			case ARROW_NW:
+				adder = 1;
+				while (((curYPos - adder) >= 0) && ((curXPos - adder) >= 0))
+				{
+					GuiElementField oTmpGuiElementField = (GuiElementField)_fields[(curYPos - adder)][(curXPos - adder)];
+		    		oTmpGuiElementField.setToHighlightField();
+		    		adder++;
+				}
+				break;
+				
+			case ARROW_SW:
+				adder = 1;
+				while (((curYPos + adder) < _rows) && ((curXPos - adder) >= 0))
+				{
+					GuiElementField oTmpGuiElementField = (GuiElementField)_fields[(curYPos + adder)][(curXPos - adder)];
+		    		oTmpGuiElementField.setToHighlightField();
+		    		adder++;
+				}
+				break;
+	
+			default:
+				break;
+		}
 	}
 	
 	

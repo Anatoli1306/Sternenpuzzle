@@ -48,6 +48,20 @@ public class Field implements Serializable
 	}
 	
 	/**
+	 * @return the _xPos
+	 */
+	public int getXPos() {
+		return _xPos;
+	}
+
+	/**
+	 * @return the _yPos
+	 */
+	public int getYPos() {
+		return _yPos;
+	}
+
+	/**
 	 * @return eStates
 	 */
 	public eStates getState() 
