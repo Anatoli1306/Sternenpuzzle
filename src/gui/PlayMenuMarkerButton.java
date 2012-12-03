@@ -77,6 +77,7 @@ public class PlayMenuMarkerButton extends JPanel
             	else
             	{
             		boolean result = playFrame._oBoard.check();
+            		playFrame._oBoard.getDifficulty();
             		String message = "Spiel entspricht nicht den Regeln";
             		if (!result)
             		{

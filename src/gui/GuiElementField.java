@@ -270,6 +270,7 @@ abstract public class GuiElementField extends JButton
 	public static void clearImageCache()
 	{
 		_instancesOfImages = new HashMap<String, ImageIcon>();
+		_instancesOfHighlightedImages = new HashMap<String, ImageIcon>();
 	}
 	
 	/**

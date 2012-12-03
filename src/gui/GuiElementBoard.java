@@ -20,6 +20,7 @@ import sun.applet.Main;
 
 import logic.Board;
 import logic.CheckBoard;
+import logic.CheckEditorBoardDifficulty;
 import logic.Field;
 
 
@@ -392,6 +393,13 @@ public abstract class GuiElementBoard extends JScrollPane
 	public boolean check()
 	{
 		return CheckBoard.getInstance(_oLogicBoard).check();
+	}
+	
+	public int getDifficulty()
+	{
+		CheckEditorBoardDifficulty oDiff = new CheckEditorBoardDifficulty(_oLogicBoard);
+		oDiff.checkDifficulty();
+		return 1;
 	}
 
 	public Board getLogicBoard()
