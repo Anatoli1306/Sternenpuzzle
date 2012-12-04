@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -395,11 +397,18 @@ public abstract class GuiElementBoard extends JScrollPane
 		return CheckBoard.getInstance(_oLogicBoard).check();
 	}
 	
-	public int getDifficulty()
+	public String getDifficulty()
+	{
+		CheckEditorBoardDifficulty oDiff = new CheckEditorBoardDifficulty(_oLogicBoard);
+		String result = oDiff.checkDifficulty();
+		return result;
+	}
+	
+	public Map<Integer, HashMap<Integer, Integer>> getUnsolvableStars()
 	{
 		CheckEditorBoardDifficulty oDiff = new CheckEditorBoardDifficulty(_oLogicBoard);
 		oDiff.checkDifficulty();
-		return 1;
+		return oDiff.getUnsolvableStars();
 	}
 
 	public Board getLogicBoard()

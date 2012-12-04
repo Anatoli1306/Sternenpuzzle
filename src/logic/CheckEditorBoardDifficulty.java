@@ -6,6 +6,10 @@ package logic;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.ImageIcon;
 
 import gui.GuiElementField;
 import gui.GuiElementField.eStates;
@@ -16,6 +20,14 @@ import gui.GuiElementField.eStates;
  */
 public class CheckEditorBoardDifficulty 
 {
+	final static public String BOARD_DIFFICULTY_EASY = "einfach";
+	
+	final static public String BOARD_DIFFICULTY_MEDIUM = "mittel";
+	
+	final static public String BOARD_DIFFICULTY_HARD = "schwer";
+	
+	final static public String BOARD_DIFFICULTY_NOT_SOLVABLE = "unlösbar";
+	
 	/**
 	 *
 	 */
@@ -30,6 +42,7 @@ public class CheckEditorBoardDifficulty
 	
 	eStatesDiff[][] _tmpDiff = null;
 	
+	protected Map<Integer, HashMap<Integer, Integer>> _unsolvableStars = null;
 	
 	
 
@@ -38,11 +51,12 @@ public class CheckEditorBoardDifficulty
 		_oBoard = oBoard;
 	}
 	
-	public void checkDifficulty()
+	public String checkDifficulty()
 	{
 		_tmpDiff = new eStatesDiff[_oBoard.getHeight()][_oBoard.getWidth()];
 		
 		boolean isSolvable = false;
+		boolean doMediumSearch = false;
 		boolean isSolved = false;
 		boolean hasChanged = true;
 		int tmpStarCount = 0;
@@ -56,17 +70,18 @@ public class CheckEditorBoardDifficulty
 			hasChanged = false;
 			for (int iY = 0; iY < _oBoard.getHeight(); iY++) 
 			{
-				int rowStars = _oBoard.getCountStarsForRow(iY);
+				int rowStars = getCalculatedRowStars(iY, doMediumSearch);
 				
 				for (int iX = 0; iX < _oBoard.getWidth(); iX++) 
 				{
-					int columnStars = _oBoard.getCountStarsForColumn(iX);
+					int columnStars = getCalculatedColumnStars(iX, doMediumSearch);
 					Field oField = _oBoard.getField(iY, iX);
 					
 					if (0 == columnStars ||
 						0 == rowStars ||
 						isArrow(oField.getState()))
 					{
+						
 						boolean tmpChanged = updateTmpFields(iY, iX, eStatesDiff.BLOCKED);
 						if (!hasChanged)
 						{
@@ -114,7 +129,7 @@ public class CheckEditorBoardDifficulty
 			tmpEmptyFields = 0;
 			for (int iX = 0; iX < _oBoard.getWidth(); iX++) 
 			{
-				int columnStars = _oBoard.getCountStarsForColumn(iX);
+				int columnStars = getCalculatedColumnStars(iX, doMediumSearch);
 				for (int iY = 0; iY < _oBoard.getHeight(); iY++) 
 				{
 					if (_tmpDiff[iY][iX] != eStatesDiff.BLOCKED)
@@ -138,9 +153,37 @@ public class CheckEditorBoardDifficulty
 					}
 				}
 			}
+			
+			
 
 			isSolved = isSolved();
 			counter++;
+			
+			if (!isSolved && !doMediumSearch &&
+				 (counter > 1 || !hasChanged))
+			{
+				// its medium
+				doMediumSearch = true;
+				hasChanged = true;
+			}
+		}
+		
+		if (isSolved && !doMediumSearch && counter <2)
+		{
+			return BOARD_DIFFICULTY_EASY;
+		}
+		else if(isSolved && counter < 4)
+		{
+			return BOARD_DIFFICULTY_MEDIUM;
+		}
+		else if(isSolved)
+		{
+			return BOARD_DIFFICULTY_HARD;
+		}
+		else
+		{
+			calculatedUnsolvableStars();
+			return BOARD_DIFFICULTY_NOT_SOLVABLE;
 		}
 	}
 	
@@ -206,7 +249,7 @@ public class CheckEditorBoardDifficulty
 		adder = 1;
 		while (((yPos - adder) >= 0) && ((xPos + adder) < _oBoard.getWidth()))
 		{
-			if (_oBoard.getField((yPos - adder), (xPos + adder)).getState() == eStates.ARROW_NE)
+			if (_oBoard.getField((yPos - adder), (xPos + adder)).getState() == eStates.ARROW_SW)
 			{
 				return true;
 			}
@@ -217,7 +260,7 @@ public class CheckEditorBoardDifficulty
 		adder = 1;
 		while (((yPos + adder) < _oBoard.getHeight()) && ((xPos + adder) < _oBoard.getWidth()))
 		{
-			if (_oBoard.getField((yPos + adder), (xPos + adder)).getState() == eStates.ARROW_SE)
+			if (_oBoard.getField((yPos + adder), (xPos + adder)).getState() == eStates.ARROW_NW)
 			{
 				return true;
 			}
@@ -228,7 +271,7 @@ public class CheckEditorBoardDifficulty
 		adder = 1;
 		while (((yPos - adder) >= 0) && ((xPos - adder) >= 0))
 		{
-			if (_oBoard.getField((yPos - adder), (xPos - adder)).getState() == eStates.ARROW_NW)
+			if (_oBoard.getField((yPos - adder), (xPos - adder)).getState() == eStates.ARROW_SE)
 			{
 				return true;
 			}
@@ -239,7 +282,7 @@ public class CheckEditorBoardDifficulty
 		adder = 1;
 		while (((yPos + adder) < _oBoard.getHeight()) && ((xPos - adder) >= 0))
 		{
-			if (_oBoard.getField((yPos + adder), (xPos - adder)).getState() == eStates.ARROW_SW)
+			if (_oBoard.getField((yPos + adder), (xPos - adder)).getState() == eStates.ARROW_NE)
 			{
 				return true;
 			}
@@ -279,5 +322,65 @@ public class CheckEditorBoardDifficulty
 		}
 		
 		return false;
+	}
+	
+	public int getCalculatedRowStars(int iY, boolean isMedium)
+	{
+		int stars = _oBoard.getCountStarsForRow(iY);
+		if (isMedium)
+		{
+			for (int iX = 0; iX < _oBoard.getWidth(); iX++) 
+			{
+				if (_tmpDiff[iY][iX] == eStatesDiff.ISSTAR)
+				{
+					stars--;
+				}
+			}
+		}
+		
+		return stars;
+	}
+	
+	public int getCalculatedColumnStars(int iX, boolean isMedium)
+	{
+		int stars = _oBoard.getCountStarsForColumn(iX);
+		if (isMedium)
+		{
+			for (int iY = 0; iY < _oBoard.getHeight(); iY++) 
+			{
+				if (_tmpDiff[iY][iX] == eStatesDiff.ISSTAR)
+				{
+					stars--;
+				}
+			}
+		}
+		
+		return stars;
+	}
+	
+	public void calculatedUnsolvableStars()
+	{
+		HashMap<Integer, Integer> unsolvableStar = null;
+		_unsolvableStars = new HashMap<Integer, HashMap<Integer, Integer>>();
+		
+		for (int iY = 0; iY < _oBoard.getHeight(); iY++) 
+		{
+			for (int iX = 0; iX < _oBoard.getWidth(); iX++) 
+			{
+				unsolvableStar = new HashMap<Integer, Integer>();
+				Field oField = _oBoard.getField(iY, iX);
+				if (oField.getState() == eStates.STAR &&
+					_tmpDiff[iY][iX] != eStatesDiff.ISSTAR)
+				{
+					unsolvableStar.put(iY, iX);
+					_unsolvableStars.put(_unsolvableStars.size(), unsolvableStar);
+				}
+			}
+		}
+	}
+	
+	public Map<Integer, HashMap<Integer, Integer>> getUnsolvableStars()
+	{
+		return _unsolvableStars;
 	}
 }

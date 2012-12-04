@@ -3,6 +3,7 @@
  */
 package gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -204,6 +205,7 @@ abstract public class GuiElementField extends JButton
 			_instancesOfImages.put(path, oScaledIcon);
 		}
 		
+		setContentAreaFilled(false);
 		setIcon(_instancesOfImages.get(path));
 		repaint();
 	}
@@ -315,5 +317,12 @@ abstract public class GuiElementField extends JButton
 	 */
 	public int getYPos() {
 		return _oLogicField.getYPos();
+	}
+	
+	public void markAsBadStar()
+	{
+		setBackground(new Color(255, 0, 0));
+		setContentAreaFilled(true);
+		repaint();
 	}
 }
