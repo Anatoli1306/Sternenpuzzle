@@ -6,8 +6,14 @@ import java.awt.MenuBar;
 import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+
+import logic.CheckEditorBoardDifficulty;
 
 // Klasse enthällt die Menüleiste
 
@@ -164,12 +170,59 @@ class PlayMenuBar extends MenuBar
 			
 		});
 		
+		//Bearbeiten Rückgänging - Lösbarkeit überprüfen
+		MenuItem check = new MenuItem("Lösbarkeit überprüfen");
+		check.addActionListener(new ActionListener(){
+			
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				boolean result = playFrame._oBoard.check();
+        		String resultDiff = playFrame._oBoard.getDifficulty();
+        		String message = "Spiel entspricht nicht den Regeln";
+        		boolean showDiff = false;
+        		if (!result)
+        		{
+        			message = "Spiel entspricht den Regeln";
+        			showDiff = true;
+        		}
+        		JOptionPane.showMessageDialog(null, message, "SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+        		
+        		if (showDiff)
+        		{
+        			JOptionPane.showMessageDialog(null, "Das Spiel ist "+resultDiff, "SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+        			if (CheckEditorBoardDifficulty.BOARD_DIFFICULTY_NOT_SOLVABLE == resultDiff)
+        			{
+        				Map<Integer, HashMap<Integer, Integer>> unsolvableStars = playFrame._oBoard.getUnsolvableStars();
+        				for (int i = 0; i < unsolvableStars.size(); i++) 
+        				{
+        					HashMap<Integer, Integer> starPosMap = null;
+        					starPosMap = unsolvableStars.get(i);
+        					for (Entry<Integer, Integer> entry : starPosMap.entrySet()) 
+        					{
+        						playFrame._oBoard.getField(entry.getKey(), entry.getValue()).markAsBadStar();
+        				    }
+						}
+        			}
+        		}
+			}
+        	 
+    });
+
+		
 		// Schaltflächen hinzufügen
-		m.add(marker_setzen);
-		m.add(zurück_zum_marker);
-		m.addSeparator();
-		m.add(rückgängig_zum_ersten_fehler);
-		add(m);
+		if(frame._oBoard instanceof GuiElementGameBoard){
+			m.add(marker_setzen);
+			m.add(zurück_zum_marker);
+			m.addSeparator();
+			m.add(rückgängig_zum_ersten_fehler);
+			add(m);
+		}
+		else {
+			m.add(check);
+			add(m);
+		}
+		
+
 		
 		//Ansicht
 		m = new Menu("Ansicht");
