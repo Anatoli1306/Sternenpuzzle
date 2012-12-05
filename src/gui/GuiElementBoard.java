@@ -36,6 +36,10 @@ import logic.Field;
 public abstract class GuiElementBoard extends JScrollPane
 {
 	private boolean hasChanged = false;
+	
+	public void setHasChanged(boolean hasChanged) {
+		this.hasChanged = hasChanged;
+	}
 	/**
 	 * 
 	 */

@@ -79,6 +79,7 @@ public class SaveDialog extends JFrame {
    				}
    				
    			}
+   			PlayFrame._oPlayFrame._oBoard.setHasChanged(false);
    		}
   		else if (result == JFileChooser.CANCEL_OPTION)
   		{

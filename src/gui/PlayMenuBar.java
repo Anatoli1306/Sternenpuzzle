@@ -50,11 +50,17 @@ class PlayMenuBar extends MenuBar
 			
 			public void actionPerformed(ActionEvent arg0)
 			{	
-				QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
-				
-				if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
-					BoardSizeDialog boardSizeDialog = new BoardSizeDialog(playFrame);					
-									
+				int temp = 0;
+				if(PlayFrame._oPlayFrame._oBoard.getCols() == 0 && PlayFrame._oPlayFrame._oBoard.getRows() == 0 || PlayFrame._oPlayFrame._oBoard.isHasChanged() == false){temp = 1;}
+				else{
+					QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
+
+					if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
+						BoardSizeDialog boardSizeDialog = new BoardSizeDialog(playFrame);									
+					}
+				}
+				if(temp == 1){
+					BoardSizeDialog boardSizeDialog = new BoardSizeDialog(playFrame);
 				}
 			}
 			
