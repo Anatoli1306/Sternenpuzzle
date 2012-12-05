@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+
 // Klasse enthällt die Reihe der oberen Buttons
 
 /**
@@ -68,15 +69,25 @@ public class PlayMenuModeButton extends JPanel
 		btnGameMode.addActionListener(new ActionListener() {
         	 
 			public void actionPerformed(ActionEvent e)
-            {
-            	QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
+            {	
+				int temp = 0;
+				if(PlayFrame._oPlayFrame._oBoard.getCols() == 0 && PlayFrame._oPlayFrame._oBoard.getRows() == 0 || PlayFrame._oPlayFrame._oBoard.isHasChanged() == false){temp = 1;}
+				else{
+					QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
             	
-            	if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
-            		frame.drawGameBoard(0,0);          	
+					if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
+						frame.drawGameBoard(0,0);          	
             	
-            		btnGameMode.setVisible(false);
-            		btnEditMode.setVisible(true);
+						btnGameMode.setVisible(false);
+						btnEditMode.setVisible(true);
+					}
             	}
+				if(temp == 1){
+					frame.drawGameBoard(0,0);
+					btnGameMode.setVisible(false);
+					btnEditMode.setVisible(true);
+				}
+				
             }
         });      
 		add(btnGameMode);
@@ -90,16 +101,22 @@ public class PlayMenuModeButton extends JPanel
         	 
 			public void actionPerformed(ActionEvent e)
             {
-            	QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
-            	
-            	System.out.println(questionToSaveDialog.isSave_is_cancel());
-            	
-            	if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
-            		frame.drawEditorBoard(0,0);          	
+				int temp = 0;
+				if(PlayFrame._oPlayFrame._oBoard.getCols() == 0 && PlayFrame._oPlayFrame._oBoard.getRows() == 0 || PlayFrame._oPlayFrame._oBoard.isHasChanged() == false){temp = 1;}
+				else{
+					QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
+					if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
+						frame.drawEditorBoard(0,0);          	
             	           		
-            		btnGameMode.setVisible(false);
-            		btnEditMode.setVisible(true);
+						btnGameMode.setVisible(false);
+						btnEditMode.setVisible(true);
+					}
             	}
+				if(temp == 1){
+					frame.drawEditorBoard(0,0);
+					btnGameMode.setVisible(false);
+					btnEditMode.setVisible(true);
+				}
             }
         });           
 		add(btnEditMode);		

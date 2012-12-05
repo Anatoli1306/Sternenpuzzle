@@ -35,6 +35,7 @@ import logic.Field;
 
 public abstract class GuiElementBoard extends JScrollPane
 {
+	private boolean hasChanged = false;
 	/**
 	 * 
 	 */
@@ -189,6 +190,7 @@ public abstract class GuiElementBoard extends JScrollPane
 			
 			if (e.getButton() == MouseEvent.BUTTON1)
 			{
+				hasChanged = true;
 				GuiElementField oGuiElementField = (GuiElementField)e.getSource();
 				if (PlayFrame._oPlayFrame._oBoard instanceof GuiElementGameBoard)
 				{
@@ -208,6 +210,7 @@ public abstract class GuiElementBoard extends JScrollPane
 			}
 			else if (e.getButton() == MouseEvent.BUTTON3)
 			{
+				hasChanged = true;
 				GuiElementField oGuiElementField = (GuiElementField)e.getSource();
 				if (PlayFrame._oPlayFrame._oBoard instanceof GuiElementGameBoard)
 				{
@@ -424,5 +427,8 @@ public abstract class GuiElementBoard extends JScrollPane
 	public int getRows()
 	{
 		return this._rows;
+	}
+	public boolean isHasChanged() {
+		return hasChanged;
 	}
 }
