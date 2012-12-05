@@ -25,6 +25,8 @@ public class CommandTracker
 	
 	private int _currentPos = 0;
 	
+	public javax.swing.Timer _myTimer;
+	
 	private List<Integer> _markerPositions = new ArrayList<Integer>();
 	
 	public CommandTracker()
@@ -69,17 +71,14 @@ public class CommandTracker
 	}
 	
 	public void undoTillPosition(final int pos)
-	{
-		System.out.println(pos);
-		System.out.println(_currentPos);
-		
+	{	
 		int delayTime = 500;
 		
-		final javax.swing.Timer myTimer = new Timer(delayTime, new ActionListener() 
+		ActionListener actionListener = new ActionListener()
 		{
-		     public void actionPerformed(ActionEvent e) 
-		     {
-		        // TODO: put in the code you want called in xxx mSecs.
+			public void actionPerformed(ActionEvent actionEvent)
+			{
+				 // TODO: put in the code you want called in xxx mSecs.
 		    	if (pos < _currentPos)
 		 		{
 		    		undo();
@@ -87,13 +86,15 @@ public class CommandTracker
 		 		}
 		    	else
 		    	{
+		    		_myTimer.stop();
 		    		return;
 		    	}
-		    	
-		     }
-		});
-		myTimer.setRepeats(true);
-		myTimer.start();
+			}
+		};
+		
+		_myTimer = new Timer(delayTime, actionListener);
+		_myTimer.setRepeats(true);
+		_myTimer.start();
 	}
 	
 	
@@ -105,7 +106,6 @@ public class CommandTracker
 	
 	public void goBackToLastMarker()
 	{
-		System.out.println(_markerPositions.size());
 		if (_markerPositions.size() > 0)
 		{
 			int pos = _markerPositions.get(_markerPositions.size()-1);
