@@ -5,6 +5,7 @@ package logic;
 
 import gui.GuiElementBoard;
 import gui.GuiElementEditorBoard;
+import gui.PlayWin;
 import gui.GuiElementField.eStates;
 import gui.GuiElementGameBoard;
 
@@ -184,7 +185,8 @@ public class GameBoard extends Board
 		
 		if (isWon)
 		{
-			System.out.println("winning");
+			//System.out.println("winning");
+			PlayWin pw = new PlayWin();
 		}
 		
 	}
