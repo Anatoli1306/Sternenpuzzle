@@ -79,7 +79,6 @@ public class GameField extends Field
 	 */
 	public void setState(eStates state, int aas)
 	{
-		System.out.println("asd");
 		super.setState(state);
 	}
 	

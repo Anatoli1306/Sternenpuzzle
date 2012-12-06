@@ -36,9 +36,6 @@ public class QuestionToSaveDialog {
 	    	SaveDialog saveDialog = new SaveDialog();
 	    	yes_no_answer = true;
 	    	save_is_cancel = saveDialog.isCancel();
-	    	
-	    	System.out.println(saveDialog.isCancel());
-	    	
 	    }
 	    
 	    if( n == JOptionPane.NO_OPTION ){

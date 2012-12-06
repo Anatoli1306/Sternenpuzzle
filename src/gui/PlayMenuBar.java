@@ -263,9 +263,7 @@ class PlayMenuBar extends MenuBar
 			public void actionPerformed(ActionEvent arg0) 
 			{
             	QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
-            	
-            	System.out.println(questionToSaveDialog.isSave_is_cancel());
-            	
+
             	if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
             		playFrame.drawEditorBoard(0,0);          	
             	}

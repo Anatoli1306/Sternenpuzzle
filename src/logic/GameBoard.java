@@ -123,7 +123,7 @@ public class GameBoard extends Board
 		try 
 		{ 
 			fis = new FileInputStream( filename ); 
-		//	System.out.println(filename);
+
 			ObjectInputStream o = new ObjectInputStream( fis );
 			
 			Board oBoard = (Board) o.readObject();
@@ -185,7 +185,6 @@ public class GameBoard extends Board
 		
 		if (isWon)
 		{
-			//System.out.println("winning");
 			PlayWin pw = new PlayWin();
 		}
 		

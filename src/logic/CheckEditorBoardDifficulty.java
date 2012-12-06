@@ -140,14 +140,7 @@ public class CheckEditorBoardDifficulty
 						tmpEmptyFields++;
 					}
 				}
-				
-				if (iX == 6)
-				{
-					System.out.println(counter+"=");
-					System.out.println(tmpEmptyFields);
-					System.out.println(columnStars);
-				}
-				
+
 				if (tmpEmptyFields == columnStars)
 				{
 					for (int iY2 = 0; iY2 < _oBoard.getWidth(); iY2++) 
@@ -166,7 +159,6 @@ public class CheckEditorBoardDifficulty
 			
 			if (doHardSearch)
 			{
-				System.out.println("arg");
 				boolean upCheckDone = false;
 				boolean downCheckDone = false;
 				boolean foundEmptySpot = false;

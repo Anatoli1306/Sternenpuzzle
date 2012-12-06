@@ -66,7 +66,6 @@ public class SaveDialog extends JFrame {
    			file = new File(pfad);
    			if (markUpFilter.accept(file))
    			{
-   				System.out.println(pfad + " kann gespeichert werden.");
    				//Board oBoard = PlayFrame._oPlayFrame._oBoard.getLogicBoard();
    				Board oBoard = PlayFrame._oPlayFrame._oBoard.getLogicBoard();
    				if (oBoard instanceof EditorBoard)
@@ -83,17 +82,11 @@ public class SaveDialog extends JFrame {
    		}
   		else if (result == JFileChooser.CANCEL_OPTION)
   		{
-               System.out.println("Doch nicht gespeichert");
                cancel = true;
-               
-               System.out.println(cancel);
-               
                chooser.setVisible(false);
   		}
   		else
   		{
-  		
-            System.out.println(pfad + " ist der falsche Dateityp.");
            	chooser.setVisible(false);
            	return true;
        	}

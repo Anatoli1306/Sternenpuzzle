@@ -25,6 +25,8 @@ public class CommandTracker
 	
 	private int _currentPos = 0;
 	
+	private int _positionOfFirstFailure = 0;
+	
 	public javax.swing.Timer _myTimer;
 	
 	private List<Integer> _markerPositions = new ArrayList<Integer>();
@@ -42,7 +44,7 @@ public class CommandTracker
 	
 	public void remove()
 	{
-		
+
 	}
 	
 	public void execute()
@@ -103,6 +105,21 @@ public class CommandTracker
 		_markerPositions.add(_currentPos);
 	}
 	
+	public void setFirstFailurePosition()
+	{
+		if (_positionOfFirstFailure == 0)
+		{
+			_positionOfFirstFailure = _currentPos;
+		}	
+	}
+	
+	
+	public void goBackToFirstFailure()
+	{
+		undoTillPosition(_positionOfFirstFailure - 1);
+		_positionOfFirstFailure = 0;
+	}
+	
 	
 	public void goBackToLastMarker()
 	{
@@ -111,6 +128,10 @@ public class CommandTracker
 			int pos = _markerPositions.get(_markerPositions.size()-1);
 			undoTillPosition(pos);
 			_markerPositions.remove(_markerPositions.size()-1);
+		}
+		else
+		{
+			undoTillPosition(0);
 		}
 	}
 	
