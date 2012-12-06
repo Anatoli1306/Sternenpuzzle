@@ -55,7 +55,7 @@ public class PlayMenuMarkerButton extends JPanel
         	 
             public void actionPerformed(ActionEvent e)
             {
-            	 JOptionPane.showMessageDialog(null,"Marker gesetzt","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+            	JOptionPane.showMessageDialog(null,"Marker gesetzt","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
             	GameBoard oLogicBoard = (GameBoard)playFrame._oBoard.getLogicBoard();
             	oLogicBoard.getCommandTracker().setMarkerPosition();
             }
@@ -124,7 +124,7 @@ public class PlayMenuMarkerButton extends JPanel
         	 
             public void actionPerformed(ActionEvent e)
             {
-//            	 JOptionPane.showMessageDialog(null,"Rückgängig zum ersten Fehler","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+            	JOptionPane.showMessageDialog(null,"Rückgängig zum ersten Fehler","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
             	GameBoard oLogicBoard = (GameBoard)playFrame._oBoard.getLogicBoard();
             	oLogicBoard.getCommandTracker().goBackToLastMarker();
             }
