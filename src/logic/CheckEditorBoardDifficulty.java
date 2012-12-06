@@ -57,13 +57,14 @@ public class CheckEditorBoardDifficulty
 		
 		boolean isSolvable = false;
 		boolean doMediumSearch = false;
+		boolean doHardSearch = false;
 		boolean isSolved = false;
 		boolean hasChanged = true;
 		int tmpStarCount = 0;
 		int tmpEmptyFields = 0;
 		int counter = 0;
 		
-		
+		// go through logicuntil game is solved or stop when now changes were made in last run
 		while (!isSolved &&
 				hasChanged)
 		{
@@ -104,7 +105,7 @@ public class CheckEditorBoardDifficulty
 				tmpEmptyFields = 0;
 				for (int iX2 = 0; iX2 < _oBoard.getWidth(); iX2++) 
 				{
-					if (_tmpDiff[iY][iX2] != eStatesDiff.BLOCKED)
+					if (_tmpDiff[iY][iX2] != eStatesDiff.BLOCKED && _tmpDiff[iY][iX2] != eStatesDiff.ISSTAR)
 					{
 						tmpEmptyFields++;
 					}
@@ -129,13 +130,22 @@ public class CheckEditorBoardDifficulty
 			tmpEmptyFields = 0;
 			for (int iX = 0; iX < _oBoard.getWidth(); iX++) 
 			{
+				tmpEmptyFields = 0;
+				
 				int columnStars = getCalculatedColumnStars(iX, doMediumSearch);
 				for (int iY = 0; iY < _oBoard.getHeight(); iY++) 
 				{
-					if (_tmpDiff[iY][iX] != eStatesDiff.BLOCKED)
+					if (_tmpDiff[iY][iX] != eStatesDiff.BLOCKED && _tmpDiff[iY][iX] != eStatesDiff.ISSTAR)
 					{
 						tmpEmptyFields++;
 					}
+				}
+				
+				if (iX == 6)
+				{
+					System.out.println(counter+"=");
+					System.out.println(tmpEmptyFields);
+					System.out.println(columnStars);
 				}
 				
 				if (tmpEmptyFields == columnStars)
@@ -154,7 +164,197 @@ public class CheckEditorBoardDifficulty
 				}
 			}
 			
-			
+			if (doHardSearch)
+			{
+				System.out.println("arg");
+				boolean upCheckDone = false;
+				boolean downCheckDone = false;
+				boolean foundEmptySpot = false;
+				int foundSpotX = -1;
+				int foundSpotY = -1;
+				
+				for (int iX = 0; iX < _oBoard.getWidth(); iX++) 
+				{
+					upCheckDone = false;
+					downCheckDone = false;
+					int columnStars = getCalculatedColumnStars(iX, doHardSearch);
+					if (1 <= columnStars)
+					{
+						// up check
+						for (int iY = 0; iY < _oBoard.getHeight(); iY++) 
+						{
+							foundEmptySpot = false;
+							Field oField = _oBoard.getField(iY, iX);
+							
+							if (!upCheckDone && oField.getState() == eStates.ARROW_N)
+							{
+								upCheckDone = true;
+								for (int iTmpY = 0; iTmpY < iY; iTmpY++) 
+								{
+									if (_tmpDiff[iTmpY][iX] != eStatesDiff.BLOCKED && _tmpDiff[iTmpY][iX] != eStatesDiff.ISSTAR)
+									{
+										if (!foundEmptySpot)
+										{
+											foundSpotX = iX;
+											foundSpotY = iTmpY;
+											foundEmptySpot = true;
+										}
+										else
+										{
+											foundSpotX = -1;
+											foundSpotY = -1;
+											foundEmptySpot = false;
+											break;
+										}
+									}
+								}
+								
+								if (foundEmptySpot)
+								{
+									_tmpDiff[foundSpotY][foundSpotX] = eStatesDiff.ISSTAR;
+									hasChanged = true;
+									foundSpotX = -1;
+									foundSpotY = -1;
+								}
+							}
+							
+						}
+						
+						// down check
+						for (int iY = _oBoard.getHeight()-1; iY >= 0; iY--) 
+						{
+							foundEmptySpot = false;
+							Field oField = _oBoard.getField(iY, iX);
+							
+							if (!downCheckDone && oField.getState() == eStates.ARROW_S)
+							{
+								downCheckDone = true;
+								for (int iTmpY = iY+1; iTmpY < _oBoard.getHeight(); iTmpY++) 
+								{
+									if (_tmpDiff[iTmpY][iX] != eStatesDiff.BLOCKED && _tmpDiff[iTmpY][iX] != eStatesDiff.ISSTAR)
+									{
+										if (!foundEmptySpot)
+										{
+											foundSpotX = iX;
+											foundSpotY = iTmpY;
+											foundEmptySpot = true;
+										}
+										else
+										{
+											foundSpotX = -1;
+											foundSpotY = -1;
+											foundEmptySpot = false;
+											break;
+										}
+									}
+								}
+								
+								if (foundEmptySpot)
+								{
+									_tmpDiff[foundSpotY][foundSpotX] = eStatesDiff.ISSTAR;
+									hasChanged = true;
+									foundSpotX = -1;
+									foundSpotY = -1;
+								}
+							}
+							
+						}
+					}
+					
+					
+				}
+				
+				for (int iY = 0; iY < _oBoard.getHeight(); iY++) 
+				{
+					upCheckDone = false;
+					downCheckDone = false;
+					int rowStars = getCalculatedRowStars(iY, doHardSearch);
+					if (1 <= rowStars)
+					{
+						// up check
+						for (int iX = 0; iX < _oBoard.getWidth(); iX++) 
+						{
+							foundEmptySpot = false;
+							Field oField = _oBoard.getField(iY, iX);
+							
+							if (!upCheckDone && oField.getState() == eStates.ARROW_W)
+							{
+								upCheckDone = true;
+								for (int iTmpX = 0; iTmpX < iX; iTmpX++) 
+								{
+									if (_tmpDiff[iY][iTmpX] != eStatesDiff.BLOCKED && _tmpDiff[iY][iTmpX] != eStatesDiff.ISSTAR)
+									{
+										if (!foundEmptySpot)
+										{
+											foundSpotX = iTmpX;
+											foundSpotY = iY;
+											foundEmptySpot = true;
+										}
+										else
+										{
+											foundSpotX = -1;
+											foundSpotY = -1;
+											foundEmptySpot = false;
+											break;
+										}
+									}
+								}
+								
+								if (foundEmptySpot)
+								{
+									_tmpDiff[foundSpotY][foundSpotX] = eStatesDiff.ISSTAR;
+									hasChanged = true;
+									foundSpotX = -1;
+									foundSpotY = -1;
+								}
+							}
+							
+						}
+						
+						// up check
+						for (int iX = _oBoard.getWidth()-1; iX >= 0; iX--) 
+						{
+							foundEmptySpot = false;
+							Field oField = _oBoard.getField(iY, iX);
+							
+							if (!downCheckDone && oField.getState() == eStates.ARROW_E)
+							{
+								downCheckDone = true;
+								for (int iTmpX = iX+1; iTmpX < _oBoard.getWidth(); iTmpX++) 
+								{
+									if (_tmpDiff[iY][iTmpX] != eStatesDiff.BLOCKED && _tmpDiff[iY][iTmpX] != eStatesDiff.ISSTAR)
+									{
+										if (!foundEmptySpot)
+										{
+											foundSpotX = iTmpX;
+											foundSpotY = iY;
+											foundEmptySpot = true;
+										}
+										else
+										{
+											foundSpotX = -1;
+											foundSpotY = -1;
+											foundEmptySpot = false;
+											break;
+										}
+									}
+								}
+								
+								if (foundEmptySpot)
+								{
+									_tmpDiff[foundSpotY][foundSpotX] = eStatesDiff.ISSTAR;
+									hasChanged = true;
+									foundSpotX = -1;
+									foundSpotY = -1;
+								}
+							}
+							
+						}
+					}
+					
+					
+				}
+			}
 
 			isSolved = isSolved();
 			counter++;
@@ -166,13 +366,21 @@ public class CheckEditorBoardDifficulty
 				doMediumSearch = true;
 				hasChanged = true;
 			}
+			
+			if (!isSolved && doMediumSearch && !doHardSearch &&
+				 (counter > 4 || !hasChanged))
+			{
+				// its medium
+				doHardSearch = true;
+				hasChanged = true;
+			}
 		}
 		
 		if (isSolved && !doMediumSearch && counter <2)
 		{
 			return BOARD_DIFFICULTY_EASY;
 		}
-		else if(isSolved && counter < 4)
+		else if(isSolved && counter < 4 && !doHardSearch)
 		{
 			return BOARD_DIFFICULTY_MEDIUM;
 		}
