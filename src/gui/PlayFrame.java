@@ -173,7 +173,7 @@ public class PlayFrame extends JFrame
 		menuButtonsTop.setOpaque(false);
 		add(menuButtonsTop);
 		
-		PlayMenuMarkerButton menuButtonsBottom = new PlayMenuMarkerButton(this);
+		PlayMenuMarkerButton menuButtonsBottom = new PlayMenuMarkerButton(this, mode);
 		menuButtonsBottom.setBounds(900, 15, 350, 500);
 		menuButtonsBottom.setOpaque(false);		
 		add(menuButtonsBottom);

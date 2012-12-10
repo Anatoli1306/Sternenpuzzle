@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import logic.CheckEditorBoardDifficulty;
 import logic.GameBoard;
 
-// Klasse enthällt die Menüleiste
+// Klasse enthält die Menüleiste
 
 /**
  * 
