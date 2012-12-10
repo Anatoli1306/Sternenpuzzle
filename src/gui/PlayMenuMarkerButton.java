@@ -67,7 +67,6 @@ public class PlayMenuMarkerButton extends JPanel
 		}
 
 		//	Dekl. Button CHECK ( Spiel entspricht den Regeln )
-
 		JButton btnCheck;
 		btnCheck = new JButton(new ImageIcon(getClass().getResource("/resources/check.png")));
 		btnCheck.setAlignmentX(LEFT_ALIGNMENT);
@@ -129,7 +128,7 @@ public class PlayMenuMarkerButton extends JPanel
 
 				public void actionPerformed(ActionEvent e)
 				{
-					JOptionPane.showMessageDialog(null,"Zurück zu letztem Marker","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Zurück vor den ersten Fehler","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
 					GameBoard oLogicBoard = (GameBoard)playFrame._oBoard.getLogicBoard();
 					oLogicBoard.getCommandTracker().goBackToFirstFailure();
 				}

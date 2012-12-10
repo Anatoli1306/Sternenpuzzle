@@ -37,7 +37,7 @@ public class PlayFrame extends JFrame
 		setSize(1280, 1024);
 		setLayout(null);
 		
-
+		// Icon setzen
 	    BufferedImage image = null;
 		try {
 			image = ImageIO.read(this.getClass().getResource("/resources/msIcon.ico"));

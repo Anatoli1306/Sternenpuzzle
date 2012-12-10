@@ -2,7 +2,10 @@ package gui;
 
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,26 +20,12 @@ import javax.swing.JLabel;
 public class InfoDialog {
 
 	JFrame frame;
-	//	JLabel label;
+
 	JLabel backGroundImage;
 
 	public InfoDialog() {
 		frame = new JFrame ("Sternenpuzzle - Info");
-		//	        label = new JLabel ("");
-		//	        label.setHorizontalAlignment(JLabel.CENTER);
-		//	        label.setVerticalAlignment(JLabel.TOP);
-		//	        label.setForeground(Color.white);
-		//	        label.setText("<html><p/><p/>Entwickler: <p/><p/> "+                  
-		//	                   "Fabian Hassert <p/>" +
-		//	                   "Eren Arslan <p/>" +
-		//	                   "Mats Bulin <p/>" +
-		//	                   "Daniel Frings <p/>" +
-		//	                   "Anatoly Steinhauer <p/>" +
-		//	                   "Andreas Amberg <p/> <p/>" +
-		//	                   "Auftraggeber: Games4Ever <p/> <p/>" +
-		//	                   "Version: 0.1 <p/> <p/>" +
-		//	                   "Datum: 25.10.2012 </html>");	        
-		//	        frame.add(label);
+
 		frame.setSize(400, 520);
 		frame.setVisible(true);
 		frame.setResizable(false);
@@ -47,5 +36,19 @@ public class InfoDialog {
 		backGroundImage.setOpaque(false);
 		frame.getContentPane().add(backGroundImage);
 		backGroundImage.setBounds(0,0,400, 520);
+		
+		// Icon setzen
+	    BufferedImage image = null;
+		try {
+			image = ImageIO.read(this.getClass().getResource("/resources/msIcon.ico"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    frame.setIconImage(image);
+	}
+
+	private void setIconImage(BufferedImage image) {
+		// TODO Auto-generated method stub
+		
 	}
 }
