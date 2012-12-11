@@ -81,36 +81,41 @@ public class PlayMenuMarkerButton extends JPanel
 
 				public void actionPerformed(ActionEvent e)
 				{
-					if (playFrame._oBoard instanceof GuiElementGameBoard)
-					{
-						JOptionPane.showMessageDialog(null,"Lösbarkeit anzeigen","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+					if(PlayFrame._oPlayFrame._oBoard.getCols() == 0 && PlayFrame._oPlayFrame._oBoard.getRows() == 0){
+						JOptionPane.showMessageDialog(null,"Sie müssen erst ein Spielfeld anlegen","Option so nicht möglich", JOptionPane.PLAIN_MESSAGE);
 					}
-					else
-					{
-						boolean result = playFrame._oBoard.check();
-						String resultDiff = playFrame._oBoard.getDifficulty();
-						String message = "Spiel entspricht nicht den Regeln";
-						boolean showDiff = false;
-						if (!result)
+					else{					
+						if (playFrame._oBoard instanceof GuiElementGameBoard)
 						{
-							message = "Spiel entspricht den Regeln";
-							showDiff = true;
+							JOptionPane.showMessageDialog(null,"Lösbarkeit anzeigen","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
 						}
-						JOptionPane.showMessageDialog(null, message, "SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
-
-						if (showDiff)
+						else
 						{
-							JOptionPane.showMessageDialog(null, "Das Spiel ist "+resultDiff, "SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
-							if (CheckEditorBoardDifficulty.BOARD_DIFFICULTY_NOT_SOLVABLE == resultDiff)
+							boolean result = playFrame._oBoard.check();
+							String resultDiff = playFrame._oBoard.getDifficulty();
+							String message = "Spiel entspricht nicht den Regeln";
+							boolean showDiff = false;
+							if (!result)
 							{
-								Map<Integer, HashMap<Integer, Integer>> unsolvableStars = playFrame._oBoard.getUnsolvableStars();
-								for (int i = 0; i < unsolvableStars.size(); i++) 
+								message = "Spiel entspricht den Regeln";
+								showDiff = true;
+							}
+							JOptionPane.showMessageDialog(null, message, "SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+	
+							if (showDiff)
+							{
+								JOptionPane.showMessageDialog(null, "Das Spiel ist "+resultDiff, "SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+								if (CheckEditorBoardDifficulty.BOARD_DIFFICULTY_NOT_SOLVABLE == resultDiff)
 								{
-									HashMap<Integer, Integer> starPosMap = null;
-									starPosMap = unsolvableStars.get(i);
-									for (Entry<Integer, Integer> entry : starPosMap.entrySet()) 
+									Map<Integer, HashMap<Integer, Integer>> unsolvableStars = playFrame._oBoard.getUnsolvableStars();
+									for (int i = 0; i < unsolvableStars.size(); i++) 
 									{
-										playFrame._oBoard.getField(entry.getKey(), entry.getValue()).markAsBadStar();
+										HashMap<Integer, Integer> starPosMap = null;
+										starPosMap = unsolvableStars.get(i);
+										for (Entry<Integer, Integer> entry : starPosMap.entrySet()) 
+										{
+											playFrame._oBoard.getField(entry.getKey(), entry.getValue()).markAsBadStar();
+										}
 									}
 								}
 							}
