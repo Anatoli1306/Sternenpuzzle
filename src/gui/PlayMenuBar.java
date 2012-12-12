@@ -80,7 +80,15 @@ class PlayMenuBar extends MenuBar
 			
 			public void actionPerformed(ActionEvent arg0) 
 			{	
-				LoadDialog loadDialog = new LoadDialog();
+				if(PlayFrame._oPlayFrame._oBoard.getCols() == 0 && PlayFrame._oPlayFrame._oBoard.getRows() == 0 || PlayFrame._oPlayFrame._oBoard.isHasChanged() == false){
+					LoadDialog loadDialog = new LoadDialog();
+				}
+				else{
+					QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
+					if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
+						LoadDialog loadDialog = new LoadDialog();								
+					}
+				}
 			}
 			
 		});
