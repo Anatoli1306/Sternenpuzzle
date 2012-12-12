@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 
-// Klasse enthällt das Layout
+// Klasse beinhaltet das Layout
 
 
 /**
@@ -56,11 +56,11 @@ public class PlayFrame extends JFrame
 	/**
 	 * 
 	 */
-	
+	//	Spielfeld erstellen
 	public void drawGameBoard(int rows, int cols)
 	{	
-		getContentPane().removeAll();
-		GuiElementField.clearImageCache();
+		getContentPane().removeAll(); // Bereinigen
+		GuiElementField.clearImageCache(); // Bereinigen Cache
 		
 		_oBoard = new GuiElementGameBoard(rows, cols);
 		_oBoard.setBounds(10, 100, 1240, 870);
@@ -76,11 +76,11 @@ public class PlayFrame extends JFrame
 	/**
 	 * 
 	 */
-	
+	//	Editierfeld erstellen
 	public void drawEditorBoard(int rows, int cols)
 	{
-		getContentPane().removeAll();
-		GuiElementField.clearImageCache();
+		getContentPane().removeAll(); // Bereinigen
+		GuiElementField.clearImageCache(); // Bereinigen Cache
 		
 		_oBoard = new GuiElementEditorBoard(rows, cols);
 		_oBoard.setBounds(10, 100, 1240, 870);
@@ -92,11 +92,11 @@ public class PlayFrame extends JFrame
 		this.refreshWindow();
 	}
 	
-	
-	public void drawLoadedBoard(GuiElementBoard gui)
+	//	geladenes Editierfeld erstellen
+	public void drawLoadedBoard(GuiElementBoard gui) 
 	{
-		getContentPane().removeAll();
-		GuiElementField.clearImageCache();
+		getContentPane().removeAll(); // Bereinigen
+		GuiElementField.clearImageCache(); // Bereinigen Cache
 		
 		_oBoard = gui;//new GuiElementEditorBoard(rows, cols);
 		_oBoard.setBounds(10, 100, 1240, 870);
@@ -108,6 +108,7 @@ public class PlayFrame extends JFrame
 		this.refreshWindow();
 	}
 	
+//	geladenes Spielfeld erstellen
 	public void drawLoadedGameBoard(GuiElementBoard game)
 	{
 		getContentPane().removeAll();
@@ -130,7 +131,7 @@ public class PlayFrame extends JFrame
 	
 	/**
 	 * 
-	 * little helper methode to calculate left posiition of board
+	 * little helper methode to calculate left position of board
 	 * 
 	 * @param int cols
 	 * @return int

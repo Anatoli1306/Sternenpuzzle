@@ -9,6 +9,8 @@ import logic.Board;
 import logic.EditorBoard;
 import logic.GameBoard;
 
+// Klasse beinhaltet Laden-Fenster
+
 /**
  * 
  * @author Eren, Fabian
@@ -20,14 +22,16 @@ public class LoadDialog
 {
   public LoadDialog()
   {
+	// Dateipfad auswählen
 	String pfad = System.getProperty("user.home");
-	pfad = pfad + "\\Sternenhimmel-Puzzle";
+	pfad = pfad + "\\Sternenhimmel-Puzzle";	
 	File saveDirectory = new File(pfad);
 	if(saveDirectory.isDirectory()){}
 	else{
 		saveDirectory.mkdir();
 	}
 	
+	// File auswählen
     JFileChooser chooser = new JFileChooser(pfad);
 
     chooser.setFileFilter( new FileFilter()
@@ -35,7 +39,7 @@ public class LoadDialog
       @Override public boolean accept( File f )
       {
         return f.isDirectory() ||
-          f.getName().toLowerCase().endsWith( ".xml" );
+          f.getName().toLowerCase().endsWith( ".xml" ); // Nur .xml-Dateien
       }
       @Override public String getDescription()
       {

@@ -52,7 +52,7 @@ abstract public class GuiElementField extends JButton
 	
 	/**
 	 * this mapping speed things up.
-	 * instead of resizing alle images everytime
+	 * instead of resizing all images everytime
 	 * we store the resized image
 	 */
 	private static Map<String, ImageIcon> _instancesOfImages = new HashMap<String, ImageIcon>();

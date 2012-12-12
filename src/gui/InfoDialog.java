@@ -10,6 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+// Klasse beinhaltet Info-Fenster (Versionsangabe, Programmierer, Auftraggeber)
+
 /**
  * 
  * @author Eren, Fabian, Mats
@@ -20,10 +22,10 @@ import javax.swing.JLabel;
 public class InfoDialog {
 
 	JFrame frame;
-
 	JLabel backGroundImage;
 
 	public InfoDialog() {
+		// Frameeinstellungen 
 		frame = new JFrame ("Sternenpuzzle - Info");
 
 		frame.setSize(400, 520);
@@ -31,6 +33,7 @@ public class InfoDialog {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 
+		// Hintergrundbild mit Text
 		backGroundImage = new JLabel(new ImageIcon(getClass().getResource("/resources/infoBackground.png")));
 		backGroundImage.setLayout(null);
 		backGroundImage.setOpaque(false);

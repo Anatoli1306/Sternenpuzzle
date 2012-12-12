@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-// @ EREN: Bitte den entsprechend formatierten Hintergrund einfügen und Schrift auf weiss setzen. Nach Vollendung diesen Kommentar löschen!
+// Klasse beinhaltet die Anleitung (+ Tipp)
 
 /**
  * 
@@ -25,6 +25,7 @@ public class InstructionDialog {
 	JLabel backGroundImage;
 
 	public InstructionDialog() {
+		// Frameinstellungen
 		frame = new JFrame ("Sternenpuzzle - Info");
 
 		frame.setSize(472, 622);
@@ -32,6 +33,7 @@ public class InstructionDialog {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 
+		// Hintergrundbild mit Text
 		backGroundImage = new JLabel(new ImageIcon(getClass().getResource("/resources/instructionBackground.png")));
 		backGroundImage.setLayout(null);
 		backGroundImage.setOpaque(false);
