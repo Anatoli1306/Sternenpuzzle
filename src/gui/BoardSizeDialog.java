@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.text.*;
 
 import javax.swing.*;
@@ -90,6 +91,8 @@ public class BoardSizeDialog extends JFrame{
 					else
 						playFrame.drawEditorBoard(zeile,spalte);					
 					frame.dispose();
+					File f = new File("SaveInfo.xml");
+					f.delete();
 				}				
 			}
 		});

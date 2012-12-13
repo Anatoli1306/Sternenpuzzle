@@ -100,6 +100,7 @@ class PlayMenuBar extends MenuBar
 			
 			public void actionPerformed(ActionEvent arg0) 
 			{
+				SaveDialog saveDialog = new SaveDialog();
 			}
 			
 		});
@@ -111,7 +112,7 @@ class PlayMenuBar extends MenuBar
 			
 			public void actionPerformed(ActionEvent arg0) 
 			{	
-				SaveDialog saveDialog = new SaveDialog();
+				SaveAsDialog saveDialog = new SaveAsDialog();
 			}
 			
 		});

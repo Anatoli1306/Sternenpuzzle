@@ -33,7 +33,7 @@ public class QuestionToSaveDialog {
 	              null, options,options[0] );
 		
 	    if ( n == JOptionPane.YES_OPTION ){
-	    	SaveDialog saveDialog = new SaveDialog();
+	    	SaveAsDialog saveDialog = new SaveAsDialog();
 	    	yes_no_answer = true;
 	    	save_is_cancel = saveDialog.isCancel();
 	    }
