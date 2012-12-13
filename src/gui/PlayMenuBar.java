@@ -168,6 +168,8 @@ class PlayMenuBar extends MenuBar
 			public void actionPerformed(ActionEvent arg0) 
 			{	
 				JOptionPane.showMessageDialog(null,"Zurück zum Marker","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+            	GameBoard oLogicBoard = (GameBoard)playFrame._oBoard.getLogicBoard();
+            	oLogicBoard.getCommandTracker().goBackToLastMarker();
 			}
 					
 		});
@@ -179,9 +181,9 @@ class PlayMenuBar extends MenuBar
 			
 			public void actionPerformed(ActionEvent arg0) 
 			{	
-				JOptionPane.showMessageDialog(null,"Rückgängig zum ersten Fehler","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
-            	GameBoard oLogicBoard = (GameBoard)playFrame._oBoard.getLogicBoard();
-            	oLogicBoard.getCommandTracker().goBackToLastMarker();
+				JOptionPane.showMessageDialog(null,"Zurück vor den ersten Fehler","SternenHimmelPuzzle", JOptionPane.PLAIN_MESSAGE);
+				GameBoard oLogicBoard = (GameBoard)playFrame._oBoard.getLogicBoard();
+				oLogicBoard.getCommandTracker().goBackToFirstFailure();
 			}
 			
 		});
