@@ -89,10 +89,9 @@ public class LoadDialog
 					GuiElementBoard oGameBoard = GameBoard.load(chooser.getSelectedFile().getAbsolutePath());
 					PlayFrame._oPlayFrame.drawLoadedGameBoard(oGameBoard);
 					PlayFrame.refreshWindow();
-
+					
 					GameBoard lBoard = (GameBoard)oGameBoard.getLogicBoard();
 					lBoard.getCommandTracker().resetTracker();
-
 
 				}
 			}

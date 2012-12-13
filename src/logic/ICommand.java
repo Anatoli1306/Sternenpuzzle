@@ -3,6 +3,8 @@
  */
 package logic;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Andreas
@@ -10,7 +12,7 @@ package logic;
  *
  */
 
-public interface ICommand 
+public interface ICommand extends Serializable
 {
 	/**
 	 * 

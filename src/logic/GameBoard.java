@@ -122,6 +122,7 @@ public class GameBoard extends Board
 		FileInputStream fis = null;
 		try 
 		{ 
+			
 			fis = new FileInputStream( filename ); 
 
 			ObjectInputStream o = new ObjectInputStream( fis );
@@ -134,10 +135,21 @@ public class GameBoard extends Board
 				for (int y = 0; y < oGame.getRows();y++)
 				{
 				
-					if (oBoard instanceof GameBoard){
-						
+					if (oBoard instanceof GameBoard)
+					{
 						eStates asd = oBoard.getField(y, x).getState();
 						oGame.getField(y, x).setState(asd, 1);
+						// isStarField
+						GameField oBoardFiled = (GameField)oBoard.getField(y, x);
+						oGame.getField(y, x).setIsStarField(oBoardFiled.isStarField());
+						
+						GameBoard lBoardTmp = (GameBoard)oGame.getLogicBoard();
+						lBoardTmp.getCommandTracker().resetTracker();
+						
+						oGame.setLogicBoard(oBoard);
+						
+						GameBoard lBoard = (GameBoard)oBoard;
+						lBoard.getCommandTracker()._blockReset = true;
 					}
 					else 
 					{		

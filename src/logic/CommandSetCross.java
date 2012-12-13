@@ -3,6 +3,8 @@
  */
 package logic;
 
+import java.io.Serializable;
+
 import gui.GuiElementField.eStates;
 
 /**
@@ -12,7 +14,7 @@ import gui.GuiElementField.eStates;
  *
  */
 
-public class CommandSetCross implements ICommand 
+public class CommandSetCross implements ICommand, Serializable
 {
 	GameField _oField = null;
 	

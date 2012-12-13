@@ -7,6 +7,7 @@ import gui.PlayFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +20,13 @@ import javax.swing.Timer;
  *
  */
 
-public class CommandTracker 
+public class CommandTracker implements Serializable
 {
 	private List<ICommand> _trackerList = new ArrayList<ICommand>();
 	
 	private int _currentPos = 0;
+	
+	public boolean _blockReset = false;
 	
 	private int _positionOfFirstFailure = 0;
 	
@@ -38,7 +41,7 @@ public class CommandTracker
 	
 	public void add(ICommand oCmd)
 	{
-		_trackerList.add(_currentPos, oCmd);
+		_trackerList.add(_trackerList.size(), oCmd);
 		_currentPos++;
 	}
 	
@@ -59,6 +62,7 @@ public class CommandTracker
 			_currentPos--;
 
 			_trackerList.get(_currentPos).undo();
+			_trackerList.remove(_trackerList.size()-1);
 		}
 	}
 	
@@ -81,7 +85,7 @@ public class CommandTracker
 			public void actionPerformed(ActionEvent actionEvent)
 			{
 				 // TODO: put in the code you want called in xxx mSecs.
-		    	if (pos < _currentPos)
+		    	if (pos < _trackerList.size() && 0 != pos)
 		 		{
 		    		undo();
 				    PlayFrame._oPlayFrame.refreshWindow();
@@ -102,14 +106,14 @@ public class CommandTracker
 	
 	public void setMarkerPosition()
 	{
-		_markerPositions.add(_currentPos);
+		_markerPositions.add(_trackerList.size());
 	}
 	
 	public void setFirstFailurePosition()
 	{
 		if (_positionOfFirstFailure == 0)
 		{
-			_positionOfFirstFailure = _currentPos;
+			_positionOfFirstFailure = _trackerList.size();
 		}	
 	}
 	
@@ -137,8 +141,12 @@ public class CommandTracker
 	
 	public void resetTracker()
 	{
-		_trackerList = new ArrayList<ICommand>();
-		_markerPositions = new ArrayList<Integer>();
-		_currentPos = 0;
+		if (!_blockReset)
+		{
+			_trackerList = new ArrayList<ICommand>();
+			_markerPositions = new ArrayList<Integer>();
+			_currentPos = 0;
+		}
+		_blockReset = false;
 	}
 }

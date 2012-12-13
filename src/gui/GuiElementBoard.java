@@ -24,6 +24,7 @@ import logic.Board;
 import logic.CheckBoard;
 import logic.CheckEditorBoardDifficulty;
 import logic.Field;
+import logic.GameBoard;
 
 
 /**
@@ -421,6 +422,11 @@ public abstract class GuiElementBoard extends JScrollPane
 	public Board getLogicBoard()
 	{
 		return _oLogicBoard;
+	}
+	
+	public void setLogicBoard(Board oBoard)
+	{
+		_oLogicBoard = oBoard;
 	}
 	
 	public int getCols()

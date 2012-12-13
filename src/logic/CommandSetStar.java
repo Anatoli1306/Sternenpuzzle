@@ -3,6 +3,8 @@
  */
 package logic;
 
+import java.io.Serializable;
+
 import gui.GuiElementField.eStates;
 
 /**
@@ -12,7 +14,7 @@ import gui.GuiElementField.eStates;
  *
  */
 
-public class CommandSetStar implements ICommand 
+public class CommandSetStar implements ICommand, Serializable
 {
 	GameField _oField = null;
 	
