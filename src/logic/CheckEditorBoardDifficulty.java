@@ -63,8 +63,12 @@ public class CheckEditorBoardDifficulty
 		int tmpStarCount = 0;
 		int tmpEmptyFields = 0;
 		int counter = 0;
+		boolean foundEmptySpot = false;
+		int foundSpotX = -1;
+		int foundSpotY = -1;
+		int adder = 0;
 		
-		// go through logicuntil game is solved or stop when now changes were made in last run
+		// go through logicuntil game is solved or stop when no changes were made in last run
 		while (!isSolved &&
 				hasChanged)
 		{
@@ -157,13 +161,136 @@ public class CheckEditorBoardDifficulty
 				}
 			}
 			
+			// cross calculation
+			for (int iX = 0; iX < _oBoard.getWidth(); iX++) 
+			{
+				tmpEmptyFields = 0;
+				
+				for (int iY = 0; iY < _oBoard.getHeight(); iY++) 
+				{
+					foundEmptySpot = false;
+					foundSpotX = -1;
+					foundSpotY = -1;
+					Field oField = _oBoard.getField(iY, iX);
+					
+					if (oField.getState() == eStates.ARROW_SW)
+					{
+						adder = 1;
+						while (((iY + adder) < _oBoard.getHeight()) && ((iX - adder) >= 0))
+						{
+							if (_tmpDiff[iY + adder][iX - adder] != eStatesDiff.BLOCKED && _tmpDiff[iY + adder][iX - adder] != eStatesDiff.ISSTAR)
+							{
+								if (!foundEmptySpot)
+								{
+									foundSpotX = iX - adder;
+									foundSpotY = iY + adder;
+									foundEmptySpot = true;
+								}
+								else
+								{
+									foundSpotX = -1;
+									foundSpotY = -1;
+									foundEmptySpot = false;
+									break;
+								}
+							}
+							adder++;
+						}
+					}
+					else if (oField.getState() == eStates.ARROW_SE)
+					{
+						adder = 1;
+						while (((iY + adder) < _oBoard.getHeight()) && ((iX + adder) < _oBoard.getWidth()))
+						{
+							if (_tmpDiff[iY + adder][iX + adder] != eStatesDiff.BLOCKED && _tmpDiff[iY + adder][iX + adder] != eStatesDiff.ISSTAR)
+							{
+								if (!foundEmptySpot)
+								{
+									foundSpotX = iX + adder;
+									foundSpotY = iY + adder;
+									foundEmptySpot = true;
+								}
+								else
+								{
+									foundSpotX = -1;
+									foundSpotY = -1;
+									foundEmptySpot = false;
+									break;
+								}
+							}
+							adder++;
+						}
+					}
+					else if (oField.getState() == eStates.ARROW_NW)
+					{
+						adder = 1;
+						while (((iY - adder) >= 0) && ((iX - adder) >= 0))
+						{
+							if (_tmpDiff[iY - adder][iX - adder] != eStatesDiff.BLOCKED && _tmpDiff[iY - adder][iX - adder] != eStatesDiff.ISSTAR)
+							{
+								if (!foundEmptySpot)
+								{
+									foundSpotX = iX - adder;
+									foundSpotY = iY - adder;
+									foundEmptySpot = true;
+								}
+								else
+								{
+									foundSpotX = -1;
+									foundSpotY = -1;
+									foundEmptySpot = false;
+									break;
+								}
+							}
+							adder++;
+						}
+					}
+					else if (oField.getState() == eStates.ARROW_NE)
+					{
+						adder = 1;
+						while (((iY - adder) >= 0) && ((iX + adder) < _oBoard.getWidth()))
+						{
+							if (_tmpDiff[iY - adder][iX + adder] != eStatesDiff.BLOCKED && _tmpDiff[iY - adder][iX + adder] != eStatesDiff.ISSTAR)
+							{
+								if (!foundEmptySpot)
+								{
+									foundSpotX = iX + adder;
+									foundSpotY = iY - adder;
+									foundEmptySpot = true;
+								}
+								else
+								{
+									foundSpotX = -1;
+									foundSpotY = -1;
+									foundEmptySpot = false;
+									break;
+								}
+							}
+							adder++;
+						}
+					}
+					
+					if (foundEmptySpot)
+					{
+						boolean tmpChanged = updateTmpFields(foundSpotY, foundSpotX, eStatesDiff.ISSTAR);
+						if (!hasChanged)
+						{
+							hasChanged = tmpChanged;
+						}
+						
+						foundSpotX = -1;
+						foundSpotY = -1;
+					}
+				}
+			}
+			
 			if (doHardSearch)
 			{
 				boolean upCheckDone = false;
 				boolean downCheckDone = false;
-				boolean foundEmptySpot = false;
-				int foundSpotX = -1;
-				int foundSpotY = -1;
+				foundEmptySpot = false;
+				foundSpotX = -1;
+				foundSpotY = -1;
 				
 				for (int iX = 0; iX < _oBoard.getWidth(); iX++) 
 				{
@@ -203,8 +330,12 @@ public class CheckEditorBoardDifficulty
 								
 								if (foundEmptySpot)
 								{
-									_tmpDiff[foundSpotY][foundSpotX] = eStatesDiff.ISSTAR;
-									hasChanged = true;
+									boolean tmpChanged = updateTmpFields(foundSpotY, foundSpotX, eStatesDiff.ISSTAR);
+									if (!hasChanged)
+									{
+										hasChanged = tmpChanged;
+									}
+									
 									foundSpotX = -1;
 									foundSpotY = -1;
 								}
@@ -243,8 +374,12 @@ public class CheckEditorBoardDifficulty
 								
 								if (foundEmptySpot)
 								{
-									_tmpDiff[foundSpotY][foundSpotX] = eStatesDiff.ISSTAR;
-									hasChanged = true;
+									boolean tmpChanged = updateTmpFields(foundSpotY, foundSpotX, eStatesDiff.ISSTAR);
+									if (!hasChanged)
+									{
+										hasChanged = tmpChanged;
+									}
+									
 									foundSpotX = -1;
 									foundSpotY = -1;
 								}
@@ -294,8 +429,12 @@ public class CheckEditorBoardDifficulty
 								
 								if (foundEmptySpot)
 								{
-									_tmpDiff[foundSpotY][foundSpotX] = eStatesDiff.ISSTAR;
-									hasChanged = true;
+									boolean tmpChanged = updateTmpFields(foundSpotY, foundSpotX, eStatesDiff.ISSTAR);
+									if (!hasChanged)
+									{
+										hasChanged = tmpChanged;
+									}
+									
 									foundSpotX = -1;
 									foundSpotY = -1;
 								}
@@ -334,8 +473,12 @@ public class CheckEditorBoardDifficulty
 								
 								if (foundEmptySpot)
 								{
-									_tmpDiff[foundSpotY][foundSpotX] = eStatesDiff.ISSTAR;
-									hasChanged = true;
+									boolean tmpChanged = updateTmpFields(foundSpotY, foundSpotX, eStatesDiff.ISSTAR);
+									if (!hasChanged)
+									{
+										hasChanged = tmpChanged;
+									}
+									
 									foundSpotX = -1;
 									foundSpotY = -1;
 								}
@@ -345,6 +488,12 @@ public class CheckEditorBoardDifficulty
 					}
 					
 					
+				}
+				
+				boolean tmpChanged = blockSpecialAlgorigthm();
+				if (!hasChanged)
+				{
+					hasChanged = tmpChanged;
 				}
 			}
 
@@ -492,6 +641,155 @@ public class CheckEditorBoardDifficulty
 		return false;
 	}
 	
+	
+	private boolean blockSpecialAlgorigthm()
+	{
+		boolean hasChanged = false;
+		boolean containsUpwardArrow = false;
+		boolean containsDownwardArrow = false;
+		
+		for (int iX = 0; iX < _oBoard.getWidth(); iX++) 
+		{
+			System.out.println("1");
+			int columnStars = getCalculatedColumnStars(iX, true);
+			if (1 == columnStars)
+			{
+				containsUpwardArrow = false;
+				containsDownwardArrow = false;
+				for (int iY = 0; iY < _oBoard.getHeight(); iY++) 
+				{
+					System.out.println("2");
+					Field oField = _oBoard.getField(iY, iX);
+					if (oField.getState() == eStates.ARROW_N)
+					{
+						containsDownwardArrow = true;
+					}
+					
+					if (oField.getState() == eStates.ARROW_S)
+					{
+						containsUpwardArrow = true;
+					}
+				}
+				
+				if (containsUpwardArrow)
+				{
+					// collect Fields that are Pointed by Arrow
+					for (int iY = _oBoard.getHeight() -1; iY >= 0; iY--)
+					{
+						System.out.println("3");
+						Field oField = _oBoard.getField(iY, iX);
+						if (oField.getState() == eStates.ARROW_S)
+						{
+							for (int iY2 = iY; iY2 >= 0; iY2--) 
+							{
+								System.out.println("4");
+								boolean tmpChanged = updateTmpFields(iY2, iX, eStatesDiff.BLOCKED);
+								if (!hasChanged)
+								{
+									hasChanged = tmpChanged;
+								}
+								
+							}
+							break;
+						}
+					}
+				}
+				
+				if (containsDownwardArrow)
+				{
+					// collect Fields that are Pointed by Arrow
+					for (int iY = 0; iY < _oBoard.getHeight(); iY++)
+					{
+						System.out.println("5");
+						Field oField = _oBoard.getField(iY, iX);
+						if (oField.getState() == eStates.ARROW_N)
+						{
+							for (int iY2 = iY; iY2 < _oBoard.getHeight(); iY2++) 
+							{
+								System.out.println("6");
+								boolean tmpChanged = updateTmpFields(iY2, iX, eStatesDiff.BLOCKED);
+								if (!hasChanged)
+								{
+									hasChanged = tmpChanged;
+								}
+								
+							}
+							break;
+						}
+					}
+				}
+			}
+		}
+		
+		for (int iY = 0; iY < _oBoard.getHeight(); iY++) 
+		{
+			int rowStars = getCalculatedColumnStars(iY, true);
+			if (1 == rowStars)
+			{
+				containsUpwardArrow = false;
+				containsDownwardArrow = false;
+				for (int iX = 0; iX < _oBoard.getWidth(); iX++) 
+				{
+					Field oField = _oBoard.getField(iY, iX);
+					if (oField.getState() == eStates.ARROW_W)
+					{
+						containsDownwardArrow = true;
+					}
+					
+					if (oField.getState() == eStates.ARROW_E)
+					{
+						containsUpwardArrow = true;
+					}
+				}
+				
+				if (containsUpwardArrow)
+				{
+					// collect Fields that are Pointed by Arrow
+					for (int iX = _oBoard.getWidth() -1; iX >= 0; iX--)
+					{
+						Field oField = _oBoard.getField(iY, iX);
+						if (oField.getState() == eStates.ARROW_E)
+						{
+							for (int iX2 = iX; iX2 >= 0; iX2--) 
+							{
+								boolean tmpChanged = updateTmpFields(iY, iX2, eStatesDiff.BLOCKED);
+								if (!hasChanged)
+								{
+									hasChanged = tmpChanged;
+								}
+								
+							}
+							break;
+						}
+					}
+				}
+				
+				if (containsDownwardArrow)
+				{
+					// collect Fields that are Pointed by Arrow
+					for (int iX = 0; iX < _oBoard.getWidth(); iX++)
+					{
+						Field oField = _oBoard.getField(iY, iX);
+						if (oField.getState() == eStates.ARROW_W)
+						{
+							for (int iX2 = iX; iX2 < _oBoard.getHeight(); iX2++) 
+							{
+								boolean tmpChanged = updateTmpFields(iY, iX2, eStatesDiff.BLOCKED);
+								if (!hasChanged)
+								{
+									hasChanged = tmpChanged;
+								}
+								
+							}
+							break;
+						}
+					}
+				}
+			}
+		}
+		
+		return hasChanged;
+	}
 	
 	public boolean isSolved()
 	{
