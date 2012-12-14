@@ -13,17 +13,22 @@ import javax.swing.JLabel;
 // Klasse beinhaltet Info-Fenster (Versionsangabe, Programmierer, Auftraggeber)
 
 /**
+ * Klasse beschreibt einen Info Dialog
+ * Enthällt Informationen über das Spiel
  * 
- * @author Eren, Fabian, Mats
+ * @author Eren, Fabian, Mats, Andreas, Daniel, Anatoli
  * @version 0.1
  *
  */
-
 public class InfoDialog {
 
 	JFrame frame;
 	JLabel backGroundImage;
 
+	/**
+	 * Konstruktor
+	 *
+	 */
 	public InfoDialog() {
 		// Frameeinstellungen 
 		frame = new JFrame ("Sternenpuzzle - Info");
@@ -49,7 +54,11 @@ public class InfoDialog {
 		}
 	    frame.setIconImage(image);
 	}
-
+	
+	/**
+	 * 
+	 * @param image
+	 */
 	private void setIconImage(BufferedImage image) {
 		// TODO Auto-generated method stub
 		

@@ -10,8 +10,9 @@ import java.awt.event.MouseListener;
 import logic.GameBoard;
 
 /**
+ * Klasse definiert das Board im Spielmodus
  * 
- * @author Andreas
+ * @author Andreas, Fabian, Eren, Mats, Anatoli, Daniel
  * @version 0.1
  *
  */
@@ -20,12 +21,12 @@ public class GuiElementGameBoard extends GuiElementBoard
 {
 
 	/**
+	 * Konstruktor
 	 * 
-	 * @param int rows
-	 * @param int cols
+	 * @param int rows - Zeile
+	 * @param int cols - Spalte
 	 * 
 	 */
-	
 	public GuiElementGameBoard(int rows, int cols) 
 	{
 		super(rows, cols);
@@ -49,10 +50,11 @@ public class GuiElementGameBoard extends GuiElementBoard
 	}
 	
 	/**
+	 * Funktion ermittelt ein Feld aus dem Spielmodus-Board
 	 * 
-	 * @param int posY
-	 * @param int posX
-	 * @return GuiElementField
+	 * @param int posY - Koordniate Y
+	 * @param int posX - Koordinate X
+	 * @return GuiElementField - Gibt ein Feld im Board zurück
 	 * 
 	 */
 	public GuiElementGameField getField(int posY, int posX)

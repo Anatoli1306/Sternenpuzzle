@@ -17,32 +17,29 @@ import javax.swing.JPanel;
 import logic.CheckEditorBoardDifficulty;
 import logic.GameBoard;
 
-// Klasse enthällt die Reihe der rechten Buttons
-
 /**
+ * Klasse beinhaltet die rechten Buttons im Spiel
+ * Spielmodus: Marker setzen, Zurück zum Marker, Zurück zum Fehler
+ * Editiermodus: Überprüfen
  * 
- * @author Eren, Fabian, Mats
+ * @author Eren, Fabian, Mats, Andreas, Daniel, Anatoli
  * @version 0.1
  *
  */
-
 public class PlayMenuMarkerButton extends JPanel
 {
-	/**
-	 * 
-	 */
 	private PlayFrame playFrame;
 
 
 	/**
+	 * Konstruktor
 	 * 
 	 * @param PlayFrame frame
+	 * @param mode - enhällt den Namen des aktuellen Modus
 	 * 
 	 */
-
 	public PlayMenuMarkerButton(PlayFrame frame,  String mode)
 	{
-
 		playFrame = frame;
 
 		//	Dekl. Button SET ( Marker auf aktuellen Spielstand setzen )
@@ -121,7 +118,6 @@ public class PlayMenuMarkerButton extends JPanel
 							}
 						}
 					}
-
 				}
 			});        
 		}
@@ -138,11 +134,8 @@ public class PlayMenuMarkerButton extends JPanel
 					oLogicBoard.getCommandTracker().goBackToFirstFailure();
 				}
 			});
-
 		}
 		add(btnCheck);
-
-
 
 		//	Dekl. Button UNDO ( Zurück zu letztem gesetzen Marker )
 		JButton btnUndo;

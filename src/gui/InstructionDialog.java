@@ -10,11 +10,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-// Klasse beinhaltet die Anleitung (+ Tipp)
-
 /**
+ * Klasse beschreibt die Anleitung und Tipps für das Spiel
  * 
- * @author Eren, Fabian, Mats
+ * @author Eren, Fabian, Mats, Andreas, Anatoli, Daniel
  * @version 0.1
  *
  */
@@ -24,6 +23,10 @@ public class InstructionDialog {
 	JFrame frame;
 	JLabel backGroundImage;
 
+	/**
+	 * Konstruktor
+	 *
+	 */
 	public InstructionDialog() {
 		// Frameinstellungen
 		frame = new JFrame ("Sternenpuzzle - Info");

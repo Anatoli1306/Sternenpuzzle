@@ -14,7 +14,7 @@ import sun.nio.cs.ext.PCK;
 
 
 /**
- * @author Andreas
+ * @author Andreas, Fabian, Eren, Mats, Daniel, Anatoli
  *
  */
 public class GuiElementStarCounter extends JLabel
@@ -22,6 +22,11 @@ public class GuiElementStarCounter extends JLabel
 
 	private int _countStars = 0;
 	
+	/**
+	 * Konstruktor
+	 * 
+	 * @param countStars - Summer der gesetzten Sterne
+	 */
 	public GuiElementStarCounter(int countStars)
 	{
 		setText(Integer.toString(countStars));
@@ -33,6 +38,11 @@ public class GuiElementStarCounter extends JLabel
 		setStars(countStars);
 	}
 	
+	/**
+	 * Funktion beschreibt das setzen einen Sterns
+	 * 
+	 * @param countStars - Summer der gesetzten Sterne
+	 */
 	public void setStars(int countStars)
 	{
 		if (_countStars != countStars)
@@ -47,7 +57,7 @@ public class GuiElementStarCounter extends JLabel
 	
 	
 	/**
-	 * find optimal font size
+	 * Funktion ermittelt die optimale Größe
 	 */
 	
 	public void setFontSize()

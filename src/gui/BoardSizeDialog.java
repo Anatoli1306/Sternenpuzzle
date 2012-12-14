@@ -10,12 +10,12 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 /**
+ * Klasse beschreibt den BoardSizeDialog, indem bestimmt wird wie groß ein Spielfeld erstellt werden soll.
  * 
- * @author Fabian, Anatoli, Eren
+ * @author Fabian, Anatoli, Eren, Mats, Daniel, Andreas
  * @version 0.1
  *
  */
-
 public class BoardSizeDialog extends JFrame{ 
 
 	private
@@ -23,15 +23,22 @@ public class BoardSizeDialog extends JFrame{
 	int zeile;
 	int spalte;
 
+	/**
+	 * Konstruktor
+	 * 
+	 * @param playFrame
+	 */
 	public BoardSizeDialog(final PlayFrame playFrame){
 		
+		// Hier wird ein Frame erstellt
 		final JFrame frame = new JFrame("Spielfeldgröße"); // Erstellung Frame
 		frame.setLayout(null);
 		frame.setSize(230, 150);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-
+		
+		//Hier wird ein Label erstellt
 		JLabel background = new JLabel(new ImageIcon(getClass().getResource("/resources/boardSizeDialogBackground.png")));
 		background.setLayout(null);
 		background.setOpaque(false);
@@ -43,6 +50,7 @@ public class BoardSizeDialog extends JFrame{
 		label.setForeground(Color.WHITE);
 		label.setBounds(20, 5, 280, 25);
 
+		//Hier wird ein Label erstellt
 		JLabel x = new JLabel(); // Zeilen
 		x.setText("<html><p/><p/>Zeilen: <p/><p/></html>"); 
 		x.setForeground(Color.WHITE);
@@ -55,6 +63,7 @@ public class BoardSizeDialog extends JFrame{
 		rows.setText("10"); // Standarttext auf "10"
 		rows.setBounds(70, 40, 20, 20);
 
+		// Hier wird ein Label erstellt
 		JLabel y = new JLabel(); // Spalten
 		y.setText("<html><p/><p/>Spalten: <p/><p/></html>");
 		y.setForeground(Color.WHITE);
@@ -65,13 +74,14 @@ public class BoardSizeDialog extends JFrame{
 		cols.setText("10"); // Standarttext auf "10"
 		cols.setBounds(175, 40, 20, 20);
 		
-
+		// Hier wird der Button "ok" erstellt
 		JButton ok = new JButton("OK"); // Button "OK"
 		ok.setBounds(80, 80, 70, 30);
 		ok.setBorder(null);
 
 		ok.addActionListener(new ActionListener(){
-
+			
+			// Diese Aktion wird aufgerufen durch den Klick auf den Button "ok"
 			public void actionPerformed(ActionEvent arg0)
 			{	
 				zeile = new Integer(rows.getText()); // einlesen Reihen
@@ -106,7 +116,6 @@ public class BoardSizeDialog extends JFrame{
 		frame.getContentPane().add(ok);
 		frame.getContentPane().add(background); 
 		frame.setAlwaysOnTop(true);
-
 		frame.repaint();
 	}
 }

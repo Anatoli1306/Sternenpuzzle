@@ -12,19 +12,20 @@ import java.awt.event.MouseListener;
 import logic.EditorBoard;
 
 /**
+ * Klasse definiert das Boar im Editor Modus
  * 
- * @author Andreas
+ * @author Andreas, Fabian, Eren, Mats, Daniel, Anatoli
  * @version 0.1
  *
  */
-
 public class GuiElementEditorBoard extends GuiElementBoard 
 {
 
 	/**
+	 * Konstruktor
 	 * 
-	 * @param int rows
-	 * @param int cols
+	 * @param int rows - Zeile
+	 * @param int cols - Spalte
 	 */
 	public GuiElementEditorBoard(int rows, int cols) 
 	{
@@ -52,15 +53,17 @@ public class GuiElementEditorBoard extends GuiElementBoard
 
 	
 	/**
+	 * Klasse definiert das Verhalten, wenn auf eine Taste geklickt wurde
 	 * 
-	 * @author Andreas
+	 * @author Andreas, Fabian, Mats, Eren, Daniel, Anatoli
 	 *
 	 */
-	
 	protected class onKeyPressed implements KeyListener
 	{
 
-		
+		/**
+		 * Funktion definiert alle Möglichkeiten die in ein Feld gesetzt werden können
+		 */
 		public void keyPressed(KeyEvent arg0) 
 		{
 			GuiElementField oGuiElementField = (GuiElementField)arg0.getSource();
@@ -104,12 +107,16 @@ public class GuiElementEditorBoard extends GuiElementBoard
 			}
 		}
 
-		
+		/**
+		 * Funktion definiert das Verhalten nach loslassen einer Taste
+		 */
 		public void keyReleased(KeyEvent arg0) 
 		{
 		}
 
-		
+		/**
+		 * Funktion definiert das Verhalten nach Tastaturkommandos
+		 */
 		public void keyTyped(KeyEvent arg0) 
 		{
 		}

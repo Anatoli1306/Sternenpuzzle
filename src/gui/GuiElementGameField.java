@@ -7,18 +7,18 @@ import logic.GameField;
 import gui.GuiElementField.eStates;
 
 /**
+ * Klasse definiert ein Feld vom Boar im EditierModus
  * 
- * @author Andreas
+ * @author Andreas, Fabian, Mats, Eren, Anatoli, Daniel
  * @version 0.1
  *
  */
-
 public class GuiElementGameField  extends GuiElementField 
 {
 	protected boolean _isStar = false;
 	
 	/**
-	 * 
+	 * Konstruktor
 	 */
 	public GuiElementGameField(GuiElementBoard oBoard) 
 	{
@@ -33,10 +33,10 @@ public class GuiElementGameField  extends GuiElementField
 	
 	
 	/**
+	 * Setzt einen Stern
 	 * 
-	 * @param star
+	 * @param star - Enthällt einen Stern
 	 */
-	
 	public void setIsStarField(boolean star)
 	{
 		_isStar = star;
@@ -44,7 +44,11 @@ public class GuiElementGameField  extends GuiElementField
 		oGameField.setIsStarField(star);
 	}
 	
-	
+	/**
+	 * Funktion überprüft ob ein Stern im Feld gesetzt ist
+	 * 
+	 * @return _isStar - boolean der einen Wahrheitswert zurück gibt ob im Feld ein Stern ist
+	 */
 	public boolean isStarField()
 	{
 		return _isStar;

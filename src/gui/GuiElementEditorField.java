@@ -6,17 +6,19 @@ package gui;
 import gui.GuiElementField.eStates;
 
 /**
+ * Klasse definiert ein Feld im Editor Modus
  * 
- * @author Andreas
+ * @author Andreas, Fabian, Mats, Eren, Anatoli, Daniel
  * @version 0.1
  *
  */
-
 public class GuiElementEditorField extends GuiElementField 
 {
 
 	/**
+	 * Konstruktor
 	 * 
+	 * @param oBoard - Enthällt das Board
 	 */
 	public GuiElementEditorField(GuiElementBoard oBoard) 
 	{
@@ -30,8 +32,9 @@ public class GuiElementEditorField extends GuiElementField
 	}
 	
 	/**
+	 * Funktion setzt den Status
 	 * 
-	 * @param eStates state
+	 * @param eStates state - Status
 	 */
 	public void setState(eStates state)
 	{
