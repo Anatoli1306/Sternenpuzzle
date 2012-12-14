@@ -506,10 +506,13 @@ public class CheckEditorBoardDifficulty
 					
 				}
 				
-				boolean tmpChanged = blockSpecialAlgorigthm();
 				if (!hasChanged)
 				{
-					hasChanged = tmpChanged;
+					boolean tmpChanged = blockSpecialAlgorigthm();
+					if (!hasChanged)
+					{
+						hasChanged = tmpChanged;
+					}
 				}
 			}
 
@@ -525,7 +528,7 @@ public class CheckEditorBoardDifficulty
 			}
 			
 			if (!isSolved && doMediumSearch && !doHardSearch &&
-				 (counter > 4 || !hasChanged))
+				 (counter > 5 || !hasChanged))
 			{
 				// its medium
 				doHardSearch = true;
@@ -537,7 +540,7 @@ public class CheckEditorBoardDifficulty
 		{
 			return BOARD_DIFFICULTY_EASY;
 		}
-		else if(isSolved && counter < 4 && !doHardSearch)
+		else if(isSolved && counter < 6)
 		{
 			return BOARD_DIFFICULTY_MEDIUM;
 		}
