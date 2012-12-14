@@ -249,15 +249,22 @@ class PlayMenuBar extends MenuBar
 		//Ansicht Spielmodus
 		MenuItem spielmodus = new MenuItem("Spielmodus");
 		spielmodus.addActionListener(new ActionListener(){
-			
+			int temp;	
 			
 			public void actionPerformed(ActionEvent arg0) 
 			{
-            	QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
+			
+				if(PlayFrame._oPlayFrame._oBoard.getCols() == 0 && PlayFrame._oPlayFrame._oBoard.getRows() == 0 || PlayFrame._oPlayFrame._oBoard.isHasChanged() == false){temp = 1;}
+				else{
+					QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
             	
-            	if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
+					if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
             		playFrame.drawGameBoard(0,0);          	
-            	}
+					}
+				}
+				if(temp == 1) {
+					playFrame.drawGameBoard(0,0);
+				}
 			}	
 			
 		});
@@ -265,15 +272,21 @@ class PlayMenuBar extends MenuBar
 		//Ansicht Editiermodus
 		MenuItem editiermodus = new MenuItem("Editiermodus");
 		editiermodus.addActionListener(new ActionListener(){
-			
+		int temp;
 			
 			public void actionPerformed(ActionEvent arg0) 
 			{
-            	QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
+				if(PlayFrame._oPlayFrame._oBoard.getCols() == 0 && PlayFrame._oPlayFrame._oBoard.getRows() == 0 || PlayFrame._oPlayFrame._oBoard.isHasChanged() == false){temp = 1;}
+				else{
+					QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
 
-            	if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
-            		playFrame.drawEditorBoard(0,0);          	
-            	}
+					if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
+						playFrame.drawEditorBoard(0,0);          	
+					}
+				}
+				if(temp == 1){
+					playFrame.drawEditorBoard(0,0); 
+				}
 			}	
 			
 		});
