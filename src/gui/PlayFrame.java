@@ -12,23 +12,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 
-// Klasse beinhaltet das Layout
-
-
 /**
- * 
- * @author Eren, Fabian
+ * Klasse beinhaltet das Layout des Spiel- und Editorfensters
+ * @author Andreas, Mats, Daniel, Eren, Fabian, Anatoli
  * @version 0.1
  *
  */
-
 public class PlayFrame extends JFrame
 {	
 	static public PlayFrame _oPlayFrame = null;
 	
 	public GuiElementBoard _oBoard = null;
 	/**
-	 * 
+	 * Konstruktor
 	 */
 	public PlayFrame()
 	{
@@ -123,12 +119,6 @@ public class PlayFrame extends JFrame
 		validate();
 		this.refreshWindow();
 	}
-	
-	
-	
-	
-	
-	
 	/**
 	 * 
 	 * little helper methode to calculate left position of board
@@ -193,7 +183,6 @@ public class PlayFrame extends JFrame
         backImgPanel.setOpaque(false);
         add(backImgPanel);
         backImgPanel.setBounds(0,0,1280,1024);
-		//setExtendedState(MAXIMIZED_BOTH);  
     	setVisible(true);
     	validate();
     	

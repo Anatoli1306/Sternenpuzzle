@@ -1,10 +1,13 @@
 package gui;
 
 import javax.swing.JOptionPane;
-
+/**
+ * Dialogfeld für Speicheranfrage 
+ * @author Andreas, Mats, Daniel, Eren, Fabian, Anatoli
+ */
 public class QuestionToSaveDialog {
 	
-	private boolean yes_no_answer = false;
+	private boolean yes_no_answer = false; 
 	private boolean save_is_cancel = false;
 	
 	public boolean isYes_no_answer() {
@@ -17,10 +20,6 @@ public class QuestionToSaveDialog {
 
 	public QuestionToSaveDialog()
 	{		
-		
-	
-	//System.out.print(oBoard);	
-		
 	    // Auswahldialog
 		String[] options = {
 			      "Ja", "Nein", "Abbrechen"};

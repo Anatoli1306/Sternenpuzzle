@@ -21,20 +21,25 @@ import logic.Board;
 import logic.EditorBoard;
 
 /**
- * 
- * @author Eren, Fabian, Anatoli
+ * Klasse für "Speichern unter"
+ * @author Andreas, Mats, Daniel, Eren, Fabian, Anatoli
  * @version 0.1
  *
  */
-
 public class SaveAsDialog extends JFrame {
 
 	private boolean cancel = false;
-
+	/**
+	 *Konstruktor 
+	 */
 	public SaveAsDialog() {
 		saveAs(null);
 	}
-
+	/**
+	 * Methode Speichern unter
+	 * @param pfad
+	 * @return boolean
+	 */
 	boolean saveAs(String pfad) {
 		JFileChooser chooser;
 		
@@ -82,7 +87,6 @@ public class SaveAsDialog extends JFrame {
 			file = new File(pfad);
 			if (markUpFilter.accept(file))
 			{
-				//Board oBoard = PlayFrame._oPlayFrame._oBoard.getLogicBoard();
 				Board oBoard = PlayFrame._oPlayFrame._oBoard.getLogicBoard();
 				if (oBoard instanceof EditorBoard)
 				{

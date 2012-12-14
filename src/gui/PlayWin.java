@@ -14,59 +14,36 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.text.StyledEditorKit.FontSizeAction;
-
+/**
+ * Erscheint, wenn das Spiel gewonnen wurde
+ * @author Andreas, Mats, Daniel, Eren, Fabian, Anatoli
+ */
 public class PlayWin {
 	
 	public PlayWin(){
 		
-		final JFrame frame = new JFrame("Gewonnen!!");
-		frame.setLocationRelativeTo(null);
+		final JFrame frame = new JFrame("Gewonnen!!"); //Fenster
+		frame.setLocationRelativeTo(null); 
 		frame.setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//frame.setSize(400,500);
 		frame.setBounds(400, 225 , 400, 350);
 		frame.setResizable(false);
 		frame.setVisible(true);
 		
-		JLabel background = new JLabel(new ImageIcon(getClass().getResource("/resources/Gangnam.gif")));
-		
-		//JPanel panel = new JPanel();
-		//panel.add(new JLabel(new ImageIcon(getClass().getResource("/resources/Gangnam.gif"))));
-		
-		
-		
+		JLabel background = new JLabel(new ImageIcon(getClass().getResource("/resources/Gangnam.gif"))); //Hintergrundanimation
 		background.setLayout(null);
 		background.setOpaque(false);
 		background.setBounds(0,0,400,300);
-		
-		//panel.add(background);
-		
-		
-		JLabel label = new JLabel();
+				
+		JLabel label = new JLabel("Glückwunsch! Sie haben gewonnen!"); //Label mit Text
 		label.setLocation(90, 90);
 		label.setSize(380, 20);
 		label.setBounds(45, 250, 380, 30);
-		label.setText("Glückwunsch! Sie haben gewonnen!");
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Dialog", 0, 18));
+		label.setForeground(Color.WHITE); // Schriftfarbe auf weis setzen
+		label.setFont(new Font("Dialog", 0, 18)); // Schriftgröße auf 18
 		
 		
-		
-	/*	JButton btn = new JButton("OK");
-		btn.setBounds(30, 90, 7, 75);
-		btn.setBorder(null);
-		
-		btn.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent arg0)
-			{						
-				PlayNewGame png = new PlayNewGame();
-				frame.dispose();
-					
-			}
-		});*/
-		
-		JButton laden = new JButton("Laden");
+		JButton laden = new JButton("Laden"); // Laden-Button
 		laden.setBounds(0, 290, 200, 30);
 		laden.setBorder(null);
 		
@@ -74,12 +51,12 @@ public class PlayWin {
 
 			public void actionPerformed(ActionEvent arg0)
 			{						
-				frame.dispose();
-				LoadDialog ld = new LoadDialog();
+				frame.dispose(); //Fenster Schlißen
+				LoadDialog ld = new LoadDialog(); //Ladefenster öffenen
 			}
 		});
 		
-		JButton ende = new JButton("Weiter");
+		JButton ende = new JButton("Weiter"); // Weiter-Button
 		ende.setBounds(200, 290, 200, 30);
 		ende.setBorder(null);
 		
@@ -87,10 +64,10 @@ public class PlayWin {
 
 			public void actionPerformed(ActionEvent arg0)
 			{						
-				frame.dispose();				
+				frame.dispose(); //Fenster schließen		
 			}
 		});
-		
+		//Components ans Frame binden
 		frame.getContentPane().add(label);
 		frame.getContentPane().add(background);
 		frame.getContentPane().add(laden);

@@ -11,11 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
-// Klasse enthällt die Reihe der oberen Buttons
-
 /**
- * 
- * @author Eren, Fabian
+ * Klasse enthällt die Reihe der oberen Buttons
+ * @author Andreas, Mats, Daniel, Eren, Fabian, Anatoli
  * @version 0.1
  *
  */
@@ -40,22 +38,28 @@ public class PlayMenuModeButton extends JPanel
 	public void setBtnEditModeVisible(Boolean v){
 		btnEditMode.setVisible(v);
 	}
-	
+	/**
+	 * Konstruktor
+	 * @param frame
+	 * @param mode
+	 */
 	public PlayMenuModeButton(final PlayFrame frame, String mode)
 	{
 			
-		frame.getContentPane().setBackground(Color.white);
+		frame.getContentPane().setBackground(Color.white); //Hintergrund weis machen
 		
-		btnGameMode = new JButton(new ImageIcon(getClass().getResource("/resources/gameMode.png")));
-		btnEditMode = new JButton(new ImageIcon(getClass().getResource("/resources/editMode.png")));
+		btnGameMode = new JButton(new ImageIcon(getClass().getResource("/resources/gameMode.png"))); //Modus-Button
+		btnEditMode = new JButton(new ImageIcon(getClass().getResource("/resources/editMode.png"))); //Modus-Button
 		
 		if ("Editor" == mode)
 		{
-			btnGameMode.setVisible(true);
+			//Editor-Buttons setzen
+			btnGameMode.setVisible(true); 
 			btnEditMode.setVisible(false);
 		}
 		else
 		{
+			//Game-Buttons setzen
 			btnGameMode.setVisible(false);
 			btnEditMode.setVisible(true);
 		}
@@ -63,11 +67,11 @@ public class PlayMenuModeButton extends JPanel
 		
 		btnGameMode.setAlignmentX(LEFT_ALIGNMENT);
 		btnGameMode.setContentAreaFilled(false);
-		btnGameMode.setToolTipText("Starte den Spielmodus");
+		btnGameMode.setToolTipText("Spielmodus starten");
 		btnGameMode.setBorder(null);
 		
 		btnGameMode.addActionListener(new ActionListener() {
-        	 
+        	//Spielmodus öffnen
 			public void actionPerformed(ActionEvent e)
             {	
 				int temp = 0;
@@ -94,11 +98,11 @@ public class PlayMenuModeButton extends JPanel
 		
 		btnEditMode.setAlignmentX(LEFT_ALIGNMENT);
 		btnEditMode.setContentAreaFilled(false);
-		btnEditMode.setToolTipText("Starte den Editormodus");
+		btnEditMode.setToolTipText("Editormodus starten");
 		btnEditMode.setBorder(null);
 		
 		btnEditMode.addActionListener(new ActionListener() {
-        	 
+        	// Editormodus öffnen
 			public void actionPerformed(ActionEvent e)
             {
 				int temp = 0;
@@ -120,9 +124,6 @@ public class PlayMenuModeButton extends JPanel
             }
         });           
 		add(btnEditMode);		
-	}
-	
-	
-	
+	}	
 }
 

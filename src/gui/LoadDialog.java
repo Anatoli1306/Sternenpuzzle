@@ -13,17 +13,17 @@ import logic.Board;
 import logic.EditorBoard;
 import logic.GameBoard;
 
-// Klasse beinhaltet Laden-Fenster
-
 /**
- * 
- * @author Eren, Fabian
+ * Klasse beinhaltet Laden-Fenster
+ * @author Andreas, Mats, Daniel, Eren, Fabian, Anatoli
  * @version 0.1
- *
  */
 
 public class LoadDialog
 {
+	/**
+	 * Konstruktor
+	 */
 	public LoadDialog()
 	{
 		// Dateipfad auswählen
@@ -51,7 +51,6 @@ public class LoadDialog
 			}
 		}
 
-
 		// File auswählen
 		JFileChooser chooser = new JFileChooser(pfad);
 
@@ -70,13 +69,11 @@ public class LoadDialog
 		int state = chooser.showOpenDialog( null );
 		if ( state == JFileChooser.APPROVE_OPTION )
 		{
-
 			File file = chooser.getSelectedFile();
 
 			Board oBoard = PlayFrame._oPlayFrame._oBoard.getLogicBoard();
 			if (oBoard instanceof EditorBoard)
 			{
-
 				GuiElementBoard oGuiBoard = EditorBoard.loadEdit(chooser.getSelectedFile().getAbsolutePath());
 				PlayFrame._oPlayFrame.drawLoadedBoard(oGuiBoard);
 				PlayFrame.refreshWindow();
@@ -85,7 +82,6 @@ public class LoadDialog
 			{
 				if (oBoard instanceof GameBoard)
 				{
-
 					GuiElementBoard oGameBoard = GameBoard.load(chooser.getSelectedFile().getAbsolutePath());
 					if (oGameBoard instanceof GuiElementBoard)
 					{
@@ -97,8 +93,6 @@ public class LoadDialog
 					}
 				}
 			}
-
 		}
-
 	}
 }

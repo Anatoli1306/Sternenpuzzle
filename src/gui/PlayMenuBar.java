@@ -16,11 +16,9 @@ import javax.swing.JOptionPane;
 import logic.CheckEditorBoardDifficulty;
 import logic.GameBoard;
 
-// Klasse enthält die Menüleiste
-
 /**
- * 
- * @author Eren, Fabian
+ * Klasse enthält die Menüleiste
+ * @author Andreas, Mats, Daniel, Eren, Fabian, Anatoli
  * @version 0.1
  *
  */
@@ -54,7 +52,6 @@ class PlayMenuBar extends MenuBar
 		MenuItem neu = new MenuItem("Neu");
 		neu.addActionListener(new ActionListener(){
 			
-			
 			public void actionPerformed(ActionEvent arg0)
 			{	
 				int temp = 0;
@@ -63,14 +60,13 @@ class PlayMenuBar extends MenuBar
 					QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
 
 					if(questionToSaveDialog.isYes_no_answer() && questionToSaveDialog.isSave_is_cancel() == false){
-						BoardSizeDialog boardSizeDialog = new BoardSizeDialog(playFrame);									
+						BoardSizeDialog boardSizeDialog = new BoardSizeDialog(playFrame);	//Fenster für Feldgröße öffnen								
 					}
 				}
 				if(temp == 1){
-					BoardSizeDialog boardSizeDialog = new BoardSizeDialog(playFrame);
+					BoardSizeDialog boardSizeDialog = new BoardSizeDialog(playFrame); //Fenster für Feldgröße öffnen
 				}
-			}
-			
+			}		
 		});
 		
 		//Datei Laden
@@ -112,7 +108,7 @@ class PlayMenuBar extends MenuBar
 			
 			public void actionPerformed(ActionEvent arg0) 
 			{	
-				SaveAsDialog saveDialog = new SaveAsDialog();
+				SaveDialog saveDialog = new SaveDialog();
 			}
 			
 		});

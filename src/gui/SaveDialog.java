@@ -14,15 +14,25 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import logic.Board;
 import logic.EditorBoard;
-
+/**
+ * Klasse zum Speichern des Spiels bzw. des Entwurfs
+ *  @author Andreas, Mats, Daniel, Fabian, Anatoli, Eren
+ *  @version 0.1
+ */
 public class SaveDialog extends JFrame {
-
+	/**
+	 * Konstruktor
+	 */
 	public SaveDialog() {
 		save(null);
 	}
-
+	/**
+	 * Speichervorgang
+	 * @param pfad
+	 * @return boolean 
+	 */ 
 	boolean save(String pfad) {
-	
+		//Initialisierung der Datei
 		FileInputStream fis = null;
 
 		try {
@@ -34,7 +44,7 @@ public class SaveDialog extends JFrame {
 		catch(ClassNotFoundException e){System.err.println(e);}
 		finally { try { fis.close(); } catch ( Exception e ) { } }
 
-
+		//Pfad vorgbelegen
 		if (pfad == null){
 			pfad = System.getProperty("user.home");
 			pfad = pfad + "\\Sternenhimmel-Puzzle";
@@ -46,11 +56,13 @@ public class SaveDialog extends JFrame {
 		}
 
 		Board oBoard = PlayFrame._oPlayFrame._oBoard.getLogicBoard();
+		//Editor speichern
 		if (oBoard instanceof EditorBoard)
 		{
 			oBoard.save(pfad);
 		}
 		else
+		//Game speichern
 		{
 			oBoard.save(pfad);
 		}
