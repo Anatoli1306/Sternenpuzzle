@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 
 public class EditorBoard extends Board
 {
-
+	boolean isSolvable = false;
 
 
 	/**
@@ -65,7 +65,18 @@ public class EditorBoard extends Board
 	 */
 	public void save(String filename)
 	{
-		OutputStream fos = null; 
+		OutputStream fos = null;
+		
+		CheckEditorBoardDifficulty oDiff = new CheckEditorBoardDifficulty(this);
+		String result = oDiff.checkDifficulty();
+		if (result == CheckEditorBoardDifficulty.BOARD_DIFFICULTY_NOT_SOLVABLE)
+		{
+			isSolvable = false;
+		}
+		else
+		{
+			isSolvable = true;
+		}
 		 
 		try 
 		{ 

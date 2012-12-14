@@ -16,6 +16,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 /**
@@ -129,6 +132,18 @@ public class GameBoard extends Board
 			
 			Board oBoard = (Board) o.readObject();
 			GuiElementGameBoard oGame = new GuiElementGameBoard(oBoard.getHeight(), oBoard.getWidth());
+			
+			if (oBoard instanceof EditorBoard)
+			{
+				EditorBoard tmpBoard = (EditorBoard)oBoard;
+				if (!tmpBoard.isSolvable)
+				{
+					JOptionPane.showMessageDialog(null, "Spiel ist nicht lösbar!");
+					return null;
+				}
+			}
+			
+			
 				
 			for (int x = 0; x < oGame.getCols(); x++)
 			{
@@ -152,7 +167,7 @@ public class GameBoard extends Board
 						lBoard.getCommandTracker()._blockReset = true;
 					}
 					else 
-					{		
+					{			
 						eStates asd = oBoard.getField(y, x).getState();
 						if (asd != eStates.STAR)
 						{
