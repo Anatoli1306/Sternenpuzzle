@@ -120,8 +120,11 @@ public class CommandTracker implements Serializable
 	
 	public void goBackToFirstFailure()
 	{
-		undoTillPosition(_positionOfFirstFailure - 1);
-		_positionOfFirstFailure = 0;
+		if (_positionOfFirstFailure != 0)
+		{
+			undoTillPosition(_positionOfFirstFailure - 1);
+			_positionOfFirstFailure = 0;
+		}
 	}
 	
 	

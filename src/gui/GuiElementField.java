@@ -16,6 +16,7 @@ import javax.swing.JButton;
 
 import logic.Board;
 import logic.Field;
+import logic.GameBoard;
 
 /**
  * 
@@ -123,6 +124,17 @@ abstract public class GuiElementField extends JButton
 		_currentState = state;
 		_oLogicField.setState(state);
 		setScaledImage(_eStateToResource.get(state));
+		
+		if (this instanceof GuiElementGameField)
+		{
+			GuiElementGameField tmpField = (GuiElementGameField)this;
+			if ((state == eStates.STAR && !tmpField.isStarField()) ||
+				(state == eStates.CROSS && tmpField.isStarField()))
+			{
+				GameBoard tmpBoard = (GameBoard)_oBoard.getLogicBoard();
+				tmpBoard.getCommandTracker().setFirstFailurePosition();
+			}
+		}
 	}
 	
 	/**
