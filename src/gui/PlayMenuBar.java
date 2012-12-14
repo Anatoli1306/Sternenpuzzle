@@ -108,7 +108,7 @@ class PlayMenuBar extends MenuBar
 			
 			public void actionPerformed(ActionEvent arg0) 
 			{	
-				SaveDialog saveDialog = new SaveDialog();
+				SaveAsDialog SaveAsDialog = new SaveAsDialog();
 			}
 			
 		});
