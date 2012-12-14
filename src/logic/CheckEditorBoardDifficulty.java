@@ -15,44 +15,60 @@ import gui.GuiElementField;
 import gui.GuiElementField.eStates;
 
 /**
- * @author Andreas
- *
+ * Die CheckEditorBoardDifficulty Klasse dient dazu, um die Schwirigkeit des Boards auszugeben
+ * Durch set und get Methoden können die Daten des Board gesetzt und ausgegeben werden.
+ * 
+ * @author Fabian, Mats, Eren, Daniel, Andreas, Anatoli
+ * @version 0.1
+ * 
  */
 public class CheckEditorBoardDifficulty 
 {
-	final static public String BOARD_DIFFICULTY_EASY = "einfach";
-	
-	final static public String BOARD_DIFFICULTY_MEDIUM = "mittel";
-	
-	final static public String BOARD_DIFFICULTY_HARD = "schwer";
-	
+	/**
+	 * Dekleration der Variabeln für die Klasse
+	 */
+	final static public String BOARD_DIFFICULTY_EASY = "einfach";	
+	final static public String BOARD_DIFFICULTY_MEDIUM = "mittel";	
+	final static public String BOARD_DIFFICULTY_HARD = "schwer";	
 	final static public String BOARD_DIFFICULTY_NOT_SOLVABLE = "unlösbar";
+	Board _oBoard = null;
+	eStatesDiff[][] _tmpDiff = null;
+	protected Map<Integer, HashMap<Integer, Integer>> _unsolvableStars = null;
+	
 	
 	/**
-	 *
+	 * Ein Enum wird hier deklariert
 	 */
 	public static enum eStatesDiff
 	{
 	    BLOCKED,
 	    ISSTAR,
 	}
-	
-	Board _oBoard = null;
-	
-	
-	eStatesDiff[][] _tmpDiff = null;
-	
-	protected Map<Integer, HashMap<Integer, Integer>> _unsolvableStars = null;
-	
-	
+			
 
+	/**
+	 * Konstruktor der Klasse CheckEditorBoardDifficulty
+	 * Das Editor Board wird nach der Schwirigkeit geprüft
+	 * @param Board - Hier wird das Editor Board angegeben
+	 */
 	public CheckEditorBoardDifficulty(Board oBoard)
 	{
 		_oBoard = oBoard;
 	}
 	
+	/**
+	 * Konstruktor der Klasse CheckEditorBoardDifficulty
+	 * Das Editor Board wird nach der Schwirigkeit geprüft
+	 * @return BOARD_DIFFICULTY_EASY = "einfach" - Hier wird angegeben, dass das Board die Schwirigkeit leicht hat	
+	 * @return BOARD_DIFFICULTY_MEDIUM = Hier wird angegeben, dass das Board die Schwirigkeit mittel hat	
+	 * @return BOARD_DIFFICULTY_HARD = Hier wird angegeben, dass das Board die Schwirigkeit schwer hat	
+	 * @return BOARD_DIFFICULTY_NOT_SOLVABLE = Hier wird angegeben, dass das Board die Schwirigkeit unlösbar hat	
+	 */
 	public String checkDifficulty()
 	{
+		/**
+		 * Dekleration der Variabeln für die Funktion checkDifficulty
+		 */
 		_tmpDiff = new eStatesDiff[_oBoard.getHeight()][_oBoard.getWidth()];
 		
 		boolean isSolvable = false;
@@ -791,6 +807,10 @@ public class CheckEditorBoardDifficulty
 		return hasChanged;
 	}
 	
+	/**
+	 * Gibt an ob das Board gelöst ist
+	 * @return solved - Enthält den Status ob das Editor Board gelöst ist
+	 */
 	public boolean isSolved()
 	{
 		boolean solved = true;
@@ -809,7 +829,13 @@ public class CheckEditorBoardDifficulty
 		return solved;
 	}
 	
-	
+	/**
+	 * Die temporären Felder werden hier geupdatet
+	 * @param iY - Hier wird die Positon des Feldes auf der Y Achse angegeben
+	 * @param iX - Hier wird die Positon des Feldes auf der X Achse angegeben
+	 * @param state  - Hier wird der Status des Feldes angegeben
+	 * @return boolean - Hier wird zurückgegeben ob die temporären Felder geupdatet wurden
+	 */
 	public boolean updateTmpFields(int iY, int iX, eStatesDiff state)
 	{
 		if (_tmpDiff[iY][iX] != eStatesDiff.BLOCKED &&
@@ -822,6 +848,12 @@ public class CheckEditorBoardDifficulty
 		return false;
 	}
 	
+	/**
+	 * Die Anzahl der Sterne für die Zeile werden hier zurückgegeben
+	 * @param iY - Hier wird die Positon des Feldes auf der Zeile angegeben
+	 * @param isMedium - Hier wird angegeben ob die Schwirigkeit mittel ist
+	 * @return stars - Die anzahl der ausgerechneten Sterne für die Zeile wird hier zurückgegeben
+	 */	
 	public int getCalculatedRowStars(int iY, boolean isMedium)
 	{
 		int stars = _oBoard.getCountStarsForRow(iY);
@@ -839,6 +871,12 @@ public class CheckEditorBoardDifficulty
 		return stars;
 	}
 	
+	/**
+	 * Die Anzahl der Sterne für die Spalte werden hier zurückgegeben
+	 * @param iX - Hier wird die Positon des Feldes für Die Spalte angegeben
+	 * @param isMedium - Hier wird angegeben ob die Schwirigkeit mittel ist
+	 * @return stars - Die anzahl der ausgerechneten Sterne für die Spalte wird hier zurückgegeben
+	 */	
 	public int getCalculatedColumnStars(int iX, boolean isMedium)
 	{
 		int stars = _oBoard.getCountStarsForColumn(iX);
@@ -856,6 +894,9 @@ public class CheckEditorBoardDifficulty
 		return stars;
 	}
 	
+	/**
+	 * Die Sterne die unlösbar sind werden hier in eine HashMap eingetragen
+	 */	
 	public void calculatedUnsolvableStars()
 	{
 		HashMap<Integer, Integer> unsolvableStar = null;
@@ -877,6 +918,12 @@ public class CheckEditorBoardDifficulty
 		}
 	}
 	
+	/**
+	 * Die Sterne die unlösbar sind werden hier in eine HashMap eingetragen
+	 * @param _unsolvableStars.size()- Hier wird die Anzahl der Sterne übergeben die unlösboar sind
+	 * @param unsolvableStar - Hier wird das Stern übergeben das unlösbar ist
+	 * @return _unsolvableStars - Hier werden die Sterne zürückgegben die unlösbar sind
+	 */	
 	public Map<Integer, HashMap<Integer, Integer>> getUnsolvableStars()
 	{
 		return _unsolvableStars;

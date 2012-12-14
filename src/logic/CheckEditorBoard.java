@@ -6,17 +6,29 @@ package logic;
 import gui.GuiElementField.eStates;
 
 /**
- * @author Andreas
- *
+ * Die CheckEditorBoard Klasse prüft das Editor Board nach der lösbarkeit.
+ * Durch set und get Methoden können die Daten des Editor Boards gesetzt und ausgegeben werden.
+ * 
+ * @author Fabian, Mats, Eren, Daniel, Andreas, Anatoli
+ * @version 0.1
+ * 
  */
 public class CheckEditorBoard extends CheckBoard 
 {	
+	/**
+	 * Konstruktor der Klasse CheckEditorBoard
+	 * Das Editor Board wird gesetzt
+	 * @param Board - Hier wird das Editor Board angegeben
+	 */
 	public CheckEditorBoard(Board oBoard)
 	{
 		setBoard(oBoard);
 	}
 	
-	
+	/**
+	 * Die Funktion check prüft das Board nach Fehlern
+	 * @return error - Wenn das Editor Board Fehler enthält wird hier ein true zurückgegeben
+	 */
 	public boolean check()
 	{
 		boolean error = false;
@@ -166,12 +178,16 @@ public class CheckEditorBoard extends CheckBoard
 		return error;
 	}
 	
-	
+	/**
+	 * Die Funktion checkStar prüft ob in allen Richtungen ein Stern existiert
+	 * @param curX - Hier wird die Position des Sterns auf der X Achse angegeben
+	 * @param curY - Hier wird die Position des Sterns auf der Y Achse angegeben
+	 */
 	private boolean checkStar(int curX, int curY)
 	{
 		boolean error = false;
 
-		// check if south arrow is pointing at star
+		// Prüft ob es im Süd Bereich ein Stern existiert
 		error = true;
 		for (int iCheckY = curY; iCheckY >= 0; iCheckY--)
 		{
@@ -188,7 +204,7 @@ public class CheckEditorBoard extends CheckBoard
 			return error;
 		}
 
-		// check if south-west arrow is pointing at star
+		// Prüft ob Süd-West Bereich ein Stern existiert
 		int diffWidth = _oBoard.getWidth() - curX -1;
 		int diffHeight = curY;
 		
@@ -210,7 +226,7 @@ public class CheckEditorBoard extends CheckBoard
 			return error;
 		}
 
-		// check if west arrow is pointing at star
+		// Prüft ob im Westen Bereich ein Stern existiert
 		error = true;
 		for (int iCheckX = curX; iCheckX < _oBoard.getWidth(); iCheckX++)
 		{
@@ -228,7 +244,7 @@ public class CheckEditorBoard extends CheckBoard
 		}
 		
 		
-		// check if north-west arrow is pointing at star
+		// Prüft ob es im Nord-West Bereich ein Stern existiert
 		diffWidth = _oBoard.getWidth() - curX -1;
 		diffHeight = _oBoard.getHeight() - curY -1;
 
@@ -251,7 +267,7 @@ public class CheckEditorBoard extends CheckBoard
 		}
 		
 		
-		// check if north arrow is pointing at star
+		// Prüft ob es im Nord Bereich ein Stern existiert
 		error = true;
 		for (int iCheckY = curY; iCheckY < _oBoard.getHeight(); iCheckY++)
 		{
@@ -269,7 +285,7 @@ public class CheckEditorBoard extends CheckBoard
 		}
 		
 		
-		// check if north-east arrow is pointing at star
+		// Prüft ob es im Nord-Osten Bereich ein Stern existiert
 		diffWidth = curX;
 		diffHeight = _oBoard.getHeight() - curY -1;
 
@@ -292,7 +308,7 @@ public class CheckEditorBoard extends CheckBoard
 		}
 		
 		
-		// check if east arrow is pointing at star
+		// Prüft ob es im Osten Bereich ein Stern existiert
 		error = true;
 		for (int iCheckX = curX; iCheckX >= 0; iCheckX--)
 		{
@@ -310,7 +326,7 @@ public class CheckEditorBoard extends CheckBoard
 		}
 		
 		
-		// check if south-east arrow is pointing at star
+		// Prüft ob es im Süd-Ost Bereich ein Stern existiert
 		diffWidth = curX;
 		diffHeight = curY;
 		

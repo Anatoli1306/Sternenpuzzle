@@ -14,14 +14,19 @@ import java.util.List;
 import javax.swing.Timer;
 
 /**
+ * Die CommandTracker Klasse dient dazu, das Tracking zu aktevieren.
+ * Durch set und get Methoden können die Daten der CommandTracker Klasse gesetzt und ausgegeben werden.
  * 
- * @author Andreas
+ * @author Fabian, Mats, Eren, Daniel, Andreas, Anatoli
  * @version 0.1
- *
+ * 
  */
 
 public class CommandTracker implements Serializable
 {
+	/**
+	 * Dekleration der Variabeln für die Klasse
+	 */
 	private List<ICommand> _trackerList = new ArrayList<ICommand>();
 	
 	private int _currentPos = 0;
@@ -34,16 +39,24 @@ public class CommandTracker implements Serializable
 	
 	private List<Integer> _markerPositions = new ArrayList<Integer>();
 	
+	/**
+	 * Konstruktor für die CommandTracker - Klasse
+	 */
 	public CommandTracker()
 	{
 		
 	}
 	
+	/**
+	 * Setzt den Command für das Tracking
+	 * @param ICommand - Das Command für das Tracking wird übergeben
+	 */
 	public void add(ICommand oCmd)
 	{
 		_trackerList.add(_trackerList.size(), oCmd);
 		_currentPos++;
 	}
+	
 	
 	public void remove()
 	{
@@ -55,6 +68,9 @@ public class CommandTracker implements Serializable
 		
 	}
 	
+	/**
+	 * Setzt den Command für das Tracking zurück
+	 */
 	public void undo()
 	{
 		if (_currentPos > 0)
@@ -66,16 +82,25 @@ public class CommandTracker implements Serializable
 		}
 	}
 	
+	/**
+	 * Gibt die die anzahl der Tracking Daten zurück
+	 * @return _trackerList - Gibt die Anzahl der Tracking Daten zurück
+	 */
 	public int getLength()
 	{
 		return _trackerList.size();
 	}
+	
 	
 	public void executeTillPosition()
 	{
 		
 	}
 	
+	/**
+	 * Die Trackingdaten werden bis zu einer bestimmten Postion zurückgesetzt
+	 * @param pos - Hier wird die Position angegeben, bis wo die Tracking Daten zurückgesetzt werden
+	 */
 	public void undoTillPosition(final int pos)
 	{	
 		int delayTime = 500;
@@ -103,12 +128,17 @@ public class CommandTracker implements Serializable
 		_myTimer.start();
 	}
 	
-	
+	/**
+	 * Hier werden die Positionen des Markers in eine List<integer> gespeichert
+	 */	
 	public void setMarkerPosition()
 	{
 		_markerPositions.add(_trackerList.size());
 	}
 	
+	/**
+	 * Hier wird die erste falsche Position des Markers gespeichert
+	 */	
 	public void setFirstFailurePosition()
 	{
 		if (_positionOfFirstFailure == 0)
@@ -117,7 +147,9 @@ public class CommandTracker implements Serializable
 		}	
 	}
 	
-	
+	/**
+	 * Hier werden die Daten bis zum ersten Fehler zurückgesetzt
+	 */
 	public void goBackToFirstFailure()
 	{
 		if (_positionOfFirstFailure != 0)
@@ -127,7 +159,9 @@ public class CommandTracker implements Serializable
 		}
 	}
 	
-	
+	/**
+	 * Hier werden die Daten bis zum ersten Marker zurückgesetzt
+	 */
 	public void goBackToLastMarker()
 	{
 		if (_markerPositions.size() > 0)
@@ -142,6 +176,10 @@ public class CommandTracker implements Serializable
 		}
 	}
 	
+	/**
+	 * Hier werden die Tracking Daten zurückgesetzt
+	 *
+	 */
 	public void resetTracker()
 	{
 		if (!_blockReset)

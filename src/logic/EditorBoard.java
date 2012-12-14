@@ -19,22 +19,31 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
- * 
- * @author Andreas, Anatoli
+ * Die Klasse EditorBoard erstellt das Editor Board
+ * Durch set und get Methoden können die Daten der EditorBoard Klasse gesetzt und ausgegeben werden.
+ * @author Fabian, Mats, Eren, Daniel, Andreas, Anatoli
  * @version 0.1
  * 
  */
 
 public class EditorBoard extends Board
 {
+	/**
+	 * Derkleration der Klassen Variabel Board
+	 */
 	boolean isSolvable = false;
-
 
 	/**
 	 * @param int height
 	 * @param int width
 	 */
 	
+	/**
+	 * Konstruktor für die EditorBoard - Klasse
+	 * Als parameter wird hier die Höhe und die Breite angegeben
+	 * @param height - Höhe des Boards
+	 * @param width - Breite des Boards
+	 */
 	public EditorBoard(int height, int width) 
 	{
 		super(height, width);
@@ -50,9 +59,10 @@ public class EditorBoard extends Board
 	}
 	
 	/**
-	 * @param int yPos
-	 * @param int xPos
-	 * return Field
+	 * Gibt das ausgewählte Feld zurück
+	 * @param yPos - Hier wird die Position für das Feld auf der Y Achse angeben 
+	 * @param xPos - Hier wird die Position für das Feld auf der X Achse angeben 
+	 * @return _fields - das ausgewählte Feld wird hier zurückgegeben
 	 */
 	public Field getField(int yPos, int xPos)
 	{
@@ -61,7 +71,8 @@ public class EditorBoard extends Board
 	
 	
 	/**
-	 * @param String filename
+	 * Die Funktion save speichert das Board als XML
+	 * @param filename - Hier wird der Dateiname für das Spiel angegeben
 	 */
 	public void save(String filename)
 	{
@@ -91,8 +102,8 @@ public class EditorBoard extends Board
 
 		
 	/**
-	 * @param String filename
-	 * @return 
+	 * Die Funktion loadEdit ladet das Board aus der XML - Datei in ein Board Objekt
+	 * @param filename - Hier wird der Dateiname für das Spiel angegeben
 	 */
 	
 	public static GuiElementBoard loadEdit(String filename)
