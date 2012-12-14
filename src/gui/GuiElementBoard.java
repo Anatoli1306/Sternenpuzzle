@@ -28,8 +28,9 @@ import logic.GameBoard;
 
 
 /**
+ * Die Klasse definiert das Board für Spiel- und Editiermodus
  * 
- * @author Andreas
+ * @author Andreas, Mats, Fabian, Eren, Anatoli, Daniel
  * @version 0.1
  *
  */
@@ -38,13 +39,17 @@ public abstract class GuiElementBoard extends JScrollPane
 {
 	private boolean hasChanged = false;
 	
+	/**
+	 * Gucken, ob im Feld was geändert wurde
+	 * @param hasChanged
+	 */
 	public void setHasChanged(boolean hasChanged) {
 		this.hasChanged = hasChanged;
 	}
 	/**
 	 * 
 	 */
-	private int _cols = 0;
+	private int _cols = 0; 
 	
 	/**
 	 * 
@@ -87,12 +92,11 @@ public abstract class GuiElementBoard extends JScrollPane
 	protected GuiElementField[][] _fields = new GuiElementField[0][0];
 	
 	
-	/**
+	/** Legt das Board an, mit Angabe von Reihen und Spalten
 	 * 
-	 * @param int rows
-	 * @param int cols
+	 * @param int rows = Reihen
+	 * @param int cols = Zeilen
 	 */
-	
 	public GuiElementBoard(int rows, int cols)
 	{
 		this._cols = cols;
@@ -125,7 +129,10 @@ public abstract class GuiElementBoard extends JScrollPane
 		}
 	}
 	
-	@Override
+	/** 
+	 * Setzt x und y Werte, Breit und Höhe
+	 * öffnet Funktion initControls()
+	 */
 	public void setBounds(int x, int y, int width, int height) 
 	{
 		// TODO Auto-generated method stub
@@ -135,8 +142,10 @@ public abstract class GuiElementBoard extends JScrollPane
 	
 	
 	/**
-	 * 
-	 * 
+	 * Ermittelt Höhe und Breite des Elements
+	 * Übergibt Werte in Container
+	 * Ermittelt in Schleifen die Sternanzahl
+	 * Danach werden alle Buttons gezeichnet!
 	 */
 	
 	public void initControls()
@@ -183,7 +192,8 @@ public abstract class GuiElementBoard extends JScrollPane
 	}
 	
 	/**
-	 * 
+	 * Hier werden die Mausklicks implementiert
+	 * ob BLANK, CROSS, STAR oder QUESTION angezeigt werden
 	 * @author Andreas
 	 *
 	 */
@@ -237,6 +247,10 @@ public abstract class GuiElementBoard extends JScrollPane
 			PlayFrame._oPlayFrame.refreshWindow();
 		}
 
+		/**
+		 * Funktion der Hilfslinien auf dem Board wird aufgerufen
+		 * Aktualisiert das Board 
+		 */
 		public void mouseEntered(MouseEvent e) 
 		{
 			// TODO Auto-generated method stub
@@ -246,16 +260,28 @@ public abstract class GuiElementBoard extends JScrollPane
 			PlayFrame._oPlayFrame.refreshWindow();
 		}
 
+		/**
+		 * Mouse verlässt Bereich
+		 * Aktualisiert das Board
+		 */
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
 			PlayFrame._oPlayFrame.refreshWindow();
 		}
 
+		/**
+		 * Mouse wird gedrückt
+		 * Aktualisiert das Board
+		 */
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
 			PlayFrame._oPlayFrame.refreshWindow();
 		}
 
+		/**
+		 * Mouseklick wird losgelassen
+		 * Aktualisiert das Board
+		 */
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
 			PlayFrame._oPlayFrame.refreshWindow();
@@ -263,6 +289,7 @@ public abstract class GuiElementBoard extends JScrollPane
 	 }
 	
 	/**
+	 * Feld X und Y wird zurückgegeben
 	 * 
 	 * @param int posY
 	 * @param int posX
@@ -274,13 +301,23 @@ public abstract class GuiElementBoard extends JScrollPane
 		return this._fields[posY][posX];
 	}
 	
+	/**
+	 * Speichern wird aufgerufen
+	 * 
+	 * @param filename wird übergeben
+	 */
 	public void save(String filename)
 	{
 		_oLogicBoard.save(filename);
 	}
 	
 	
-	
+	/**
+	 * Hier werden die Hilfslinien aufs Spielfeld gezeichnet
+	 * 
+	 * @param curXPos - Aktuelle X Position der Maus
+	 * @param curYPos - Aktuelle Y Position der Maus
+	 */
 	public void drawHelpingLines(int curXPos, int curYPos)
 	{
 		int adder = 1;
@@ -378,7 +415,11 @@ public abstract class GuiElementBoard extends JScrollPane
 	
 	
 	/**
+	 * Rechnet aus, wieviele Sterne auf dem Feld ist
 	 * 
+	 * Erst Y Reihe, dann X
+	 * 
+	 * Aktualisiert Board
 	 */
 	public void calculateStars()
 	{
@@ -400,11 +441,23 @@ public abstract class GuiElementBoard extends JScrollPane
 		PlayFrame.refreshWindow();
 	}
 	
+	/**
+	 * Fragt erst welcher Modus ->
+	 * Wenn Editorboard - CHECK - ist lösbar?
+	 * Wenn Spielmodus - CHECK - ist richtig?
+	 * 
+	 * @return
+	 */
 	public boolean check()
 	{
 		return CheckBoard.getInstance(_oLogicBoard).check();
 	}
 	
+	/**
+	 * Gibt Schwierigkeitsgrad an
+	 * 
+	 * @return Ergebnis
+	 */
 	public String getDifficulty()
 	{
 		CheckEditorBoardDifficulty oDiff = new CheckEditorBoardDifficulty(_oLogicBoard);
@@ -412,6 +465,10 @@ public abstract class GuiElementBoard extends JScrollPane
 		return result;
 	}
 	
+	/**
+	 * Welche Sterne sind nicht lösbar?
+	 * @return
+	 */
 	public Map<Integer, HashMap<Integer, Integer>> getUnsolvableStars()
 	{
 		CheckEditorBoardDifficulty oDiff = new CheckEditorBoardDifficulty(_oLogicBoard);
@@ -419,25 +476,46 @@ public abstract class GuiElementBoard extends JScrollPane
 		return oDiff.getUnsolvableStars();
 	}
 
+	/**
+	 * Gibt LogicBoard zurück
+	 * @return
+	 */
 	public Board getLogicBoard()
 	{
 		return _oLogicBoard;
 	}
 	
+	/**
+	 *  Setzt LogicBoard
+	 * @param oBoard
+	 */
 	public void setLogicBoard(Board oBoard)
 	{
 		_oLogicBoard = oBoard;
 	}
 	
+	/**
+	 * Return Anzahl Zeilen
+	 * @return
+	 */
 	public int getCols()
 	{
 		return this._cols;
 	}
 	
+	/**
+	 * Return Anzahl Reihen
+	 * @return
+	 */
 	public int getRows()
 	{
 		return this._rows;
 	}
+	
+	/**
+	 * Return hat sich geändert?
+	 * @return
+	 */
 	public boolean isHasChanged() {
 		return hasChanged;
 	}
